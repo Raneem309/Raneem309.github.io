@@ -28,28 +28,4 @@ function fillProjects() {
       },
       {
           name: "Team Management & Optimization",
-          description: "Managed database operations and team workflows at The Grooming Lounge, optimizing business performance using tools like Millennium and Meevo systems.",
-          tools: "Millennium, Meevo"
-      }
-  ];
-
-  const projectsList = document.getElementById("projects-list");
-  projects.forEach(project => {
-      const projectItem = document.createElement('div');
-      projectItem.classList.add('project-item');
-      projectItem.innerHTML = `
-          <h3>${project.name}</h3>
-          <p>${project.description}</p>
-          <p><strong>Tools Used:</strong> ${project.tools}</p>
-      `;
-      projectsList.appendChild(projectItem);
-  });
-}
-
-function fillContact() {
-  const email = "Raneem309@gmail.com";
-  const phone = "(703) 268-9046";
-  
-  document.getElementById("email").textContent = email;
-  document.getElementById("phone").textContent = phone;
-}
+          description: "Managed database operations and team workflows at The Grooming Lounge, optimizing bus
