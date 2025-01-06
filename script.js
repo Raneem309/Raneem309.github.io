@@ -1,69 +1,55 @@
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
-
-canvas.width = 400;
-canvas.height = 600;
-
-let player = { x: 200, y: 550, size: 30 };
-let balls = [];
-let score = 0;
-
-function drawPlayer() {
-  ctx.fillStyle = 'blue';
-  ctx.fillRect(player.x, player.y, player.size, player.size);
-}
-
-function drawBalls() {
-  balls.forEach((ball) => {
-    ctx.fillStyle = 'red';
-    ctx.beginPath();
-    ctx.arc(ball.x, ball.y, 10, 0, Math.PI * 2);
-    ctx.fill();
-  });
-}
-
-function updateBalls() {
-  balls.forEach((ball, index) => {
-    ball.y += 5;
-    if (ball.y > canvas.height) balls.splice(index, 1);
-    if (
-      ball.x > player.x &&
-      ball.x < player.x + player.size &&
-      ball.y > player.y &&
-      ball.y < player.y + player.size
-    ) {
-      balls.splice(index, 1);
-      score++;
-    }
-  });
-}
-
-function addBall() {
-  let x = Math.random() * canvas.width;
-  balls.push({ x, y: 0 });
-}
-
-setInterval(addBall, 1000);
-
-function drawScore() {
-  ctx.fillStyle = 'black';
-  ctx.font = '20px Arial';
-  ctx.fillText(`Score: ${score}`, 10, 20);
-}
-
-function update() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  drawPlayer();
-  drawBalls();
-  updateBalls();
-  drawScore();
-  requestAnimationFrame(update);
-}
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowLeft' && player.x > 0) player.x -= 20;
-  if (e.key === 'ArrowRight' && player.x < canvas.width - player.size)
-    player.x += 20;
+document.addEventListener("DOMContentLoaded", function() {
+  fillAboutMe();
+  fillProjects();
+  fillContact();
 });
 
-update();
+function showTab(tabId) {
+  const sections = document.querySelectorAll('.tab-content');
+  sections.forEach(section => {
+      section.style.display = section.id === tabId ? 'block' : 'none';
+  });
+}
+
+function fillAboutMe() {
+  const aboutText = `
+      <strong>Raneem Ali</strong> is a software developer based in Brooklyn, NY, specializing in web technologies. With a solid foundation in languages like JavaScript, HTML, and CSS, Raneem has experience working with cloud platforms like AWS and Azure, and is well-versed in Agile development methodologies. 
+      In addition to technical expertise, Raneem is passionate about crafting seamless user interfaces and ensuring high-quality performance through rigorous testing and debugging.
+  `;
+  document.getElementById("about-me-text").innerHTML = aboutText;
+}
+
+function fillProjects() {
+  const projects = [
+      {
+          name: "Web Application Development",
+          description: "Developed and maintained scalable web applications using JavaScript, HTML, and CSS. Integrated RESTful APIs and ensured seamless user experiences across different devices and browsers.",
+          tools: "JavaScript, HTML, CSS, GitHub"
+      },
+      {
+          name: "Team Management & Optimization",
+          description: "Managed database operations and team workflows at The Grooming Lounge, optimizing business performance using tools like Millennium and Meevo systems.",
+          tools: "Millennium, Meevo"
+      }
+  ];
+
+  const projectsList = document.getElementById("projects-list");
+  projects.forEach(project => {
+      const projectItem = document.createElement('div');
+      projectItem.classList.add('project-item');
+      projectItem.innerHTML = `
+          <h3>${project.name}</h3>
+          <p>${project.description}</p>
+          <p><strong>Tools Used:</strong> ${project.tools}</p>
+      `;
+      projectsList.appendChild(projectItem);
+  });
+}
+
+function fillContact() {
+  const email = "Raneem309@gmail.com";
+  const phone = "(703) 268-9046";
+  
+  document.getElementById("email").textContent = email;
+  document.getElementById("phone").textContent = phone;
+}

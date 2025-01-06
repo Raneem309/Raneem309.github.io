@@ -1,35 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Raneem Ali - Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raneem Ali's Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
 </head>
 <body>
-  <header>
-    <h1>Raneem Ali</h1>
-    <p>Software Developer | Techno Producer</p>
-  </header>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#about" onclick="showTab('about')">About Me</a></li>
+                <li><a href="#projects" onclick="showTab('projects')">Projects</a></li>
+                <li><a href="#contact" onclick="showTab('contact')">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>
-      Hi, I’m Raneem, a software developer with experience in JavaScript, HTML, CSS, and Python.
-    </p>
-  </section>
+    <main>
+        <section id="about" class="tab-content">
+            <h2>About Me</h2>
+            <p id="about-me-text"></p>
+            <!-- You can add an image here and comment it out for now -->
+            <!-- <img src="your-image.jpg" alt="Raneem Ali"> -->
+        </section>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="project">
-      <h3>Mini Game: Catch the Ball</h3>
-      <p>A simple JavaScript-based game where you score points by catching falling balls.</p>
-      <a href="game.html">Play the Game</a>
-    </div>
-  </section>
+        <section id="projects" class="tab-content">
+            <h2>Projects</h2>
+            <div id="projects-list"></div>
+        </section>
 
-  <footer>
-    <p>Contact me: Raneem309@gmail.com</p>
-  </footer>
+        <section id="contact" class="tab-content">
+            <h2>Contact</h2>
+            <p>Email: <span id="email"></span></p>
+            <p>Phone: <span id="phone"></span></p>
+            <!-- You can add a contact form here if you prefer -->
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Raneem Ali</p>
+    </footer>
 </body>
 </html>
