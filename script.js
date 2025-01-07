@@ -25,14 +25,14 @@ function handleTabs(tabId) {
   });
 
   // Show the corresponding section based on tab click
-  if (tabId === 'aboutMeTab') {
-    about.classList.remove('displayNone');
+  if (tabId === 'aboutMeSection') {
+    aboutMeSection.classList.remove('displayNone');
     mainHeader.classList.add("displayNone");
-  } else if (tabId === 'projectTab') {
-    projects.classList.remove('displayNone');
+  } else if (tabId === 'projectsSection') {
+    projectsSection.classList.remove('displayNone');
     mainHeader.classList.add("displayNone");
-  } else if (tabId === 'contactTab') {
-    contact.classList.remove('displayNone');
+  } else if (tabId === 'contactSection') {
+    contactSection.classList.remove('displayNone');
     mainHeader.classList.add("displayNone");
   } else if (tabId === 'homeTab') {
     mainHeader.classList.remove("displayNone");
