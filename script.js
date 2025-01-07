@@ -1,7 +1,7 @@
-// Define sections globally
-const about = document.getElementById('about');
-const projects = document.getElementById('projects');
-const contact = document.getElementById('contact');
+//Global Variables
+const about = document.getElementById('aboutMeTab');
+const projects = document.getElementById('projectTab');
+const contact = document.getElementById('contactTab');
 
 function tabLinks() {
   // Adding onclick for each tab
@@ -22,12 +22,16 @@ function handleTabs(tabId) {
   // Show the corresponding section based on tab click
   if (tabId === 'aboutMeTab') {
     about.classList.remove('displayNone');
+    mainHeader.classList.add("displayNone");
   } else if (tabId === 'projectTab') {
     projects.classList.remove('displayNone');
+    mainHeader.classList.add("displayNone");
   } else if (tabId === 'contactTab') {
     contact.classList.remove('displayNone');
+    mainHeader.classList.add("displayNone");
   } else if (tabId === 'homeTab') {
-    // Home button: Hide all sections and show the center tabs
+    mainHeader.classList.remove("displayNone");
+    homeTab.classList.add("displayNone");
     sections.forEach(section => {
       section.classList.add('displayNone');
     });
