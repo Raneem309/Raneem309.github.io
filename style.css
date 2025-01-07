@@ -27,26 +27,8 @@
 	align-items: center;
 	height: 60px;
   }
-  
-  nav ul {
-	display: flex;
-	list-style-type: none;
-	padding: 0;
-  }
-  
-  nav ul li {
-	margin: 0 20px;
-  }
-  
-  nav ul li a {
-	color: white;
-	text-decoration: none;
-	font-size: 18px;
-	font-weight: bold;
-  }
-  
+
   section {
-	display: none; /* Hidden by default */
 	padding: 100px 20px;
 	text-align: center;
   }
@@ -69,18 +51,9 @@
 	height: 100%;
 	background: url("images/MATRIX.gif");
 	background-size: cover;
-	animation: moveBackground 30s linear infinite;
 	z-index: -1;
   }
   
-  @keyframes moveBackground {
-	0% {
-	  background-position: 0 0;
-	}
-	100% {
-	  background-position: 100% 100%;
-	}
-  }
   
   .center-tabs {
 	display: flex;
