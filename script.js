@@ -3,6 +3,11 @@ const about = document.getElementById('aboutMeTab');
 const projects = document.getElementById('projectTab');
 const contact = document.getElementById('contactTab');
 
+window.onload = function() {
+  tabLinks();
+}
+
+
 function tabLinks() {
   // Adding onclick for each tab
   document.querySelectorAll('.tab').forEach(tab => {
