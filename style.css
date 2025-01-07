@@ -19,7 +19,6 @@
   header {
 	width: 100%;
 	width: 100%;
-	position: fixed;
 	top: 0;
 	background-color: rgba(0, 0, 0, 0.5);
 	z-index: 1000;
@@ -112,4 +111,8 @@
   
   .tab:hover {
 	background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .displayNone{
+	display: none;
   }
