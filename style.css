@@ -1,88 +1,117 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  color: white;
-  background-color: black;
-  overflow-x: hidden;
-  position: relative;
-}
-
-header {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-
-  /* Flexbox for centering content */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 60px; /* Set a specific height for better spacing */
-}
-
-nav ul {
-  display: flex;
-  list-style-type: none;
-  padding: 0;
-}
-
-nav ul li {
-  margin: 0 20px; /* Spacing between items */
-}
-
-nav ul li a {
-  color: white;
-  text-decoration: none;
-  font-size: 18px;
-}
-
-section {
-  padding: 100px 20px;
-  text-align: center;
-}
-
-#about,
-#projects,
-#contact {
-  padding-top: 80px;
-}
-
-h2 {
-  margin-bottom: 20px;
-}
-
-.background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url("images/background1.gif");
-  background-size: cover;
-  /* animation: moveBackground 30s linear infinite; */
-  z-index: -1;
-}
-
-/* @keyframes moveBackground {
-  0% {
-    background-position: 0 0;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
   }
-  100% {
-    background-position: 100% 100%;
+  
+  body {
+	font-family: Arial, sans-serif;
+	color: white;
+	background-color: black;
+	overflow-x: hidden;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh; /* Make body take full viewport height */
   }
-} */
-
-a {
-  color: white;
-  text-decoration: none;
-}
-
-.displayNone {
-  display: none;
-}
+  
+  header {
+	width: 100%;
+	position: fixed;
+	top: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 1000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 60px;
+  }
+  
+  nav ul {
+	display: flex;
+	list-style-type: none;
+	padding: 0;
+  }
+  
+  nav ul li {
+	margin: 0 20px;
+  }
+  
+  nav ul li a {
+	color: white;
+	text-decoration: none;
+	font-size: 18px;
+	font-weight: bold;
+  }
+  
+  section {
+	display: none; /* Hidden by default */
+	padding: 100px 20px;
+	text-align: center;
+  }
+  
+  #about,
+  #projects,
+  #contact {
+	padding-top: 80px;
+  }
+  
+  h2 {
+	margin-bottom: 20px;
+  }
+  
+  .background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: url("images/MATRIX.gif");
+	background-size: cover;
+	animation: moveBackground 30s linear infinite;
+	z-index: -1;
+  }
+  
+  @keyframes moveBackground {
+	0% {
+	  background-position: 0 0;
+	}
+	100% {
+	  background-position: 100% 100%;
+	}
+  }
+  
+  /* Center the links in the viewport */
+  .center-tabs {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh; /* Take up full viewport height */
+  }
+  
+  .center-tabs ul {
+	display: flex;
+	list-style-type: none;
+	padding: 0;
+  }
+  
+  .center-tabs ul li {
+	margin: 0 20px;
+  }
+  
+  .center-tabs ul li a {
+	color: white;
+	text-decoration: none;
+	font-size: 24px;
+	font-weight: bold;
+	background-color: rgba(0, 0, 0, 0.6);
+	padding: 10px 20px;
+	border-radius: 5px;
+	transition: background-color 0.3s;
+  }
+  
+  .center-tabs ul li a:hover {
+	background-color: rgba(255, 255, 255, 0.3);
+  }
+  
