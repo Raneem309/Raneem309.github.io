@@ -18,7 +18,7 @@
   
   #mainHeader {
 	width: 100%;
-	top: 0;
+	top: 40px;
 	background-color: rgba(0, 0, 0, 0.5);
 	z-index: 1000;
 	display: flex;
@@ -27,27 +27,12 @@
 	height: 60px;
   }
   
-  /* nav ul {
-	display: flex;
-	list-style-type: none;
-	padding: 0;
-  }
-  
-  nav ul li {
-	margin: 0 20px;
-  }
-  
-  nav ul li a {
-	color: white;
-	text-decoration: none;
-	font-size: 18px;
-	font-weight: bold;
-  } */
-  
   section {
 	padding: 20px 20px;
 	text-align: left;
 	background-color: black;
+	margin-bottom: 20rem;
+    margin-right: 50rem;
   }
   
   #about,
