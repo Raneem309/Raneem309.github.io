@@ -5,7 +5,7 @@
   }
   
   body {
-	font-family: Arial, sans-serif;
+	font-family: 'Fira Code', monospace;
 	color: white;
 	background-color: black;
 	overflow-x: hidden;
@@ -13,7 +13,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100vh; /* Make body take full viewport height */
+	height: 100vh; 
   }
   
   #mainHeader {
@@ -28,11 +28,15 @@
   }
   
   section {
-	padding: 20px 20px;
-	text-align: left;
-	background-color: black;
-	margin-bottom: 20rem;
-    margin-right: 50rem;
+	padding: 5rem; /* Adds padding inside the section */
+	text-align: left; /* Keeps the text aligned to the left */
+	background-color: black; /* Background color remains black */
+	margin: 20rem 5rem 5rem 5rem; /* Top margin of 20rem, 5rem on other sides for spacing */
+	display: flex; /* Enables flexbox for consistent layout */
+	flex-direction: column; /* Ensures content stacks vertically */
+	justify-content: flex-start; /* Aligns content to the top */
+	align-items: flex-start; /* Aligns content to the left */
+	border-radius: 10px;
   }
   
   #about,
@@ -88,3 +92,5 @@
   .displayNone{
 	display: none;
   }
+
+  @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap')
