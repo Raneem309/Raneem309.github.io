@@ -7,7 +7,7 @@
   body {
 	font-family: 'Fira Code', monospace;
 	color: white;
-	background-color: black;
+	background-color: #d3d3d3; /* Grey wash background outside the border */
 	overflow-x: hidden;
 	position: relative;
 	display: flex;
@@ -19,11 +19,15 @@
   .container {
 	width: 90%; /* Or adjust width as needed */
 	height: 100%;
-	border: 2px solid white; /* Outer border around the page */
-	padding: 20px;
+	padding: 2rem; /* Adds space inside the border */
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
+	background-color: black; /* Background color inside the border */
+	position: relative; /* Keeps the background image inside the container */
+	border-width: 2rem; /* Border width */
+	border-style: solid;
+	border-image: url('https://giphy.com/gifs/magic-eye-gw3RX8HWJygFr5pC') 30 stretch; 
   }
   
   header {
