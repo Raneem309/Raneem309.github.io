@@ -117,8 +117,8 @@ h2 {
   max-height: 400px; /* Adjust the height as per your needs */
   overflow-y: auto; /* Enables vertical scrolling when content overflows */
   padding: 10px; /* Optional padding */
-  background-color: rgba(0, 0, 0, 0.8); /* Optional background color */
-  color: rgb(0, 0, 0); /* Text color */
+  background-color: rgb(255 255 255); /* Optional background color */
+  color: rgb(0 0 0); /* Text color */
   border-radius: 10px; /* Optional border radius */
   margin-top: 10px; /* Optional margin */
 }
