@@ -114,3 +114,14 @@ h2 {
 .displayNone {
   display: none;
 }
+
+#aboutMeBio {
+  width: 100%; /* Make it full width of its container */
+  max-height: 200px; /* Adjust the height as per your needs */
+  overflow-y: auto; /* Enables vertical scrolling when content overflows */
+  padding: 10px; /* Optional padding */
+  background-color: rgba(0, 0, 0, 0.8); /* Optional background color */
+  color: white; /* Text color */
+  border-radius: 5px; /* Optional border radius */
+  margin-top: 10px; /* Optional margin */
+}
