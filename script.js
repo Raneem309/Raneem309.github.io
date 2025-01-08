@@ -44,20 +44,12 @@ function handleTabs(tabId) {
   // Show the corresponding section based on tab click
   if (tabId === "aboutMeTab") {
     aboutMeSection.classList.remove("displayNone");
-    mainHeader.classList.add("displayNone");
-    mainHeader.style.position = "fixed";
   } else if (tabId === "projectTab") {
     projectsSection.classList.remove("displayNone");
-    mainHeader.classList.add("displayNone");
-    mainHeader.style.position = "fixed";
   } else if (tabId === "contactTab") {
     contactSection.classList.remove("displayNone");
-    mainHeader.classList.add("displayNone");
-    mainHeader.style.position = "fixed";
   } else if (tabId === "homeTab") {
     mainHeader.classList.remove("displayNone");
-    homeTab.classList.add("displayNone");
-    mainHeader.style.position = "";
     sections.forEach((section) => {
       section.classList.add("displayNone");
     });
