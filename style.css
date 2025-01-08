@@ -42,6 +42,13 @@ html, body {
   transform: translate(-50%, -50%); /* Perfect centering */
 }
 
+#headerContainer {
+  display: flex;
+  justify-content: space-between; /* Align name/title and tabs on opposite sides */
+  align-items: flex-start; /* Align at the top */
+  width: 100%;
+}
+
 /* Header styles */
 header {
   display: flex;
@@ -49,6 +56,12 @@ header {
   align-items: center;
   margin-bottom: 30px;
   width: 100%;
+}
+
+#nameTitleContainer {
+  display: flex;
+  flex-direction: column; /* Stack name and title vertically */
+  align-items: flex-start; /* Align name and title to the left */
 }
 
 #name {
