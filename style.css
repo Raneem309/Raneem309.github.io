@@ -17,7 +17,6 @@ html, body {
 
 /* Background layer */
 .background {
-  position: fixed; /* Fullscreen background */
   width: 100vw;
   height: 100vh;
   background: url("images/MATRIX.gif");
