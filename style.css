@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -17,8 +19,8 @@ body {
 }
 
 .container {
-  width: 90%; /* Or adjust width as needed */
-  height: 100%;
+  width: 80%; /* Or adjust width as needed */
+  height: 80%;
   padding: 2rem; /* Adds space inside the border */
   display: flex;
   flex-direction: column;
@@ -90,4 +92,3 @@ h2 {
   display: none;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap");
