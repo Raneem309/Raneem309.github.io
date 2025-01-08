@@ -27,7 +27,8 @@ body {
   position: relative; /* Keeps the background image inside the container */
   border-width: 2rem; /* Border width */
   border-style: solid;
-  background: url("images/MATRIX.gif") 10 stretch;
+  border-image: url("https://giphy.com/gifs/magic-eye-gw3RX8HWJygFr5pC") 30
+    stretch;
 }
 
 header {
@@ -81,7 +82,8 @@ h2 {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: black;
+  background: url("images/MATRIX.gif");
+  z-index: -1;
 }
 
 .displayNone {
