@@ -31,7 +31,7 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start; /* Align to the left */
   background-color: black; /* Black background inside */
   border: 1px solid #d3d3d3; /* Border matching outside background */
   border-radius: 50px; /* Optional rounded corners */
@@ -45,9 +45,13 @@ html, body {
 /* Header container */
 #headerContainer {
   display: flex;
-  align-items: flex-start; /* Align items to the top */
-  justify-content: flex-start; /* Align header to the left */
-  width: 100%;
+  justify-content: space-between; /* Space between name/title and tabs */
+  align-items: flex-start; /* Align to the top */
+  width: 90%;
+  position: absolute;
+  /* top: 0; */
+  /* left: 0; */
+  padding: 10px;
 }
 
 /* Name and title container */
@@ -55,16 +59,16 @@ html, body {
   display: flex;
   flex-direction: column; /* Stack name and title vertically */
   align-items: flex-start; /* Align name and title to the left */
-  margin-right: auto; /* Push tabs to the right */
+  margin-bottom: 20px; /* Add spacing between name/title and sections */
 }
 
 #name {
-  font-size: 20px; /* Match the font size with the tabs */
+  font-size: 16px; /* Match the font size with the tabs */
   font-weight: bold;
 }
 
 #title {
-  font-size: 10px; /* Match the font size with the tabs */
+  font-size: 16px; /* Match the font size with the tabs */
   font-weight: normal;
   margin-top: 5px; /* Adjust spacing between name and title */
 }
@@ -95,22 +99,22 @@ html, body {
 
 /* Sections */
 section {
-  padding: 2rem;
+  padding: 6rem;
   text-align: left;
-  background-color: black;
+  /* background-color: black; */
   margin-bottom: 2rem;
   border-radius: 10px;
 }
 
 h2 {
   margin-bottom: 20px;
+  font-size: 16px;
 }
 
 /* Hidden sections initially */
 .displayNone {
   display: none;
 }
-
 
 #aboutMeBio {
   width: 100%; /* Make it full width of its container */
@@ -121,4 +125,9 @@ h2 {
   color: rgb(0 0 0); /* Text color */
   border-radius: 10px; /* Optional border radius */
   margin-top: 10px; /* Optional margin */
+}
+
+/* Align A-Z and Contact to the left */
+#projectsSection, #contactSection {
+  text-align: left;
 }
