@@ -42,46 +42,41 @@ html, body {
   transform: translate(-50%, -50%); /* Perfect centering */
 }
 
+/* Header container */
 #headerContainer {
   display: flex;
-  justify-content: space-between; /* Align name/title and tabs on opposite sides */
-  align-items: flex-start; /* Align at the top */
+  align-items: flex-start; /* Align items to the top */
+  justify-content: flex-start; /* Align header to the left */
   width: 100%;
 }
 
-/* Header styles */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-  width: 100%;
-}
-
+/* Name and title container */
 #nameTitleContainer {
   display: flex;
   flex-direction: column; /* Stack name and title vertically */
   align-items: flex-start; /* Align name and title to the left */
+  margin-right: auto; /* Push tabs to the right */
 }
 
 #name {
-  font-size: 36px;
+  font-size: 20px; /* Match the font size with the tabs */
   font-weight: bold;
 }
 
 #title {
-  font-size: 16px;
+  font-size: 10px; /* Match the font size with the tabs */
+  font-weight: normal;
+  margin-top: 5px; /* Adjust spacing between name and title */
 }
 
 #mainHeader {
-  width: 100%;
   display: flex;
-  justify-content: flex-start;
   align-items: center;
   gap: 20px;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 10px 20px;
   border-radius: 5px;
+  margin-left: auto; /* Push the tabs to the right */
 }
 
 /* Tabs */
@@ -91,6 +86,7 @@ header {
   text-align: center;
   border-radius: 5px;
   transition: background-color 0.3s ease;
+  font-size: 16px; /* Set font size to match with name/title */
 }
 
 .tab:hover {
@@ -115,13 +111,14 @@ h2 {
   display: none;
 }
 
+
 #aboutMeBio {
   width: 100%; /* Make it full width of its container */
-  max-height: 200px; /* Adjust the height as per your needs */
+  max-height: 400px; /* Adjust the height as per your needs */
   overflow-y: auto; /* Enables vertical scrolling when content overflows */
   padding: 10px; /* Optional padding */
   background-color: rgba(0, 0, 0, 0.8); /* Optional background color */
-  color: white; /* Text color */
-  border-radius: 5px; /* Optional border radius */
+  color: rgb(0, 0, 0); /* Text color */
+  border-radius: 10px; /* Optional border radius */
   margin-top: 10px; /* Optional margin */
 }
