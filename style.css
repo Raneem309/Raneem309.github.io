@@ -6,38 +6,50 @@
   box-sizing: border-box;
 }
 
-body {
+/* HTML and body styles */
+html, body {
   font-family: "Fira Code", monospace;
   color: white;
-  background-color: #d3d3d3; /* Grey wash background outside the border */
-  overflow-x: hidden;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  height: 100%;
+  background-color: #d3d3d3;
+  overflow: hidden;
 }
 
+/* Background layer */
+.background {
+  position: fixed; /* Fullscreen background */
+  width: 100vw;
+  height: 100vh;
+  background: url("images/MATRIX.gif");
+  z-index: -1; /* Push background behind other content */
+}
+
+/* Main container */
 .container {
-  width: 80%; /* Or adjust width as needed */
-  height: 80%;
-  padding: 2rem; /* Adds space inside the border */
+  width: 80vw; /* Adjust width */
+  height: 80vh; /* Adjust height */
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  background-color: black; /* Background color inside the border */
-  position: relative; /* Keeps the background image inside the container */
-  border-width: 2rem; /* Border width */
-  border-style: solid;
-  border-image: url("https://giphy.com/gifs/magic-eye-gw3RX8HWJygFr5pC") 30
-    stretch;
+  align-items: center;
+  background-color: black; /* Black background inside */
+  border: 1px solid #d3d3d3; /* Border matching outside background */
+  border-radius: 50px; /* Optional rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional shadow */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Perfect centering */
 }
 
+/* Header styles */
 header {
   display: flex;
-  justify-content: space-between; /* Spread name and menu apart */
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
+  width: 100%;
 }
 
 #name {
@@ -56,6 +68,7 @@ header {
   border-radius: 5px;
 }
 
+/* Tabs */
 .tab {
   cursor: pointer;
   padding: 10px 20px;
@@ -68,6 +81,7 @@ header {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
+/* Sections */
 section {
   padding: 2rem;
   text-align: left;
@@ -80,15 +94,7 @@ h2 {
   margin-bottom: 20px;
 }
 
-.background {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: url("images/MATRIX.gif");
-  z-index: -1;
-}
-
+/* Hidden sections initially */
 .displayNone {
   display: none;
 }
-
