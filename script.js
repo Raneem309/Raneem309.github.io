@@ -6,6 +6,7 @@ const contact = document.getElementById("contactTab");
 window.onload = function () {
   tabLinks();
   loadInitialData();
+  handleOpeningScreen();
 };
 
 function loadInitialData() {
@@ -55,3 +56,24 @@ function handleTabs(tabId) {
     });
   }
 }
+
+function handleOpeningScreen() {
+  // Get the opening screen div
+  const openingScreen = document.getElementById("openingScreen");
+
+  // Show the opening screen
+  openingScreen.classList.remove("displayNone");
+
+  // Wait 3 seconds, then fade out and hide the opening screen
+  setTimeout(() => {
+    openingScreen.style.transition = "opacity 1s ease"; // Smooth fade-out
+    openingScreen.style.opacity = "0";
+
+    // Ensure the element is hidden after the fade-out animation
+    setTimeout(() => {
+      openingScreen.classList.add("displayNone");
+      openingScreen.style.opacity = ""; // Reset opacity for future use
+    }, 1000); // Match the fade-out duration (1s)
+  }, 3000); // Delay before fading out (3s)
+}
+
