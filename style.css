@@ -7,7 +7,8 @@
 }
 
 /* HTML and body styles */
-html, body {
+html,
+body {
   font-family: "Fira Code", monospace;
   color: white;
   height: 100%;
@@ -45,7 +46,7 @@ html, body {
 }
 
 /* Initial Screen */
-.openingScreen{
+.openingScreen {
   position: fixed; /* Ensures the div covers the viewport regardless of scrolling */
   top: 0;
   left: 0;
@@ -63,11 +64,11 @@ html, body {
 }
 @keyframes fadeOut {
   0% {
-      opacity: 1;
+    opacity: 1;
   }
   100% {
-      opacity: 0;
-      visibility: hidden;
+    opacity: 0;
+    visibility: hidden;
   }
 }
 /* Header container */
@@ -156,6 +157,7 @@ h2 {
 }
 
 /* Align A-Z and Contact to the left */
-#projectsSection, #contactSection {
+#projectsSection,
+#contactSection {
   text-align: left;
 }

@@ -76,4 +76,3 @@ function handleOpeningScreen() {
     }, 1000); // Match the fade-out duration (1s)
   }, 3000); // Delay before fading out (3s)
 }
-
