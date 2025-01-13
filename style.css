@@ -19,7 +19,7 @@ html, body {
 .background {
   width: 100vw;
   height: 100vh;
-  background: url("images/6575374.gif");
+  background: url("images/6575374.jpg");
   z-index: -1; /* Push background behind other content */
 }
 
