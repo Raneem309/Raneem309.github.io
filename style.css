@@ -19,7 +19,7 @@ html, body {
 .background {
   width: 100vw;
   height: 100vh;
-  background: url("https://img.freepik.com/free-photo/abstract-geometric-background-shapes-texture_1194-301821.jpg?t=st=1736811128~exp=1736814728~hmac=a79956fe44fc7ea5aa99d73257ae8962099437ad633bbd6a2ef00216090485fe&w=1380");
+  background: url("mirrorGrain.jpg");
   z-index: -1; /* Push background behind other content */
 }
 
