@@ -20,7 +20,7 @@ body {
 .background {
   width: 100vw;
   height: 100vh;
-  background: url("mirrorGrain.jpg");
+  background: url("images/mirrorGrain.jpg");
   z-index: -1; /* Push background behind other content */
 }
 
