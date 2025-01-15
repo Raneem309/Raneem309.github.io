@@ -46,7 +46,7 @@ body {
 }
 
 /* Initial Screen */
-.openingScreen {
+#openingScreen {
   position: fixed; /* Ensures the div covers the viewport regardless of scrolling */
   top: 0;
   left: 0;
