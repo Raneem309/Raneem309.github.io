@@ -18,7 +18,7 @@ body {
 
 /* Background layer */
 .background {
-  background-size: contain !important;
+  background-size: cover !important;
   width: 100vw;
   height: 100vh;
   background: url("images/blackLight.jpeg") no-repeat center center;

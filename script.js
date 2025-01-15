@@ -66,13 +66,13 @@ function handleOpeningScreen() {
 
   // Wait 3 seconds, then fade out and hide the opening screen
   setTimeout(() => {
-    openingScreen.style.transition = "opacity 1s ease"; // Smooth fade-out
+    openingScreen.style.transition = "opacity 10s ease"; // Smooth fade-out
     openingScreen.style.opacity = "0";
 
     // Ensure the element is hidden after the fade-out animation
     setTimeout(() => {
       openingScreen.style.opacity = ""; // Reset opacity for future use
       openingScreen.classList.add("displayNone");
-    }, 6000); // Match the fade-out duration (1s)
+    }, 1000); // Match the fade-out duration (1s)
   }, 3000); // Delay before fading out (3s)
 }
