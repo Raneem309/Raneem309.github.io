@@ -73,6 +73,6 @@ function handleOpeningScreen() {
     setTimeout(() => {
       openingScreen.style.opacity = ""; // Reset opacity for future use
       openingScreen.classList.add("displayNone");
-    }, 1000); // Match the fade-out duration (1s)
+    }, 10000); // Match the fade-out duration (1s)
   }, 3000); // Delay before fading out (3s)
 }
