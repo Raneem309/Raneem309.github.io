@@ -71,8 +71,8 @@ function handleOpeningScreen() {
 
     // Ensure the element is hidden after the fade-out animation
     setTimeout(() => {
-      openingScreen.classList.add("displayNone");
       openingScreen.style.opacity = ""; // Reset opacity for future use
+      openingScreen.classList.add("displayNone");
     }, 1000); // Match the fade-out duration (1s)
   }, 3000); // Delay before fading out (3s)
 }
