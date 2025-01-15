@@ -63,7 +63,7 @@ function handleOpeningScreen() {
 
   setTimeout(() => {
     openingScreen.style.transition = "opacity 6s ease";
-    openingScreen.style.opacity = "0";
+    openingScreen.style.opacity = "1";
 
     setTimeout(() => {
       openingScreen.classList.add("displayNone");
