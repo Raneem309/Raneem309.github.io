@@ -58,21 +58,15 @@ function handleTabs(tabId) {
 }
 
 function handleOpeningScreen() {
-  // Get the opening screen div
   const openingScreen = document.getElementById("openingScreen");
-
-  // Show the opening screen
   openingScreen.classList.remove("displayNone");
 
-  // Wait 3 seconds, then fade out and hide the opening screen
   setTimeout(() => {
-    openingScreen.style.transition = "opacity 10s ease"; // Smooth fade-out
+    openingScreen.style.transition = "opacity 6s ease";
     openingScreen.style.opacity = "0";
 
-    // Ensure the element is hidden after the fade-out animation
     setTimeout(() => {
-      openingScreen.style.opacity = ""; // Reset opacity for future use
       openingScreen.classList.add("displayNone");
-    }, 10000); // Match the fade-out duration (1s)
-  }, 3000); // Delay before fading out (3s)
+    }, 6000); // Match fade-out duration
+  }, 0);
 }
