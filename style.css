@@ -21,7 +21,7 @@ body {
   background-size: cover;
   width: 100vw;
   height: 100vh;
-  background: url("images/mirrorGrain.jpg");
+  background: url("images/mirrorGrain.jpg") no-repeat center center;
   z-index: -1; /* Push background behind other content */
 }
 
@@ -62,10 +62,12 @@ body {
   font-family: Arial, sans-serif; /* Set a clean font */
   z-index: 9999; /* Ensure it’s on top of all other content */
   text-align: center; /* Center-aligns the text */
+  animation: fadeOut 2s forwards;
 }
 @keyframes fadeOut {
   0% {
-    opacity: 0;
+    opacity: 1;
+    visibility: visible;
   }
   100% {
     opacity: 0;
