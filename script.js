@@ -62,11 +62,11 @@ function handleOpeningScreen() {
   openingScreen.classList.remove("displayNone");
 
   setTimeout(() => {
-    openingScreen.style.transition = "opacity 5s ease";
+    openingScreen.style.transition = "opacity 3s ease";
     openingScreen.style.opacity = "0";
 
     setTimeout(() => {
       openingScreen.classList.add("displayNone");
-    }, 5000); // Match fade-out duration
-  }, 1000); // Stay solid for 1 second before fading out
+    }, 3000); // Match fade-out duration
+  }, 3000); // Stay solid for 1 second before fading out
 }
