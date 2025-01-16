@@ -68,5 +68,5 @@ function handleOpeningScreen() {
     setTimeout(() => {
       openingScreen.classList.add("displayNone");
     }, 5000); // Match fade-out duration
-  }, 3000); // Stay solid for 3 second before fading out
+  }, 1000); // Stay solid for 3 second before fading out
 }
