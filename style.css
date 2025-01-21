@@ -160,7 +160,7 @@ h2 {
 
 /* Hidden sections initially */
 .displayNone {
-  display: none;
+  display: none !important;
 }
 
 #aboutMeBio {
@@ -181,7 +181,7 @@ h2 {
 }
 
 /* Projects Section Grid Layout */
-.projectsGrid {
+#projectsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
@@ -213,9 +213,15 @@ button:hover {
 
 /* Health Stats App */
 #healthStatsApp {
-  background-color: #222;
-  padding: 20px;
-  border-radius: 8px;
+  width: 100%; /* Make it full width of its container */
+  max-height: 400px; /* Adjust the height as per your needs */
+  overflow-y: auto; /* Enables vertical scrolling when content overflows */
+  padding: 10px; /* Optional padding */
+  background-color: #f2f2f2; /* Optional background color */
+  color: rgb(0, 0, 0); /* Text color */
+  border-radius: 10px; /* Optional border radius */
+  margin-top: 10px; /* Optional margin */
+  margin-right: 20px; /* Space between sections */
 }
 
 input,
@@ -241,24 +247,15 @@ select {
   background-color: #da190b;
 }
 
-/* Container for app */
-#appContainer {
+/* #appContainer {
   display: flex;
-  overflow-x: auto; /* Enables horizontal scrolling */
-  width: 100%; /* Full width of the container */
+  overflow-x: auto; 
+  width: 100%; 
   padding: 1rem;
   margin-top: 2rem;
   border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.9); /* Light background for the container */
+  background-color: rgba(255, 255, 255, 0.9); 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
+} */
 
-/* Individual app sections inside the container */
-.appContainerStyle {
-  min-width: 300px; /* Minimum width for each section */
-  margin-right: 20px; /* Space between sections */
-  padding: 1rem;
-  background-color: #f2f2f2;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
+

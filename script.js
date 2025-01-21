@@ -2,6 +2,8 @@
 const about = document.getElementById("aboutMeTab");
 const projects = document.getElementById("projectTab");
 const contact = document.getElementById("contactTab");
+const projHeader = document.getElementById("projectHeader");
+const appContainer = document.getElementById("appContainer");
 
 window.onload = function () {
   tabLinks();
@@ -73,13 +75,13 @@ function handleOpeningScreen() {
 
 // Function to launch the Health Stats app
 function launchHealthStats() {
-  const appContainer = document.getElementById("appContainer");
   appContainer.classList.remove("displayNone");
+  projHeader.innerText = "Health Stats App"
   document.getElementById("projectData").classList.add("displayNone"); // Hide the project section
 
   // Create the form for user inputs
   const formHtml = `
-    <div class="appContainerStyle">
+    <div id="mainAppContainer">
       <h3>Enter Your Information</h3>
       <label for="nameInput">First and Last Initial: </label>
       <input type="text" id="nameInput" /><br><br>
@@ -107,6 +109,7 @@ function launchHealthStats() {
 
       <button type="button" onclick="calculateHealthStats()">Submit</button>
     </div>
+    
   `;
   document.getElementById("healthStatsApp").innerHTML = formHtml;
 }
@@ -115,6 +118,7 @@ function launchHealthStats() {
 
 // Function to handle the "Exit" button
 function exitApp() {
-  document.getElementById("appContainer").classList.add("displayNone");
+  projHeader.innerText = "A - Z"
+  appContainer.classList.add("displayNone");
   document.getElementById("projectData").classList.remove("displayNone"); // Show project section again
 }
