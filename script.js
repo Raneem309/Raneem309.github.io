@@ -1,5 +1,3 @@
-import * as THREE from "https://cdn.skypack.dev/three@0.153.0";
-
 //Global Variables
 const about = document.getElementById("aboutMeTab");
 const projects = document.getElementById("projectTab");
@@ -11,7 +9,6 @@ window.onload = function () {
   tabLinks();
   loadInitialData();
   handleOpeningScreen();
-  initThreeJS();
 };
 
 function loadInitialData() {
@@ -79,54 +76,15 @@ function handleOpeningScreen() {
 // Function to launch the Health Stats app
 function launchHealthStats() {
   appContainer.classList.remove("displayNone");
-  projHeader.innerText = "Health Stats App";
+  projHeader.innerText = "Health Stats App"
   document.getElementById("projectData").classList.add("displayNone"); // Hide the project section
 }
 
+
+
 // Function to handle the "Exit" button
 function exitApp() {
-  projHeader.innerText = "A - Z";
+  projHeader.innerText = "A - Z"
   appContainer.classList.add("displayNone");
   document.getElementById("projectData").classList.remove("displayNone"); // Show project section again
-}
-
-function initThreeJS() {
-  // Create the scene
-  const scene = new THREE.Scene();
-
-  // Create the camera (field of view, aspect ratio, near, far)
-  const camera = new THREE.PerspectiveCamera(
-    75,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    1000
-  );
-
-  // Create the renderer
-  const renderer = new THREE.WebGLRenderer();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-
-  // Attach the renderer to the background div
-  const canvasElement = document.getElementById("threejsCanvas");
-  if (canvasElement) {
-    canvasElement.appendChild(renderer.domElement);
-  }
-
-  // Create a cube geometry
-  const geometry = new THREE.BoxGeometry();
-  const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-  const cube = new THREE.Mesh(geometry, material);
-  scene.add(cube); // Add the cube to the scene
-
-  // Position the camera
-  camera.position.z = 5;
-
-  // Animation loop
-  function animate() {
-    requestAnimationFrame(animate);
-    cube.rotation.x += 0.01; // Rotate the cube
-    cube.rotation.y += 0.01; // Rotate the cube
-    renderer.render(scene, camera); // Render the scene
-  }
-  animate(); // Start the animation loop
 }
