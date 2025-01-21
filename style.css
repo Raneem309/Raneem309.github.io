@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap");
+@import url("fonts/"Electromagnetic_Lungs);
 
 * {
   margin: 0;
@@ -9,14 +9,30 @@
 /* HTML and body styles */
 html,
 body {
-  font-family: "Fira Code", monospace;
+  font-family: "Electromagnetic_Lungs", monospace;
   color: white;
   height: 100%;
   background-color: #d3d3d3;
   overflow: hidden;
 }
 
+label {
+  font-style: italic;
+}
 
+#nameTitleContainer h2 {
+  text-decoration: underline;
+  text-decoration-color: #ffffff;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+#appContainer h3 {
+  text-decoration: underline;
+  text-decoration-color: #ffffff;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
 
 /* Background layer */
 .background {
@@ -37,7 +53,7 @@ body {
   justify-content: flex-start;
   align-items: flex-start; /* Align to the left */
   background: rgba(255, 255, 255, 0); /* Semi-transparent white */
-  backdrop-filter: invert(100%); /* Inverts colors behind it */
+  backdrop-filter: invert(90%); /* Inverts colors behind it */
   border: 1px solid #d3d3d3; /* Border matching outside background */
   border-radius: 50px; /* Optional rounded corners */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional shadow */
@@ -46,7 +62,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%); /* Perfect centering */
   mix-blend-mode: difference;
-  background: url(images/MATRIX.gif);
+  /* background: url(images/MATRIX.gif); */
 }
 
 .container::before {
@@ -149,10 +165,9 @@ body {
 section {
   width: 100%;
   margin-top: 6rem;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
   text-align: left;
 }
-
 
 h2 {
   margin-bottom: 20px;
@@ -234,8 +249,7 @@ select {
   background-color: #d22e22;
 }
 
-
-#appSubmitBTN{
+#appSubmitBTN {
   background-color: #00f71d;
   color: white;
   padding: 10px;
@@ -246,7 +260,7 @@ select {
   cursor: pointer;
 }
 
-#appContainer{
+#appContainer {
   border-radius: 10px;
   max-height: 450px;
   padding: 10px;
@@ -254,6 +268,12 @@ select {
   color: rgb(255, 255, 255); /* Text color */
 }
 
-#mainAppContainer{
+#mainAppContainer {
+  max-height: 380px;
   overflow-y: auto;
+}
+
+#appContainer h3 {
+  margin-bottom: 1.5rem;
+  font-size: 20px;
 }
