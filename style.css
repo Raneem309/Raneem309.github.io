@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Electromagnetic_Lungs";
-  src: url("fonts/AlteHaasGroteskRegular.ttf") format("truetype");
+  src: url("fonts/vhs_gothic.ttf") format("truetype");
   font-weight: normal; /* Adjust if you have multiple weights */
   font-style: normal;  /* Adjust if the font has italic versions */
 }
@@ -14,7 +14,7 @@
 /* HTML and body styles */
 html,
 body {
-  font-family: "Electromagnetic_Lungs", monospace;
+  font-family: "vhs_gothic", monospace;
   color: white;
   height: 100%;
   background-color: #d3d3d3;
