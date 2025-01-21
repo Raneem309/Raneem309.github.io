@@ -95,31 +95,13 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  width: 100%;
+  width: 90%;
   padding: 10px;
-}
-
-#mainHeader {
-  display: flex;
-  justify-content: space-between;
-  width: 40%;
-}
-
-.tab {
-  cursor: pointer;
-  padding: 10px;
-  background-color: #333;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
-
-.tab:hover {
-  background-color: #555;
 }
 
 /* Sections */
 section {
-  margin-top: 2rem;
+  margin-top: 6rem;
   margin-left: 1rem;
   text-align: left;
   margin-bottom: 2rem;
