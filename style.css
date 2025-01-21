@@ -16,6 +16,8 @@ body {
   overflow: hidden;
 }
 
+
+
 /* Background layer */
 .background {
   background-size: cover !important;
@@ -145,15 +147,10 @@ body {
 
 /* Sections */
 section {
-  padding: 10px;
-  overflow-y: auto;
   width: 100%;
   margin-top: 6rem;
-  margin-left: 1rem;
-  max-height: 400px;
+  margin-left: .5rem;
   text-align: left;
-  margin-bottom: 2rem;
-  border-radius: 10px;
 }
 
 
@@ -168,6 +165,10 @@ h2 {
 }
 
 #aboutMeBio {
+  border-radius: 10px;
+  max-height: 450px;
+  padding: 10px;
+  overflow-y: auto;
   background-color: rgb(255 255 255); /* Optional background color */
   color: rgb(0 0 0); /* Text color */
 }
@@ -202,49 +203,57 @@ h2 {
   border-radius: 5px;
   cursor: pointer;
   margin-left: 80%;
+  width: 20%;
 }
 
 .projectButtons:hover {
   background-color: #45a049;
 }
 
-/* Health Stats App */
-#healthStatsApp {
-  background-color: #f2f2f2; /* Optional background color */
-  color: rgb(0, 0, 0); /* Text color */
-}
-
 input,
 select {
-  padding: 8px;
+  padding: 9px;
   margin: 10px 0;
   width: 100%;
+  margin-bottom: 1.5rem;
 }
 
 #exitButton {
-  background-color: #f44336;
+  background-color: #ff1100;
   color: white;
   padding: 10px;
   position: absolute;
   bottom: 20px;
-  right: 20px;
+  right: 30px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 #exitButton:hover {
-  background-color: #da190b;
+  background-color: #d22e22;
 }
 
-/* #appContainer {
-  display: flex;
-  overflow-x: auto; 
-  width: 100%; 
-  padding: 1rem;
-  margin-top: 2rem;
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.9); 
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-} */
 
+#appSubmitBTN{
+  background-color: #00f71d;
+  color: white;
+  padding: 10px;
+  position: absolute;
+  bottom: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#appContainer{
+  border-radius: 10px;
+  max-height: 450px;
+  padding: 10px;
+  background-color: rgb(0, 0, 0); /* Optional background color */
+  color: rgb(255, 255, 255); /* Text color */
+}
+
+#mainAppContainer{
+  overflow-y: auto;
+}
