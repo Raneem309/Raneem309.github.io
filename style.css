@@ -140,9 +140,9 @@ label {
 }
 
 #title {
-  font-size: 16px; /* Match the font size with the tabs */
+  font-size: 16px; 
   font-weight: normal;
-  margin-top: 5px; /* Adjust spacing between name and title */
+  margin-top: 5px;
 }
 
 #mainHeader {
@@ -178,9 +178,16 @@ section {
   text-align: left;
 }
 
-h2 {
+
+#aboutMeSection h2,
+#projectsSection h2,
+#contactSection h2 {
   margin-bottom: 20px;
   font-size: 16px;
+  margin-top: 1rem;
+  color: #d3d3d3;
+  -webkit-text-stroke: .5px;
+  -webkit-text-stroke-color: #000000;
 }
 
 /* Hidden sections initially */
@@ -208,6 +215,7 @@ h2 {
   display: grid;
   gap: 20px;
   color: rgb(0 0 0);
+  font-size: 16px;
 }
 
 .project {
@@ -218,7 +226,7 @@ h2 {
 }
 
 .project h3 {
-  font-size: 1.2rem;
+  font-size: 17px;
 }
 
 .projectButtons {
@@ -259,6 +267,7 @@ select {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 1rem;
 }
 
 #exitButton:hover {
@@ -274,6 +283,7 @@ select {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 1rem;
 }
 
 #appContainer {
@@ -299,16 +309,26 @@ select {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  border-radius: 10px;
+    max-height: 450px;
+    padding: 10px;
+    overflow-y: auto;
+    background: #757575;
 }
 
 .contact-list li {
   margin: 10px 0;
-  font-size: 1.2rem;
+  font-size: 16px; 
+    color: #000000;
+
 }
 
 .contact-list a {
   color: #ffffff;
   text-decoration: none;
+    -webkit-text-stroke: px;
+  -webkit-text-stroke-color: #000000;
+  
 }
 
 .contact-list a:hover {

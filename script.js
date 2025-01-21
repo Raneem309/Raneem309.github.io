@@ -38,6 +38,8 @@ With a commitment to building clean, functional, and scalable solutions, I am ea
 
   document.getElementById("contactInfo").innerHTML = contactInfo;
 
+  let homeText = `Welcome to `
+
 }
 
 function tabLinks() {
