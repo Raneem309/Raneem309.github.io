@@ -1,102 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Raneem Ali's Portfolio</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div id="openingScreen" class="displayNone">- RANEEM ALI's PORTFOLIO -</div>
-    <div class="background">
-      <div class="container">
-        <header>
-          <div id="headerContainer">
-            <div id="nameTitleContainer">
-              <h1 id="name">Raneem Ali</h1>
-              <h2 id="title">Web/Software Developer</h2>
-            </div>
-            <div id="mainHeader" class="center-tabs">
-              <div id="aboutMeTab" class="tab">Home</div>
-              <div id="projectTab" class="tab">Projects</div>
-              <div id="contactTab" class="tab">Contact</div>
-            </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raneem Ali's Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="openingScreen" class="displayNone">- RANEEM ALI's PORTFOLIO -</div>
+  <div class="background">
+    <div class="container">
+      <header>
+        <div id="headerContainer">
+          <div id="nameTitleContainer">
+            <h1 id="name">Raneem Ali</h1>
+            <h2 id="title">Web/Software Developer</h2>
           </div>
-        </header>
-
-        <section class="displayNone" id="aboutMeSection">
-          <h2>About Me</h2>
-          <div id="aboutMeBio"></div>
-        </section>
-
-        <section class="displayNone" id="projectsSection">
-          <h2 id="projectHeader">A - Z</h2>
-          <div id="projectData">
-          <div id="projectsGrid">
-            <div class="project" id="project1">
-              <h3>Health Stats</h3>
-              <button class="projectButtons" onclick="launchHealthStats()">Start Health Stats</button>
-            </div>
-            <div class="project" id="project2">
-              <h3>Project 2</h3>
-              <button class="projectButtons" onclick="">Start [Project 2]</button>
-            </div>
-            <div class="project" id="project3">
-              <h3>Project 3</h3>
-              <button class="projectButtons" onclick="">Start [Project 3]</button>
-            </div>
+          <div id="mainHeader" class="center-tabs">
+            <div id="aboutMeTab" class="tab">Home</div>
+            <div id="projectTab" class="tab">Projects</div>
+            <div id="contactTab" class="tab">Contact</div>
           </div>
         </div>
+      </header>
 
-          <div id="appContainer" class="displayNone">
-            <h3>Enter Your Information</h3>
-            <div id="mainAppContainer">
-              <label for="nameInput">First and Last Initial: </label>
-              <input type="text" id="nameInput" /><div></div>
-        
-              <label for="ageInput">Age: </label>
-              <input type="number" id="ageInput" /><div></div>
-        
-              <label for="genderInput">Gender (M/F): </label>
-              <input type="text" id="genderInput" /><div></div>
-        
-              <label for="heightInput">Height (in feet, e.g., 5.9): </label>
-              <input type="number" step="0.1" id="heightInput" /><div></div>
-        
-              <label for="weightInput">Weight (in lbs): </label>
-              <input type="number" id="weightInput" /><div></div>
-        
-              <label for="activityLevelInput">Activity Level: </label>
-              <select id="activityLevelInput">
-                <option value="1.2">Sedentary (0-1 days)</option>
-                <option value="1.4">Light (1-3 days)</option>
-                <option value="1.6">Moderate (3-5 days)</option>
-                <option value="1.7">Very Active (6-7 days)</option>
-                <option value="1.9">Extremely Active (2x/day)</option>
-              </select><div></div>
-            </div>
+      <section class="displayNone" id="aboutMeSection">
+        <h2>About Me</h2>
+        <div id="aboutMeBio"></div>
+      </section>
 
-      
-            <button id="appSubmitBTN" type="button" onclick="calculateHealthStats()">Submit</button>
-            <button id="exitButton" onclick="exitApp()">Exit</button>
+      <section class="displayNone" id="projectsSection">
+        <h2>Projects</h2>
+        <div id="projectHeader"></div>
+        <div id="projectData" class="center-text">
+          <div class="project">
+            <h3>Health Stats</h3>
+            <button onclick="launchHealthStats()">Launch App</button>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="displayNone" id="contactSection">
-          <h2>Contact</h2>
-          <p>Cell: <a href="tel:+17032689046">(703) 268-9046</a></p>
-          <p>
-            Email: <a href="mailto:Raneem309@gmail.com">Raneem309@gmail.com</a>
-          </p>
-          <p>
-            LinkedIn:
-            <a href="https://www.linkedin.com/in/raneem-ali/" target="_blank"
-              >raneem-ali</a
-            >
-          </p>
-        </section>
+      <section class="displayNone" id="contactSection">
+        <h2>Contact</h2>
+        <p>Contact Information</p>
+      </section>
+
+      <div id="appContainer" class="displayNone">
+        <h3>Health Stats</h3>
+        <form onsubmit="event.preventDefault(); calculateHealthStats();">
+          <input type="text" id="nameInput" placeholder="Enter Your Name" required />
+          <input type="number" id="ageInput" placeholder="Enter Your Age" required />
+          <select id="genderInput" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+          <input type="number" id="heightInput" placeholder="Enter Height in Feet" required />
+          <input type="number" id="weightInput" placeholder="Enter Weight in Pounds" required />
+          <input type="number" id="activityLevelInput" placeholder="Activity Level (1-5)" required />
+          <button type="submit">Calculate</button>
+        </form>
       </div>
     </div>
-    <script src="script.js"></script>
-  </body>
+  </div>
+  <script src="script.js"></script>
+</body>
 </html>

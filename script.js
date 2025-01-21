@@ -80,11 +80,83 @@ function launchHealthStats() {
   document.getElementById("projectData").classList.add("displayNone"); // Hide the project section
 }
 
-
-
 // Function to handle the "Exit" button
 function exitApp() {
   projHeader.innerText = "A - Z"
   appContainer.classList.add("displayNone");
   document.getElementById("projectData").classList.remove("displayNone"); // Show project section again
+}
+
+// Function to calculate BMI
+function calcBMI(height, weight) {
+  return (703 * weight) / ((height * 12) * (height * 12));
+}
+
+// Function to calculate BMR
+function calcBMR(height, weight, gender, age) {
+  let calcBMR;
+  if (gender === "Male") {
+    calcBMR = 66 + (6.23 * weight) + (12.7 * height) - (6.8 * age);
+  } else {
+    calcBMR = 655 + (4.35 * weight) + (4.7 * height) - (4.7 * age);
+  }
+  return calcBMR;
+}
+
+// Function to calculate TDEE
+function calcTDEE(calcBMR, actLevel) {
+  return actLevel * calcBMR;
+}
+
+// Function to evaluate BMI
+function evaluateBMI(bmi) {
+  if (bmi < 18.5) {
+    return "Underweight (below 18.5)";
+  } else if (bmi >= 18.5 && bmi < 24.9) {
+    return "Normal Weight (between 18.5 - 24.9)";
+  } else if (bmi >= 25 && bmi < 29.9) {
+    return "Overweight (between 25 - 29.9)";
+  } else {
+    return "Obese (above 29.9)";
+  }
+}
+
+// Function to handle Health Stats form submission
+function calculateHealthStats() {
+  const name = document.getElementById("nameInput").value;
+  const age = parseInt(document.getElementById("ageInput").value);
+  const gender = document.getElementById("genderInput").value;
+  const height = parseFloat(document.getElementById("heightInput").value);
+  const weight = parseInt(document.getElementById("weightInput").value);
+  const actLevel = parseFloat(document.getElementById("activityLevelInput").value);
+
+  const bmi = calcBMI(height, weight);
+  const bmr = calcBMR(height, weight, gender, age);
+  const tdee = calcTDEE(bmr, actLevel);
+
+  displayHealthStats(name, age, gender, height, weight, actLevel, bmi, bmr, tdee);
+}
+
+// Function to display Health Stats
+function displayHealthStats(name, age, gender, height, weight, actLevel, bmi, bmr, tdee) {
+  let resultMessage = `
+    <h3>Health Stats for ${name}</h3>
+    <p><strong>Age:</strong> ${age}</p>
+    <p><strong>Gender:</strong> ${gender}</p>
+    <p><strong>Height:</strong> ${height} feet</p>
+    <p><strong>Weight:</strong> ${weight} lbs</p>
+    <p><strong>Activity Level:</strong> ${actLevel}</p>
+    <p><strong>BMI:</strong> ${bmi.toFixed(2)} - ${evaluateBMI(bmi)}</p>
+    <p><strong>BMR:</strong> ${bmr.toFixed(2)} calories/day</p>
+    <p><strong>TDEE:</strong> ${tdee.toFixed(2)} calories/day</p>
+  `;
+  
+  appContainer.innerHTML += resultMessage;
+  const bulk = tdee + 500;
+  const cut = tdee - 500;
+  const moreInfoMessage = `
+    <p><strong>To Bulk:</strong> ${bulk.toFixed(2)} calories/day</p>
+    <p><strong>To Cut:</strong> ${cut.toFixed(2)} calories/day</p>
+  `;
+  appContainer.innerHTML += moreInfoMessage;
 }
