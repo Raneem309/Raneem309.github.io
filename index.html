@@ -6,15 +6,13 @@
     <title>Raneem Ali's Portfolio</title>
     <link rel="stylesheet" href="style.css" />
     <script type="module">
-      import * as THREE from 'https://cdn.skypack.dev/three@0.153.0';
-    
-      // Your Three.js code here
+      import { initThreeJS } from './script.js'; // Ensure this is the correct path
     </script>
-    
   </head>
   <body>
     <div id="openingScreen" class="displayNone">- RANEEM ALI's PORTFOLIO -</div>
     <div class="background">
+      <div id="threejsCanvas"></div>
       <div class="container">
         <header>
           <div id="headerContainer">

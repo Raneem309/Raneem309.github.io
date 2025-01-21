@@ -1,3 +1,5 @@
+import * as THREE from "https://cdn.skypack.dev/three@0.153.0";
+
 //Global Variables
 const about = document.getElementById("aboutMeTab");
 const projects = document.getElementById("projectTab");
@@ -88,9 +90,6 @@ function exitApp() {
   document.getElementById("projectData").classList.remove("displayNone"); // Show project section again
 }
 
-import * as THREE from "https://cdn.skypack.dev/three@0.153.0";
-
-// Your Three.js setup and code below
 function initThreeJS() {
   // Create the scene
   const scene = new THREE.Scene();
@@ -109,7 +108,9 @@ function initThreeJS() {
 
   // Attach the renderer to the background div
   const canvasElement = document.getElementById("threejsCanvas");
-  canvasElement.appendChild(renderer.domElement);
+  if (canvasElement) {
+    canvasElement.appendChild(renderer.domElement);
+  }
 
   // Create a cube geometry
   const geometry = new THREE.BoxGeometry();
