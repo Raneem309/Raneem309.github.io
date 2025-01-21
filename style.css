@@ -95,15 +95,14 @@ label {
   align-items: center; /* Centers vertically */
   background: url("images/bg5(2).jpg") no-repeat center center;
   color: white; /* Text color */
-  font-size: 2rem; /* Adjust the font size */
-  mix-blend-mode: difference; 
-  z-index: 9999; /* Ensure it’s on top of all other content */
-  text-align: center; /* Center-aligns the text */
+  font-size: 2rem; 
+  z-index: 9999; 
+  text-align: center;
   animation: fadeOut 5s forwards;
 }
 @keyframes fadeOut {
   0% {
-    opacity: 1;
+    opacity: 3;
     visibility: visible;
   }
   100% {
