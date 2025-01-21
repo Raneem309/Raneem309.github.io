@@ -64,13 +64,13 @@ function handleOpeningScreen() {
   openingScreen.classList.remove("displayNone");
 
   setTimeout(() => {
-    openingScreen.style.transition = "opacity 3s ease";
+    openingScreen.style.transition = "opacity 6s ease";
     openingScreen.style.opacity = "0";
 
     setTimeout(() => {
       openingScreen.classList.add("displayNone");
-    }, 3000); // Match fade-out duration
-  }, 5000); // Stay solid for 3 seconds before fading out
+    }, 6000); // Match fade-out duration
+  }, 3000); // Stay solid for 3 seconds before fading out
 }
 
 // Function to launch the Health Stats app

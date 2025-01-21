@@ -145,13 +145,17 @@ body {
 
 /* Sections */
 section {
+  padding: 10px;
+  overflow-y: auto;
+  width: 100%;
   margin-top: 6rem;
   margin-left: 1rem;
+  max-height: 400px;
   text-align: left;
-  /* background-color: black; */
   margin-bottom: 2rem;
   border-radius: 10px;
 }
+
 
 h2 {
   margin-bottom: 20px;
@@ -164,14 +168,8 @@ h2 {
 }
 
 #aboutMeBio {
-  width: 100%; /* Make it full width of its container */
-  max-height: 400px; /* Adjust the height as per your needs */
-  overflow-y: auto; /* Enables vertical scrolling when content overflows */
-  padding: 10px; /* Optional padding */
   background-color: rgb(255 255 255); /* Optional background color */
   color: rgb(0 0 0); /* Text color */
-  border-radius: 10px; /* Optional border radius */
-  margin-top: 10px; /* Optional margin */
 }
 
 /* Align A-Z and Contact to the left */
@@ -183,7 +181,6 @@ h2 {
 /* Projects Section Grid Layout */
 #projectsGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
@@ -191,37 +188,30 @@ h2 {
   background: #333;
   padding: 20px;
   border-radius: 8px;
-  text-align: center;
 }
 
 .project h3 {
   font-size: 1.2rem;
 }
 
-button {
+.projectButtons {
   background-color: #4caf50;
   color: white;
   padding: 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-left: 80%;
 }
 
-button:hover {
+.projectButtons:hover {
   background-color: #45a049;
 }
 
 /* Health Stats App */
 #healthStatsApp {
-  width: 100%; /* Make it full width of its container */
-  max-height: 400px; /* Adjust the height as per your needs */
-  overflow-y: auto; /* Enables vertical scrolling when content overflows */
-  padding: 10px; /* Optional padding */
   background-color: #f2f2f2; /* Optional background color */
   color: rgb(0, 0, 0); /* Text color */
-  border-radius: 10px; /* Optional border radius */
-  margin-top: 10px; /* Optional margin */
-  margin-right: 20px; /* Space between sections */
 }
 
 input,
@@ -257,5 +247,4 @@ select {
   background-color: rgba(255, 255, 255, 0.9); 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 } */
-
 
