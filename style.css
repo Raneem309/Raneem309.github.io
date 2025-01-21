@@ -235,6 +235,15 @@ h2 {
   margin-top: 2rem;
 }
 
+#contactInfo{
+  border-radius: 10px;
+  max-height: 450px;
+  padding: 10px;
+  overflow-y: auto;
+  background: #757575;
+  color: rgb(0 0 0); /* Text color */
+}
+
 .projectButtons:hover {
   background-color: #45a049;
 }
