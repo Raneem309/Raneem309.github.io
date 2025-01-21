@@ -1,4 +1,9 @@
-@import url("fonts/"Electromagnetic_Lungs);
+@font-face {
+  font-family: "Electromagnetic_Lungs";
+  src: url("fonts/Electromagnetic_Lungs.woff") format("woff");
+  font-weight: normal; /* Adjust if you have multiple weights */
+  font-style: normal;  /* Adjust if the font has italic versions */
+}
 
 * {
   margin: 0;
