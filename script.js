@@ -79,36 +79,39 @@ function launchHealthStats() {
 
   // Create the form for user inputs
   const formHtml = `
-    <h3>Enter Your Information</h3>
-    <label for="nameInput">First and Last Initial: </label>
-    <input type="text" id="nameInput" /><br><br>
+    <div class="appContainerStyle">
+      <h3>Enter Your Information</h3>
+      <label for="nameInput">First and Last Initial: </label>
+      <input type="text" id="nameInput" /><br><br>
 
-    <label for="ageInput">Age: </label>
-    <input type="number" id="ageInput" /><br><br>
+      <label for="ageInput">Age: </label>
+      <input type="number" id="ageInput" /><br><br>
 
-    <label for="genderInput">Gender (M/F): </label>
-    <input type="text" id="genderInput" /><br><br>
+      <label for="genderInput">Gender (M/F): </label>
+      <input type="text" id="genderInput" /><br><br>
 
-    <label for="heightInput">Height (in feet, e.g., 5.9): </label>
-    <input type="number" step="0.1" id="heightInput" /><br><br>
+      <label for="heightInput">Height (in feet, e.g., 5.9): </label>
+      <input type="number" step="0.1" id="heightInput" /><br><br>
 
-    <label for="weightInput">Weight (in lbs): </label>
-    <input type="number" id="weightInput" /><br><br>
+      <label for="weightInput">Weight (in lbs): </label>
+      <input type="number" id="weightInput" /><br><br>
 
-    <label for="activityLevelInput">Activity Level: </label>
-    <select id="activityLevelInput">
-      <option value="1.2">Sedentary (0-1 days)</option>
-      <option value="1.4">Light (1-3 days)</option>
-      <option value="1.6">Moderate (3-5 days)</option>
-      <option value="1.7">Very Active (6-7 days)</option>
-      <option value="1.9">Extremely Active (2x/day)</option>
-    </select><br><br>
+      <label for="activityLevelInput">Activity Level: </label>
+      <select id="activityLevelInput">
+        <option value="1.2">Sedentary (0-1 days)</option>
+        <option value="1.4">Light (1-3 days)</option>
+        <option value="1.6">Moderate (3-5 days)</option>
+        <option value="1.7">Very Active (6-7 days)</option>
+        <option value="1.9">Extremely Active (2x/day)</option>
+      </select><br><br>
 
-    <button type="button" onclick="calculateHealthStats()">Submit</button>
+      <button type="button" onclick="calculateHealthStats()">Submit</button>
+    </div>
   `;
-
   document.getElementById("healthStatsApp").innerHTML = formHtml;
 }
+
+
 
 // Function to handle the "Exit" button
 function exitApp() {
