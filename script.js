@@ -77,26 +77,31 @@ function handleOpeningScreen() {
 // Function to launch the Health Stats app
 function launchHealthStats() {
   appContainer.classList.remove("displayNone");
-  projHeader.innerText = "Health Stats App"
+  projHeader.innerText = "Health Stats App";
   document.getElementById("projectData").classList.add("displayNone"); // Hide the project section
 }
 
-
-
 // Function to handle the "Exit" button
 function exitApp() {
-  projHeader.innerText = "A - Z"
+  projHeader.innerText = "A - Z";
   appContainer.classList.add("displayNone");
   document.getElementById("projectData").classList.remove("displayNone"); // Show project section again
 }
 
+import * as THREE from "https://cdn.skypack.dev/three@0.153.0";
 
+// Your Three.js setup and code below
 function initThreeJS() {
   // Create the scene
   const scene = new THREE.Scene();
 
   // Create the camera (field of view, aspect ratio, near, far)
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+  );
 
   // Create the renderer
   const renderer = new THREE.WebGLRenderer();
