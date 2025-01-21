@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Electromagnetic_Lungs";
-  src: url("fonts/Electromagnetic_Lungs.otf") format("opentype");
+  src: url("fonts/AlteHaasGroteskRegular.ttf") format("truetype");
   font-weight: normal; /* Adjust if you have multiple weights */
   font-style: normal;  /* Adjust if the font has italic versions */
 }
@@ -225,6 +225,10 @@ h2 {
   cursor: pointer;
   margin-left: 80%;
   width: 20%;
+}
+
+#contactSection p{
+  margin-top: 2rem;
 }
 
 .projectButtons:hover {
