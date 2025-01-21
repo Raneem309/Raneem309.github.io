@@ -45,7 +45,7 @@ label {
   background-size: cover !important;
   width: 100vw;
   height: 100vh;
-  background: url("images/bg5(2).jpg") no-repeat center center;
+  background: url("images/portCover1.jpg") no-repeat center center;
   z-index: -1; /* Push background behind other content */
 }
 
@@ -93,7 +93,7 @@ label {
   display: flex; /* Enables flexbox for centering */
   justify-content: center; /* Centers horizontally */
   align-items: center; /* Centers vertically */
-  background: url("images/bg5(2).jpg") no-repeat center center;
+  background: url("images/portCover1.jpg") no-repeat center center;
   color: white; /* Text color */
   font-size: 2rem; 
   z-index: 9999; 
@@ -209,6 +209,7 @@ h2 {
 }
 
 .project {
+  border-style: double;
   background: #757575;
   padding: 20px;
   border-radius: 8px;
@@ -219,7 +220,7 @@ h2 {
 }
 
 .projectButtons {
-  background-color: #4caf50;
+  background-color: #000000ad;
   color: white;
   padding: 10px;
   border: none;
@@ -276,8 +277,9 @@ select {
   border-radius: 10px;
   max-height: 450px;
   padding: 10px;
-  background-color: rgb(0, 0, 0); /* Optional background color */
-  color: rgb(255, 255, 255); /* Text color */
+  border-style: double;
+  background: #757575;
+  color: rgb(0 0 0); /* Text color */
 }
 
 #mainAppContainer {

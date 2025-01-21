@@ -71,6 +71,7 @@ function handleOpeningScreen() {
       openingScreen.classList.add("displayNone");
     }, 5000);
   }, 4000); 
+  
 }
 
 // Function to launch the Health Stats app
