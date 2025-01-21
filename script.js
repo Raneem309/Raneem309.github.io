@@ -70,3 +70,103 @@ function handleOpeningScreen() {
     }, 3000); // Match fade-out duration
   }, 5000); // Stay solid for 3 second before fading out
 }
+
+// Function to launch the Health Stats app
+function launchHealthStats() {
+  const appContainer = document.getElementById("appContainer");
+  appContainer.classList.remove("displayNone");
+  document.getElementById("projectsSection").classList.add("displayNone");
+
+  // Create the form for user inputs
+  const formHtml = `
+    <h3>Enter Your Information</h3>
+    <label for="nameInput">First and Last Initial: </label>
+    <input type="text" id="nameInput" /><br><br>
+
+    <label for="ageInput">Age: </label>
+    <input type="number" id="ageInput" /><br><br>
+
+    <label for="genderInput">Gender (M/F): </label>
+    <input type="text" id="genderInput" /><br><br>
+
+    <label for="heightInput">Height (in feet, e.g., 5.9): </label>
+    <input type="number" step="0.1" id="heightInput" /><br><br>
+
+    <label for="weightInput">Weight (in lbs): </label>
+    <input type="number" id="weightInput" /><br><br>
+
+    <label for="activityLevelInput">Activity Level: </label>
+    <select id="activityLevelInput">
+      <option value="1.2">Sedentary (0-1 days)</option>
+      <option value="1.4">Light (1-3 days)</option>
+      <option value="1.6">Moderate (3-5 days)</option>
+      <option value="1.7">Very Active (6-7 days)</option>
+      <option value="1.9">Extremely Active (2x/day)</option>
+    </select><br><br>
+
+    <button type="button" onclick="calculateHealthStats()">Submit</button>
+  `;
+
+  document.getElementById("healthStatsApp").innerHTML = formHtml;
+}
+
+// Function to calculate health stats
+function calculateHealthStats() {
+  const name = document.getElementById("nameInput").value;
+  const age = parseInt(document.getElementById("ageInput").value);
+  const gender = document.getElementById("genderInput").value;
+  const height = parseFloat(document.getElementById("heightInput").value);
+  const weight = parseInt(document.getElementById("weightInput").value);
+  const activityLevel = parseFloat(
+    document.getElementById("activityLevelInput").value
+  );
+
+  // Call the functions to calculate stats
+  const bmi = calcBMI(height, weight);
+  const bmr = calcBMR(height, weight, gender, age);
+  const tdee = calcTDEE(bmr, activityLevel);
+
+  // Display results
+  const resultHtml = `
+    <h3>Health Stats Summary</h3>
+    <p>Name: ${name}</p>
+    <p>Age: ${age}</p>
+    <p>Height: ${height} ft</p>
+    <p>Weight: ${weight} lbs</p>
+    <p>BMI: ${bmi.toFixed(2)} (${evaluateBMI(bmi)})</p>
+    <p>BMR: ${bmr.toFixed(2)} calories/day</p>
+    <p>TDEE: ${tdee.toFixed(2)} calories/day</p>
+  `;
+
+  document.getElementById("healthStatsApp").innerHTML = resultHtml;
+}
+
+// Functions for BMI, BMR, and TDEE calculations
+function calcBMI(height, weight) {
+  return (703 * weight) / (height * 12 * (height * 12)); // height in feet, weight in lbs
+}
+
+function calcBMR(height, weight, gender, age) {
+  if (gender.toLowerCase() === "male") {
+    return 66 + 6.23 * weight + 12.7 * height - 6.8 * age;
+  } else {
+    return 655 + 4.35 * weight + 4.7 * height - 4.7 * age;
+  }
+}
+
+function calcTDEE(bmr, activityLevel) {
+  return bmr * activityLevel;
+}
+
+function evaluateBMI(bmi) {
+  if (bmi < 18.5) return "Underweight";
+  if (bmi >= 18.5 && bmi < 24.9) return "Normal Weight";
+  if (bmi >= 25 && bmi < 29.9) return "Overweight";
+  return "Obese";
+}
+
+// Function to handle the "Exit" button
+function exitApp() {
+  document.getElementById("appContainer").classList.add("displayNone");
+  document.getElementById("projectsSection").classList.remove("displayNone");
+}

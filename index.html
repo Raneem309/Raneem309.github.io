@@ -31,8 +31,23 @@
 
         <section class="displayNone" id="projectsSection">
           <h2>A - Z</h2>
-          <div id="project1">
-
+          <div class="projectsGrid">
+            <div class="project" id="project1">
+              <h3>Health Stats</h3>
+              <button onclick="launchHealthStats()">Start Health Stats</button>
+            </div>
+            <div class="project" id="project2">
+              <h3>Project 2</h3>
+            </div>
+            <div class="project" id="project3">
+              <h3>Project 3</h3>
+            </div>
+          </div>
+          <div id="appContainer" class="displayNone">
+            <div id="healthStatsApp">
+              <!-- Health Stats Form will appear here -->
+            </div>
+            <button id="exitButton" onclick="exitApp()">Exit</button>
           </div>
         </section>
 
