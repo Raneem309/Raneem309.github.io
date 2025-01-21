@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Electromagnetic_Lungs";
-  src: url("fonts/Electromagnetic_Lungs.woff") format("woff");
+  src: url("fonts/Electromagnetic_Lungs.otf") format("woff");
   font-weight: normal; /* Adjust if you have multiple weights */
   font-style: normal;  /* Adjust if the font has italic versions */
 }
