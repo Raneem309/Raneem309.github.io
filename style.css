@@ -45,7 +45,7 @@ label {
   background-size: cover !important;
   width: 100vw;
   height: 100vh;
-  background: url("images/bg3.jpg") no-repeat center center;
+  background: url("images/bg5Edit.jpg") no-repeat center center;
   z-index: -1; /* Push background behind other content */
 }
 
