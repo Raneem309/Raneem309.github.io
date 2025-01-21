@@ -64,13 +64,13 @@ function handleOpeningScreen() {
   openingScreen.classList.remove("displayNone");
 
   setTimeout(() => {
-    openingScreen.style.transition = "opacity 6s ease";
+    openingScreen.style.transition = "opacity 5s ease";
     openingScreen.style.opacity = "0";
 
     setTimeout(() => {
       openingScreen.classList.add("displayNone");
-    }, 6000); // Match fade-out duration
-  }, 3000); // Stay solid for 3 seconds before fading out
+    }, 5000);
+  }, 4000); 
 }
 
 // Function to launch the Health Stats app
@@ -146,8 +146,8 @@ function evaluateBMI(bmi) {
 function displayResults(name, age, gender, height, weight, activityLevel, bmi, bmr, tdee) {
   // Hide the input form and show the result container
   document.getElementById("mainAppContainer").classList.add("displayNone");
-  const resultContainer = document.getElementById("resultContainer");
-  resultContainer.classList.remove("displayNone");
+  const resultsContainer = document.getElementById("resultsContainer");
+  resultsContainer.classList.remove("displayNone");
 
   // Show the user's results
   const bmiCategory = evaluateBMI(bmi);

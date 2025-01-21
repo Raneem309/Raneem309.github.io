@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Electromagnetic_Lungs";
-  src: url("fonts/vhs_gothic.ttf") format("truetype");
+  src: url("fonts/vhs_gothic.ttf"), format("truetype");
   font-weight: normal; /* Adjust if you have multiple weights */
   font-style: normal;  /* Adjust if the font has italic versions */
 }
@@ -66,8 +66,9 @@ label {
   position: absolute;
   top: 50%;
   left: 50%;
+  opacity: 90%;
   transform: translate(-50%, -50%); /* Perfect centering */
-  mix-blend-mode: difference;
+  /* mix-blend-mode: difference; invert colors*/
   /* background: url(images/MATRIX.gif); */
 }
 
@@ -86,21 +87,19 @@ label {
 
 /* Initial Screen */
 #openingScreen {
-  position: fixed; /* Ensures the div covers the viewport regardless of scrolling */
-  top: 0;
-  left: 0;
+  position: fixed; 
   width: 100vw; /* Full width of the viewport */
   height: 100vh; /* Full height of the viewport */
   display: flex; /* Enables flexbox for centering */
   justify-content: center; /* Centers horizontally */
   align-items: center; /* Centers vertically */
-  background: rgba(0, 0, 0, 0.8); /* Semi-transparent dark background */
+  background: url("images/bg5(2).jpg") no-repeat center center;
   color: white; /* Text color */
   font-size: 2rem; /* Adjust the font size */
-  font-family: Arial, sans-serif; /* Set a clean font */
+  mix-blend-mode: difference; 
   z-index: 9999; /* Ensure it’s on top of all other content */
   text-align: center; /* Center-aligns the text */
-  animation: fadeOut 6s forwards;
+  animation: fadeOut 5s forwards;
 }
 @keyframes fadeOut {
   0% {
@@ -136,6 +135,8 @@ label {
   font-size: 24px; /* Match the font size with the tabs */
   font-weight: bold;
   color: #d3d3d3;
+  -webkit-text-stroke: .5px;
+  -webkit-text-stroke-color: #000000;
 }
 
 #title {
@@ -145,13 +146,13 @@ label {
 }
 
 #mainHeader {
-  display: flex;
+    display: flex;
   align-items: center;
   gap: 20px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgb(91 89 89 / 29%);
   padding: 10px 20px;
   border-radius: 5px;
-  margin-left: auto; /* Push the tabs to the right */
+  margin-left: auto; 
 }
 
 /* Tabs */
@@ -160,7 +161,9 @@ label {
   padding: 10px 20px;
   text-align: center;
   border-radius: 5px;
-  font-size: 18px; /* Set font size to match with name/title */
+  font-size: 18px;
+  -webkit-text-stroke: .8px;
+  -webkit-text-stroke-color: #ffffff;
 }
 
 .tab:hover {
@@ -190,7 +193,7 @@ h2 {
   max-height: 450px;
   padding: 10px;
   overflow-y: auto;
-  background-color: rgb(255 255 255); /* Optional background color */
+  background: #757575;
   color: rgb(0 0 0); /* Text color */
 }
 
@@ -207,7 +210,7 @@ h2 {
 }
 
 .project {
-  background: #333;
+  background: #757575;
   padding: 20px;
   border-radius: 8px;
 }
