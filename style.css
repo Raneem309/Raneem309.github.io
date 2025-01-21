@@ -93,6 +93,7 @@ label {
   display: flex; /* Enables flexbox for centering */
   justify-content: center; /* Centers horizontally */
   align-items: center; /* Centers vertically */
+  background-size: cover !important;
   background: url("images/portCover1.jpg") no-repeat center center;
   color: white; /* Text color */
   font-size: 2rem; 
