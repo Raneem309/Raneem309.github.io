@@ -36,7 +36,7 @@ With a commitment to building clean, functional, and scalable solutions, I am ea
     <div class="contact-list">
       <li><strong>Phone:</strong> <a href="tel:+17032689046">(703) 268-9046</a></li>
       <li><strong>Email:</strong> <a href="mailto:Raneem309@gmail.com">Raneem309@gmail.com</a></li>
-      <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/raneem309/" target="_blank">linkedin.com/in/raneem309</a></li>
+      <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/raneem-ali/" target="_blank">linkedin.com/in/raneem-ali</a></li>
       <li><strong>GitHub:</strong> <a href="https://github.com/Raneem309" target="_blank">github.com/Raneem309</a></li>
     </div>
   `;
