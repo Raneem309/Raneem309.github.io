@@ -78,16 +78,27 @@ function handleTabs(tabId) {
 }
 
 function handleOpeningScreen() {
-  const name = document.getElementById('name');
-
-  // Fade out 'Raneem Ali' first
-  setTimeout(() => {
-    name.classList.add('fade-out'); // Trigger the fade-out effect on 'Raneem Ali'
-  }, 0);
-
-  
   const openingScreen = document.getElementById("openingScreen");
+  const openName = document.getElementById("openName");
+  const openTitle = document.getElementById("openTitle");
   openingScreen.classList.remove("displayNone");
+
+  openingScreen.classList.remove("displayNone"); // Show the opening screen
+
+  // Fade in "Raneem Ali" immediately
+  setTimeout(() => {
+    openName.style.opacity = "1"; // Make 'Raneem Ali' visible
+  }, 0); // Immediately after opening screen is visible
+
+  // Fade in "Portfolio" after 1 second
+  setTimeout(() => {
+    openTitle.style.opacity = "1"; // Make 'Portfolio' visible
+  }, 1000); // 1 second delay
+
+  // Fade out "Raneem Ali" after 4 seconds
+  setTimeout(() => {
+    openName.style.opacity = "0"; // Make 'Raneem Ali' fade out
+  }, 4000); // 4 seconds delay
 
   setTimeout(() => {
     openingScreen.style.transition = "opacity 5s ease";

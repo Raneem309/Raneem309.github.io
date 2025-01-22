@@ -107,7 +107,7 @@ label {
 #openName {
   color: rgba(123, 123, 123, 0.857); /* Light grey with transparency */
   font-weight: normal;
-  opacity: 1;
+  opacity: 0;
   transition: opacity 1s ease-in-out; 
   margin-right: 1rem;
 }
@@ -116,7 +116,8 @@ label {
   color: rgba(255, 255, 255, 0.857); /* White with transparency */
   font-weight: normal;
   margin-left: 1rem;
-
+  opacity: 0; 
+  transition: opacity 1s ease-in-out; 
 }
 
 @keyframes fadeOut {
