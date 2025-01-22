@@ -109,11 +109,14 @@ label {
   font-weight: normal;
   opacity: 1;
   transition: opacity 1s ease-in-out; 
+  margin-right: 1rem;
 }
 
 #openTitle {
   color: rgba(255, 255, 255, 0.857); /* White with transparency */
   font-weight: normal;
+  margin-left: 1rem;
+
 }
 
 @keyframes fadeOut {
