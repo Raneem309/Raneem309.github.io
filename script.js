@@ -231,159 +231,44 @@ function displayResults(
   `;
 }
 
-//////// snake game //////////
-// Global Variables
-const homeTabSection = document.getElementById("homeTabSection");
+// Create the scene, camera, and renderer
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer();
 
-// Initialize game state
-let gameState = {
-  snake: [{ x: 10, y: 10 }],
-  direction: { x: 0, y: 0 },
-  food: [],
-  score: 0,
-  gameLoop: null,
-  gridSize: 20,
-  gridWidth: 30,
-  gridHeight: 15,
-};
+// Set renderer size and add it to the DOM
+renderer.setSize(window.innerWidth, window.innerHeight * 0.9); // Adjust height for welcome message
+document.getElementById('container').appendChild(renderer.domElement);
 
-function initializeGame() {
-  homeTabSection.innerHTML = `
-    <div id="gameBoard" class="game-board"></div>
-    <div id="gameInfo" class="game-info">Score: 0</div>
-  `;
-  const gameBoard = document.getElementById("gameBoard");
-  const gameInfo = document.getElementById("gameInfo");
+// Create a cube geometry and material
+const geometry = new THREE.BoxGeometry();
+const material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
+const cube = new THREE.Mesh(geometry, material);
 
-  // Generate initial food
-  generateFood();
+// Add the cube to the scene
+scene.add(cube);
 
-  // Start game loop
-  gameState.gameLoop = setInterval(() => {
-    updateGame(gameBoard, gameInfo);
-  }, 150);
+// Set camera position
+camera.position.z = 5;
 
-  // Listen for keyboard events
-  document.addEventListener("keydown", changeDirection);
+// Animation loop
+function animate() {
+  requestAnimationFrame(animate);
+
+  // Rotate the cube
+  cube.rotation.x += 0.01;
+  cube.rotation.y += 0.01;
+
+  // Render the scene
+  renderer.render(scene, camera);
 }
 
-function generateFood() {
-  const foodCount = 10;
-  for (let i = 0; i < foodCount; i++) {
-    const foodX = Math.floor(Math.random() * gameState.gridWidth);
-    const foodY = Math.floor(Math.random() * gameState.gridHeight);
-    gameState.food.push({ x: foodX, y: foodY });
-  }
-}
+// Start the animation loop
+animate();
 
-function updateGame(gameBoard, gameInfo) {
-  // Move snake
-  const head = { ...gameState.snake[0] };
-  head.x += gameState.direction.x;
-  head.y += gameState.direction.y;
-
-  // Check collisions
-  if (checkCollision(head)) {
-    endGame();
-    return;
-  }
-
-  // Check if snake eats food
-  const foodIndex = gameState.food.findIndex(
-    (f) => f.x === head.x && f.y === head.y
-  );
-  if (foodIndex !== -1) {
-    gameState.food.splice(foodIndex, 1);
-    gameState.snake.push({ ...head });
-    gameState.score++;
-  } else {
-    gameState.snake.pop();
-  }
-
-  // Add new head
-  gameState.snake.unshift(head);
-
-  // Render game board
-  renderGame(gameBoard, gameInfo);
-}
-
-function renderGame(gameBoard, gameInfo) {
-  gameBoard.innerHTML = "";
-  gameState.snake.forEach((segment) => {
-    const segmentDiv = document.createElement("div");
-    segmentDiv.style.gridColumnStart = segment.x + 1;
-    segmentDiv.style.gridRowStart = segment.y + 1;
-    segmentDiv.classList.add("snake");
-    gameBoard.appendChild(segmentDiv);
-  });
-
-  gameState.food.forEach((food) => {
-    const foodDiv = document.createElement("div");
-    foodDiv.style.gridColumnStart = food.x + 1;
-    foodDiv.style.gridRowStart = food.y + 1;
-    foodDiv.classList.add("food");
-    gameBoard.appendChild(foodDiv);
-  });
-
-  gameInfo.textContent = `Score: ${gameState.score}`;
-}
-
-function changeDirection(e) {
-  switch (e.key) {
-    case "ArrowUp":
-      if (gameState.direction.y === 0) gameState.direction = { x: 0, y: -1 };
-      break;
-    case "ArrowDown":
-      if (gameState.direction.y === 0) gameState.direction = { x: 0, y: 1 };
-      break;
-    case "ArrowLeft":
-      if (gameState.direction.x === 0) gameState.direction = { x: -1, y: 0 };
-      break;
-    case "ArrowRight":
-      if (gameState.direction.x === 0) gameState.direction = { x: 1, y: 0 };
-      break;
-  }
-}
-
-function checkCollision(head) {
-  return (
-    head.x < 0 ||
-    head.y < 0 ||
-    head.x >= gameState.gridWidth ||
-    head.y >= gameState.gridHeight ||
-    gameState.snake.some((segment) => segment.x === head.x && segment.y === head.y)
-  );
-}
-
-function endGame() {
-  clearInterval(gameState.gameLoop);
-  homeTabSection.innerHTML = `
-    <div id="gameOver" class="game-over">
-      Game Over! Your score: ${gameState.score}
-      <button id="restartButton" onclick="restartGame()">Restart</button>
-    </div>
-  `;
-}
-
-function restartGame() {
-  gameState = {
-    snake: [{ x: 10, y: 10 }],
-    direction: { x: 0, y: 0 },
-    food: [],
-    score: 0,
-    gameLoop: null,
-    gridSize: 20,
-    gridWidth: 30,
-    gridHeight: 15,
-  };
-  initializeGame();
-}
-
-// Start game on Enter key press
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Enter" && !gameState.gameLoop) {
-    initializeGame();
-  }
+// Adjust the canvas size on window resize
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight * 0.9);
 });
-
-//////// snake game //////////
