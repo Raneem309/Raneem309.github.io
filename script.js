@@ -78,6 +78,14 @@ function handleTabs(tabId) {
 }
 
 function handleOpeningScreen() {
+  const name = document.getElementById('name');
+
+  // Fade out 'Raneem Ali' first
+  setTimeout(() => {
+    name.classList.add('fade-out'); // Trigger the fade-out effect on 'Raneem Ali'
+  }, 0);
+
+  
   const openingScreen = document.getElementById("openingScreen");
   openingScreen.classList.remove("displayNone");
 

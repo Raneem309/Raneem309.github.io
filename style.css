@@ -101,11 +101,14 @@ label {
   text-align: center;
   animation: fadeOut 5s forwards;
   font-family: "PPNeueMontreal-Medium", monospace;
+
 }
 
 #openName {
   color: rgba(123, 123, 123, 0.857); /* Light grey with transparency */
   font-weight: normal;
+  opacity: 1;
+  transition: opacity 1s ease-in-out; 
 }
 
 #openTitle {
