@@ -334,8 +334,3 @@ select {
   text-decoration: underline;
 }
 
-#welcome-message {
-  font-size: 24px;
-  text-align: center;
-  margin-top: 10px;
-}
