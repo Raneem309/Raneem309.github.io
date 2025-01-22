@@ -7,21 +7,7 @@ const appContainer = document.getElementById("appContainer");
 
 //////// snake game //////////
 
-const snakeGame = document.getElementById("snakeGame");
-const welcomeText = document.getElementById("welcomeText");
-const pressEnter = document.getElementById("pressEnter");
-const gameMessage = document.getElementById("gameMessage");
-let snake = [{ x: 10, y: 10 }];
-let direction = { x: 0, y: 0 };
-let food = { x: 15, y: 15 };
-let score = 0;
-let gameInterval;
 
-const gridSize = 20; // Size of one grid cell
-const canvasSize = 400; // Canvas width and height
-snakeGame.width = canvasSize;
-snakeGame.height = canvasSize;
-const ctx = snakeGame.getContext("2d");
 //////// snake game //////////
 
 window.onload = function () {
@@ -246,76 +232,158 @@ function displayResults(
 }
 
 //////// snake game //////////
+// Global Variables
+const homeTabSection = document.getElementById("homeTabSection");
 
-function startGame() {
-  gameMessage.style.display = "none";
-  snakeGame.classList.remove("hidden");
-  score = 0;
-  snake = [{ x: 10, y: 10 }];
-  direction = { x: 0, y: 0 };
-  placeFood();
-  gameInterval = setInterval(updateGame, 100);
+// Initialize game state
+let gameState = {
+  snake: [{ x: 10, y: 10 }],
+  direction: { x: 0, y: 0 },
+  food: [],
+  score: 0,
+  gameLoop: null,
+  gridSize: 20,
+  gridWidth: 30,
+  gridHeight: 15,
+};
+
+function initializeGame() {
+  homeTabSection.innerHTML = `
+    <div id="gameBoard" class="game-board"></div>
+    <div id="gameInfo" class="game-info">Score: 0</div>
+  `;
+  const gameBoard = document.getElementById("gameBoard");
+  const gameInfo = document.getElementById("gameInfo");
+
+  // Generate initial food
+  generateFood();
+
+  // Start game loop
+  gameState.gameLoop = setInterval(() => {
+    updateGame(gameBoard, gameInfo);
+  }, 150);
+
+  // Listen for keyboard events
+  document.addEventListener("keydown", changeDirection);
 }
 
-function placeFood() {
-  food.x = Math.floor(Math.random() * (canvasSize / gridSize));
-  food.y = Math.floor(Math.random() * (canvasSize / gridSize));
+function generateFood() {
+  const foodCount = 10;
+  for (let i = 0; i < foodCount; i++) {
+    const foodX = Math.floor(Math.random() * gameState.gridWidth);
+    const foodY = Math.floor(Math.random() * gameState.gridHeight);
+    gameState.food.push({ x: foodX, y: foodY });
+  }
 }
 
-function updateGame() {
-  const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
-  if (
-    head.x < 0 ||
-    head.y < 0 ||
-    head.x >= canvasSize / gridSize ||
-    head.y >= canvasSize / gridSize ||
-    checkCollision(head)
-  ) {
-    clearInterval(gameInterval);
-    alert(`Game Over! Your score: ${score}`);
-    snakeGame.classList.add("hidden");
-    gameMessage.style.display = "block";
+function updateGame(gameBoard, gameInfo) {
+  // Move snake
+  const head = { ...gameState.snake[0] };
+  head.x += gameState.direction.x;
+  head.y += gameState.direction.y;
+
+  // Check collisions
+  if (checkCollision(head)) {
+    endGame();
     return;
   }
 
-  snake.unshift(head);
-  if (head.x === food.x && head.y === food.y) {
-    score++;
-    placeFood();
+  // Check if snake eats food
+  const foodIndex = gameState.food.findIndex(
+    (f) => f.x === head.x && f.y === head.y
+  );
+  if (foodIndex !== -1) {
+    gameState.food.splice(foodIndex, 1);
+    gameState.snake.push({ ...head });
+    gameState.score++;
   } else {
-    snake.pop();
+    gameState.snake.pop();
   }
 
-  drawGame();
+  // Add new head
+  gameState.snake.unshift(head);
+
+  // Render game board
+  renderGame(gameBoard, gameInfo);
+}
+
+function renderGame(gameBoard, gameInfo) {
+  gameBoard.innerHTML = "";
+  gameState.snake.forEach((segment) => {
+    const segmentDiv = document.createElement("div");
+    segmentDiv.style.gridColumnStart = segment.x + 1;
+    segmentDiv.style.gridRowStart = segment.y + 1;
+    segmentDiv.classList.add("snake");
+    gameBoard.appendChild(segmentDiv);
+  });
+
+  gameState.food.forEach((food) => {
+    const foodDiv = document.createElement("div");
+    foodDiv.style.gridColumnStart = food.x + 1;
+    foodDiv.style.gridRowStart = food.y + 1;
+    foodDiv.classList.add("food");
+    gameBoard.appendChild(foodDiv);
+  });
+
+  gameInfo.textContent = `Score: ${gameState.score}`;
+}
+
+function changeDirection(e) {
+  switch (e.key) {
+    case "ArrowUp":
+      if (gameState.direction.y === 0) gameState.direction = { x: 0, y: -1 };
+      break;
+    case "ArrowDown":
+      if (gameState.direction.y === 0) gameState.direction = { x: 0, y: 1 };
+      break;
+    case "ArrowLeft":
+      if (gameState.direction.x === 0) gameState.direction = { x: -1, y: 0 };
+      break;
+    case "ArrowRight":
+      if (gameState.direction.x === 0) gameState.direction = { x: 1, y: 0 };
+      break;
+  }
 }
 
 function checkCollision(head) {
-  return snake.some((segment) => segment.x === head.x && segment.y === head.y);
-}
-
-function drawGame() {
-  ctx.clearRect(0, 0, canvasSize, canvasSize);
-  ctx.fillStyle = "green";
-  snake.forEach((segment) =>
-    ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize, gridSize)
+  return (
+    head.x < 0 ||
+    head.y < 0 ||
+    head.x >= gameState.gridWidth ||
+    head.y >= gameState.gridHeight ||
+    gameState.snake.some((segment) => segment.x === head.x && segment.y === head.y)
   );
-  ctx.fillStyle = "red";
-  ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize, gridSize);
 }
 
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Enter" && snakeGame.classList.contains("hidden")) {
-    startGame();
-  }
+function endGame() {
+  clearInterval(gameState.gameLoop);
+  homeTabSection.innerHTML = `
+    <div id="gameOver" class="game-over">
+      Game Over! Your score: ${gameState.score}
+      <button id="restartButton" onclick="restartGame()">Restart</button>
+    </div>
+  `;
+}
 
-  if (event.key === "ArrowUp" && direction.y === 0) {
-    direction = { x: 0, y: -1 };
-  } else if (event.key === "ArrowDown" && direction.y === 0) {
-    direction = { x: 0, y: 1 };
-  } else if (event.key === "ArrowLeft" && direction.x === 0) {
-    direction = { x: -1, y: 0 };
-  } else if (event.key === "ArrowRight" && direction.x === 0) {
-    direction = { x: 1, y: 0 };
+function restartGame() {
+  gameState = {
+    snake: [{ x: 10, y: 10 }],
+    direction: { x: 0, y: 0 },
+    food: [],
+    score: 0,
+    gameLoop: null,
+    gridSize: 20,
+    gridWidth: 30,
+    gridHeight: 15,
+  };
+  initializeGame();
+}
+
+// Start game on Enter key press
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !gameState.gameLoop) {
+    initializeGame();
   }
 });
+
 //////// snake game //////////

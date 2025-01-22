@@ -2,7 +2,7 @@
   font-family: "Electromagnetic_Lungs";
   src: url("fonts/vhs_gothic.ttf"), format("truetype");
   font-weight: normal; /* Adjust if you have multiple weights */
-  font-style: normal; /* Adjust if the font has italic versions */
+  font-style: normal;  /* Adjust if the font has italic versions */
 }
 
 * {
@@ -19,7 +19,7 @@ body {
   height: 100%;
   background-color: #d3d3d3;
   overflow: hidden;
-  letter-spacing: 0.1rem;
+  letter-spacing: .1rem
 }
 
 label {
@@ -87,7 +87,7 @@ label {
 
 /* Initial Screen */
 #openingScreen {
-  position: fixed;
+  position: fixed; 
   width: 100vw; /* Full width of the viewport */
   height: 100vh; /* Full height of the viewport */
   display: flex; /* Enables flexbox for centering */
@@ -96,8 +96,8 @@ label {
   background-size: cover !important;
   background: url("images/portCover1.jpg") no-repeat center center;
   color: white; /* Text color */
-  font-size: 2rem;
-  z-index: 9999;
+  font-size: 2rem; 
+  z-index: 9999; 
   text-align: center;
   animation: fadeOut 5s forwards;
 }
@@ -135,24 +135,24 @@ label {
   font-size: 24px; /* Match the font size with the tabs */
   font-weight: bold;
   color: #d3d3d3;
-  -webkit-text-stroke: 0.5px;
+  -webkit-text-stroke: .5px;
   -webkit-text-stroke-color: #000000;
 }
 
 #title {
-  font-size: 16px;
+  font-size: 16px; 
   font-weight: normal;
   margin-top: 5px;
 }
 
 #mainHeader {
-  display: flex;
+    display: flex;
   align-items: center;
   gap: 20px;
   background-color: rgb(91 89 89 / 29%);
   padding: 10px 20px;
   border-radius: 5px;
-  margin-left: auto;
+  margin-left: auto; 
 }
 
 /* Tabs */
@@ -162,7 +162,7 @@ label {
   text-align: center;
   border-radius: 5px;
   font-size: 18px;
-  -webkit-text-stroke: 0.8px;
+  -webkit-text-stroke: .8px;
   -webkit-text-stroke-color: #ffffff;
 }
 
@@ -178,6 +178,7 @@ section {
   text-align: left;
 }
 
+
 #aboutMeSection h2,
 #projectsSection h2,
 #contactSection h2 {
@@ -185,7 +186,7 @@ section {
   font-size: 16px;
   margin-top: 1rem;
   color: #d3d3d3;
-  -webkit-text-stroke: 0.5px;
+  -webkit-text-stroke: .5px;
   -webkit-text-stroke-color: #000000;
 }
 
@@ -197,7 +198,7 @@ section {
 #aboutMeBio {
   border-radius: 10px;
   max-height: 400px;
-  padding: 10px;
+  padding: 10px; 
   overflow-y: auto;
   background: #757575;
   color: rgb(0 0 0); /* Text color */
@@ -239,9 +240,10 @@ section {
   width: 20%;
 }
 
-#contactSection p {
+#contactSection p{
   margin-top: 2rem;
 }
+
 
 .projectButtons:hover {
   background-color: #45a049;
@@ -308,60 +310,62 @@ select {
   padding: 0;
   margin: 0;
   border-radius: 10px;
-  max-height: 450px;
-  padding: 10px;
-  overflow-y: auto;
-  background: #757575;
+    max-height: 450px;
+    padding: 10px;
+    overflow-y: auto;
+    background: #757575;
 }
 
 .contact-list li {
   margin: 10px 0;
-  font-size: 16px;
-  color: #000000;
+  font-size: 16px; 
+    color: #000000;
+
 }
 
 .contact-list a {
   color: #ffffff;
   text-decoration: none;
-  -webkit-text-stroke: px;
+    -webkit-text-stroke: px;
   -webkit-text-stroke-color: #000000;
+  
 }
 
 .contact-list a:hover {
   text-decoration: underline;
 }
 
-#gameContainer {
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(30, 1fr);
+  grid-template-rows: repeat(15, 1fr);
+  background-color: #000;
+  width: 600px;
+  height: 300px;
+  margin: 20px auto;
   position: relative;
+  border: 2px solid #fff;
+}
+
+.snake {
+  background-color: #0f0;
   width: 100%;
-  height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  height: 100%;
 }
 
-#gameMessage {
+.food {
+  background-color: #f00;
+  width: 100%;
+  height: 100%;
+}
+
+.game-info {
   text-align: center;
-}
-
-.dashed-text {
-  font-size: 24px;
-  text-transform: uppercase;
-  text-decoration: dashed underline;
-  margin-bottom: 20px;
-}
-
-#pressEnter {
   font-size: 18px;
-  color: #666;
+  color: #fff;
 }
 
-canvas.hidden {
-  display: none;
-}
-
-canvas {
-  border: 2px solid #000;
-  background-color: #f4f4f4;
+.game-over {
+  text-align: center;
+  color: #fff;
 }
