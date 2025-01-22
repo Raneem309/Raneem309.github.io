@@ -95,18 +95,18 @@ function handleOpeningScreen() {
     openTitle.style.opacity = "1"; // Make 'Portfolio' visible
   }, 1000); // 1 second delay
 
-  // Fade out "Raneem Ali" after 4 seconds
+  // Fade out "Raneem Ali" after 5 seconds
   setTimeout(() => {
     openName.style.opacity = "0"; // Make 'Raneem Ali' fade out
-  }, 4000); // 4 seconds delay
+  }, 5000); // 4 seconds delay
 
   setTimeout(() => {
-    openingScreen.style.transition = "opacity 5s ease";
+    openingScreen.style.transition = "opacity 6s ease";
     openingScreen.style.opacity = "0";
 
     setTimeout(() => {
       openingScreen.classList.add("displayNone");
-    }, 5000);
+    }, 6000);
   }, 4000);
 }
 

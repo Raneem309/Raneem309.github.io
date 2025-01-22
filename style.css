@@ -99,7 +99,7 @@ label {
   font-size: 2rem; 
   z-index: 9999; 
   text-align: center;
-  animation: fadeOut 5s forwards;
+  animation: fadeOut 6s forwards;
   font-family: "PPNeueMontreal-Medium", monospace;
 
 }
