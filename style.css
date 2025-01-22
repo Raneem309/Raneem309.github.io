@@ -153,8 +153,7 @@ label {
   font-size: 24px; /* Match the font size with the tabs */
   font-weight: bold;
   color: #d3d3d3;
-  -webkit-text-stroke: .5px;
-  -webkit-text-stroke-color: #000000;
+
 }
 
 #title {
@@ -179,8 +178,7 @@ label {
   text-align: center;
   border-radius: 5px;
   font-size: 18px;
-  -webkit-text-stroke: .8px;
-  -webkit-text-stroke-color: #ffffff;
+  color: #d3d3d3;
 }
 
 .tab:hover {
@@ -203,8 +201,6 @@ section {
   font-size: 16px;
   margin-top: 1rem;
   color: #d3d3d3;
-  -webkit-text-stroke: .5px;
-  -webkit-text-stroke-color: #000000;
 }
 
 /* Hidden sections initially */
@@ -343,8 +339,6 @@ select {
 .contact-list a {
   color: #ffffff;
   text-decoration: none;
-    -webkit-text-stroke: px;
-  -webkit-text-stroke-color: #000000;
   
 }
 
