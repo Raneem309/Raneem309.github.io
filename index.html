@@ -10,22 +10,30 @@
     <div id="openingScreen" class="">- RANEEM ALI's PORTFOLIO -</div>
     <div class="background">
       <div class="container">
-        <header>
-          <div id="headerContainer">
-            <div id="nameTitleContainer">
-              <h1 id="name">Raneem Ali</h1>
-              <h2 id="title">Web/Software Developer</h2>
-            </div>
-            <div id="mainHeader" class="center-tabs">
-              <div id="homeTab" class="tab">Home</div>
-              <div id="aboutMeTab" class="tab">About Me</div>
-              <div id="projectTab" class="tab">Projects</div>
-              <div id="contactTab" class="tab">Contact</div>
-            </div>
+        <div id="headerContainer">
+          <div id="nameTitleContainer">
+            <h1 id="name">Raneem Ali</h1>
+            <h2 id="title">Web/Software Developer</h2>
           </div>
-        </header>
-
-        <section class="" id="aboutMeSection">
+          <div id="mainHeader" class="center-tabs">
+            <div id="homeTab" class="tab">Home</div>
+            <div id="aboutMeTab" class="tab">About Me</div>
+            <div id="projectTab" class="tab">Projects</div>
+            <div id="contactTab" class="tab">Contact</div>
+          </div>
+        </div>
+        <section id="homeTabSection">
+          <div id="gameContainer">
+            <div id="gameMessage">
+              <div id="welcomeText" class="dashed-text">
+                Welcome to Raneem Ali's Portfolio
+              </div>
+              <div id="pressEnter">Press Enter to Play</div>
+            </div>
+            <canvas id="snakeGame" class="hidden"></canvas>
+          </div>
+        </section>
+        <section class="displayNone" id="aboutMeSection">
           <h2>About Me</h2>
           <div id="aboutMeBio"></div>
         </section>
@@ -33,69 +41,85 @@
         <section class="displayNone" id="projectsSection">
           <h2 id="projectHeader">A - Z</h2>
           <div id="projectData">
-          <div id="projectsGrid">
-            <div class="project" id="project1">
-              <h3>Health Stats</h3>
-              <button class="projectButtons" onclick="launchHealthStats()">Start Health Stats</button>
-            </div>
-            <div class="project" id="project2">
-              <h3>Project 2</h3>
-              <button class="projectButtons" onclick="">Start [Project 2]</button>
-            </div>
-            <div class="project" id="project3">
-              <h3>Project 3</h3>
-              <button class="projectButtons" onclick="">Start [Project 3]</button>
+            <div id="projectsGrid">
+              <div class="project" id="project1">
+                <h3>Health Stats</h3>
+                <button class="projectButtons" onclick="launchHealthStats()">
+                  Start Health Stats
+                </button>
+              </div>
+              <div class="project" id="project2">
+                <h3>Project 2</h3>
+                <button class="projectButtons" onclick="">
+                  Start [Project 2]
+                </button>
+              </div>
+              <div class="project" id="project3">
+                <h3>Project 3</h3>
+                <button class="projectButtons" onclick="">
+                  Start [Project 3]
+                </button>
+              </div>
             </div>
           </div>
-        </div>
 
-<!-- Existing appContainer structure with input fields -->
-<div id="appContainer" class="displayNone">
-  <h3>Enter Your Information</h3>
-  <div id="mainAppContainer">
-    <!-- Input fields remain here -->
-    <label for="nameInput">First and Last Initial: </label>
-    <input type="text" id="nameInput" /><div></div>
+          <!-- Existing appContainer structure with input fields -->
+          <div id="appContainer" class="displayNone">
+            <h3>Enter Your Information</h3>
+            <div id="mainAppContainer">
+              <!-- Input fields remain here -->
+              <label for="nameInput">First and Last Initial: </label>
+              <input type="text" id="nameInput" />
+              <div></div>
 
-    <label for="ageInput">Age: </label>
-    <input type="number" id="ageInput" /><div></div>
+              <label for="ageInput">Age: </label>
+              <input type="number" id="ageInput" />
+              <div></div>
 
-    <label for="genderInput">Gender (M/F): </label>
-    <input type="text" id="genderInput" /><div></div>
+              <label for="genderInput">Gender (M/F): </label>
+              <input type="text" id="genderInput" />
+              <div></div>
 
-    <label for="heightInput">Height (in feet, e.g., 5.9): </label>
-    <input type="number" step="0.1" id="heightInput" /><div></div>
+              <label for="heightInput">Height (in feet, e.g., 5.9): </label>
+              <input type="number" step="0.1" id="heightInput" />
+              <div></div>
 
-    <label for="weightInput">Weight (in lbs): </label>
-    <input type="number" id="weightInput" /><div></div>
+              <label for="weightInput">Weight (in lbs): </label>
+              <input type="number" id="weightInput" />
+              <div></div>
 
-    <label for="activityLevelInput">Activity Level: </label>
-    <select id="activityLevelInput">
-      <option value="1.2">Sedentary (0-1 days)</option>
-      <option value="1.4">Light (1-3 days)</option>
-      <option value="1.6">Moderate (3-5 days)</option>
-      <option value="1.7">Very Active (6-7 days)</option>
-      <option value="1.9">Extremely Active (2x/day)</option>
-    </select><div></div>
-  </div>
+              <label for="activityLevelInput">Activity Level: </label>
+              <select id="activityLevelInput">
+                <option value="1.2">Sedentary (0-1 days)</option>
+                <option value="1.4">Light (1-3 days)</option>
+                <option value="1.6">Moderate (3-5 days)</option>
+                <option value="1.7">Very Active (6-7 days)</option>
+                <option value="1.9">Extremely Active (2x/day)</option>
+              </select>
+              <div></div>
+            </div>
 
-  <!-- Submit and Exit buttons -->
-  <button id="appSubmitBTN" type="button" onclick="calculateHealthStats()">Submit</button>
-  <button id="exitButton" onclick="exitApp()">Exit</button>
+            <!-- Submit and Exit buttons -->
+            <button
+              id="appSubmitBTN"
+              type="button"
+              onclick="calculateHealthStats()"
+            >
+              Submit
+            </button>
+            <button id="exitButton" onclick="exitApp()">Exit</button>
 
-  <!-- Display Results after Submit -->
-  <div id="resultsContainer" class="displayNone">
-    <h4>Your Health Stats</h4>
-    <p id="resultsText"></p>
-  </div>
-</div>
-
+            <!-- Display Results after Submit -->
+            <div id="resultsContainer" class="displayNone">
+              <h4>Your Health Stats</h4>
+              <p id="resultsText"></p>
+            </div>
+          </div>
         </section>
 
         <section class="displayNone" id="contactSection">
           <h2>Contact</h2>
-          <div id="contactInfo">
-          </div>
+          <div id="contactInfo"></div>
         </section>
       </div>
     </div>
