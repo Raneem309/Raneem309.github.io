@@ -113,6 +113,7 @@ function handleOpeningScreen() {
 // Exit the app
 function exitApp() {
   projHeader.innerText = "A - Z";
+  document.getElementById("mainAppContainer").classList.add("displayNone");
   appContainer.classList.add("displayNone");
   document.getElementById("projectData").classList.remove("displayNone"); // Show project section again
 }
@@ -127,7 +128,7 @@ function launchHealthStats() {
   const welcomeSubtitle = document.getElementById("welcomeSubtitle");
 
   projectData.classList.add("displayNone");
-  document.getElementById("projectHeader").classList.add("displayNone");
+  document.getElementById("projectHeader").innerText = "Fit Mindset"
   appContainer.classList.remove("displayNone");
 
   // Fade in the welcome text
@@ -216,39 +217,3 @@ function displayResults(bmi, bmr, tdee) {
   `;
 }
 
-// Show the calculator screen
-function showCalculatorScreen() {
-  const project1 = document.getElementById("project1");
-  project1.innerHTML = `
-    <h1>FIT MINDSET</h1>
-    <h2>a BMI, BMR, and TDEE Calculator</h2>
-    <div id="mainAppContainer">
-      <label for="nameInput">First and Last Initial: </label>
-      <input type="text" id="nameInput" />
-      <label for="ageInput">Age: </label>
-      <input type="number" id="ageInput" />
-      <label for="genderInput">Sex (Male/Female): </label>
-      <input type="text" id="genderInput" />
-      <label for="heightInput">Height (in feet, e.g., 5.9): </label>
-      <input type="number" step="0.1" id="heightInput" />
-      <label for="weightInput">Weight (in lbs): </label>
-      <input type="number" id="weightInput" />
-      <label for="activityLevelInput">Activity Level: </label>
-      <select id="activityLevelInput">
-        <option value="1.2">Sedentary (0-1 days)</option>
-        <option value="1.4">Light (1-3 days)</option>
-        <option value="1.6">Moderate (3-5 days)</option>
-        <option value="1.7">Very Active (6-7 days)</option>
-        <option value="1.9">Extremely Active (2x/day)</option>
-      </select>
-      <button id="submitButton" onclick="calculateHealthStats()">Submit</button>
-      <button id="exitButton" onclick="exitApp()">Exit</button>
-    </div>
-    <div id="resultsContainer" class="displayNone">
-      <h3>Your Health Stats</h3>
-      <div id="chartContainer"></div>
-      <p id="resultsExplanation"></p>
-      <button id="restartButton" onclick="launchHealthStats()">Restart</button>
-    </div>
-  `;
-}

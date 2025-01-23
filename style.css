@@ -43,10 +43,11 @@ label {
 #appContainer h3 {
   text-decoration: underline;
   text-decoration-color: #ffffff;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
-  margin-bottom: 1.5rem;
-  font-size: 18px;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 11px;
+  margin-bottom: 1rem;
+  font-size: 20px;
+  margin-top: .5rem;
 }
 
 
