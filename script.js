@@ -7,7 +7,6 @@ const appContainer = document.getElementById("appContainer");
 
 //////// snake game //////////
 
-
 //////// snake game //////////
 
 window.onload = function () {
@@ -236,7 +235,30 @@ function displayResults(
   document.getElementById("resultCut").innerText = `Cut: ${cut.toFixed(
     2
   )} calories/day`;
+  document.getElementById("resultTDEE").innerText = `TDEE: ${tdee.toFixed(
+    2
+  )} calories/day`;
+  document.getElementById("resultBulk").innerText = `To bulk: ${bulk.toFixed(
+    2
+  )} calories/day`;
+  document.getElementById("resultCut").innerText = `To cut: ${cut.toFixed(
+    2
+  )} calories/day`;
 
+  // Create a summary message
+  const summary = `
+    Your BMI is categorized as ${bmiCategory}. Your TDEE (Total Daily Energy Expenditure) is ${tdee.toFixed(
+    2
+  )} calories/day, meaning this is the amount of calories needed to maintain your current weight with your activity level.
+    If you want to gain weight (bulk), aim for approximately ${bulk.toFixed(
+      2
+    )} calories/day. 
+    If you aim to lose weight (cut), aim for approximately ${cut.toFixed(
+      2
+    )} calories/day.
+  `;
+
+  document.getElementById("resultsText").innerText = summary;
   // Display more information on TDEE, BMI, and BMR
   document.getElementById("moreInfo").innerHTML = `
     <h3>More Information</h3>
@@ -249,4 +271,3 @@ function displayResults(
     )} calories/day.</p>
   `;
 }
-
