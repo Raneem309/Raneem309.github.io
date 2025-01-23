@@ -70,7 +70,7 @@ function handleTabs(tabId) {
   } else if (tabId === "contactTab") {
     contactSection.classList.remove("displayNone");
   } else if (tabId === "homeTab") {
-    mainHeader.classList.remove("displayNone");
+    homeTabSection.classList.remove("displayNone");
     sections.forEach((section) => {
       section.classList.add("displayNone");
     });
