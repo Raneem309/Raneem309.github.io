@@ -119,11 +119,15 @@ function exitApp() {
 
 // Function to launch the Health Stats app
 function launchHealthStats() {
+  const projectData = document.getElementById("projectData");
   const welcomeScreen = document.getElementById("welcomeScreen");
   welcomeScreen.classList.remove("displayNone");
 
   const welcomeTitle = document.getElementById("welcomeTitle");
   const welcomeSubtitle = document.getElementById("welcomeSubtitle");
+
+  projectData.classList.add("displayNone");
+  appContainer.classList.remove("displayNone");
 
   // Fade in the welcome text
   setTimeout(() => (welcomeTitle.style.opacity = "1"), 500);
@@ -133,6 +137,9 @@ function launchHealthStats() {
   document.addEventListener("keydown", function onEnterPress(e) {
     if (e.key === "Enter") {
       document.removeEventListener("keydown", onEnterPress); // Prevent multiple triggers
+      document.getElementById("appSubmitBTN").classList.remove("displayNone");
+      document.getElementById("mainAppContainer").classList.remove("displayNone");
+      welcomeScreen.classList.add("displayNone");
       showCalculatorScreen();
     }
   });
@@ -181,6 +188,8 @@ function displayResults(bmi, bmr, tdee) {
   const resultsContainer = document.getElementById("resultsContainer");
   const resultsChart = document.getElementById("resultsChart");
   const explanation = document.getElementById("resultsDescription");
+  
+  document.getElementById("appRestartBTN").classList.remove("displayNone");
 
   document.getElementById("mainAppContainer").classList.add("displayNone");
   resultsContainer.classList.remove("displayNone");

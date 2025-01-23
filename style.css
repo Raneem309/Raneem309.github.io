@@ -284,7 +284,7 @@ select {
   background-color: #d22e22;
 }
 
-#appSubmitBTN {
+#appSubmitBTN, #appRestartBTN {
   background-color: #00f71d;
   color: white;
   padding: 10px;

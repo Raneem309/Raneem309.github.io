@@ -33,8 +33,8 @@
         </section>
 
         <section class="displayNone" id="projectsSection">
-          <h2 id="projectHeader">A-Z</h2>
           <div id="projectData">
+            <h2 id="projectHeader">A-Z</h2>
             <div id="projectsGrid">
               <div class="project" id="project1">
                 <h3>Fit Mindset</h3>
@@ -61,8 +61,8 @@
 
           <!-- Existing appContainer structure with input fields -->
           <div id="appContainer" class="displayNone">
-            <h3>Enter Your Information</h3>
-            <div id="mainAppContainer">
+            <div id="mainAppContainer" class="displayNone">
+              <h3>Enter Your Information</h3>
               <!-- Input fields remain here -->
               <label for="nameInput">First and Last Initial: </label>
               <input type="text" id="nameInput" />
@@ -86,6 +86,7 @@
 
               <label for="activityLevelInput">Activity Level: </label>
               <select id="activityLevelInput">
+                <option value=""></option>
                 <option value="1.2">Sedentary (0-1 days)</option>
                 <option value="1.4">Light (1-3 days)</option>
                 <option value="1.6">Moderate (3-5 days)</option>
@@ -95,11 +96,12 @@
               <div></div>
             </div>
 
-            <!-- Submit and Exit buttons -->
+            <!-- Submit, Restart and Exit buttons -->
             <button
               id="appSubmitBTN"
               type="button"
               onclick="calculateHealthStats()"
+              class="displayNone"
             >
               Submit
             </button>
@@ -107,6 +109,8 @@
               Restart
             </button>
             <button id="exitButton" onclick="exitApp()">Exit</button>
+
+
             <div id="welcomeScreen" class="displayNone">
               <h1 id="welcomeTitle">Welcome to Fit Mindset</h1>
               <h2 id="welcomeSubtitle">[Press ENTER to get Started]</h2>
