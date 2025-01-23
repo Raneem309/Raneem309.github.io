@@ -375,3 +375,16 @@ select {
   font-size: 1rem;
   color: #333;
 }
+
+#homeTabSection{
+  padding: 20px 40px;
+  border: 2px groove;
+  border-radius: 10px;
+  border-color: #c5c5c5;
+  animation: glow-border 1s infinite alternate;
+  border-bottom-style: groove;
+  color: #000000;
+  margin-top: 30rem;
+  text-align: -webkit-center;
+  font-size: 20px;
+}
