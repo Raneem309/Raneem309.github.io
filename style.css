@@ -2,7 +2,7 @@
   font-family: "PPNeueMontreal-Medium";
   src: url("fonts/PPNeueMontreal-Medium.otf"), format("truetype");
   font-weight: normal; /* Adjust if you have multiple weights */
-  font-style: normal;  /* Adjust if the font has italic versions */
+  font-style: normal; /* Adjust if the font has italic versions */
 }
 
 * {
@@ -19,7 +19,7 @@ body {
   height: 100%;
   background-color: #d3d3d3;
   overflow: hidden;
-  letter-spacing: .1rem
+  letter-spacing: 0.1rem;
 }
 
 label {
@@ -87,7 +87,7 @@ label {
 
 /* Initial Screen */
 #openingScreen {
-  position: fixed; 
+  position: fixed;
   width: 100vw; /* Full width of the viewport */
   height: 100vh; /* Full height of the viewport */
   display: flex; /* Enables flexbox for centering */
@@ -96,19 +96,18 @@ label {
   background-size: cover !important;
   background: url("images/portCover1.jpg") no-repeat center center;
   color: white; /* Text color */
-  font-size: 2rem; 
-  z-index: 9999; 
+  font-size: 2rem;
+  z-index: 9999;
   text-align: center;
   animation: fadeOut 6s forwards;
   font-family: "PPNeueMontreal-Medium", monospace;
-
 }
 
 #openName {
   color: rgba(123, 123, 123, 0.857); /* Light grey with transparency */
   font-weight: normal;
   opacity: 0;
-  transition: opacity 1s ease-in-out; 
+  transition: opacity 1s ease-in-out;
   margin-right: 1rem;
 }
 
@@ -116,8 +115,8 @@ label {
   color: rgba(255, 255, 255, 0.857); /* White with transparency */
   font-weight: normal;
   margin-left: 1rem;
-  opacity: 0; 
-  transition: opacity 1s ease-in-out; 
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
 }
 
 @keyframes fadeOut {
@@ -154,11 +153,10 @@ label {
   font-size: 24px; /* Match the font size with the tabs */
   font-weight: bold;
   color: #d3d3d3;
-
 }
 
 #title {
-  font-size: 16px; 
+  font-size: 16px;
   font-weight: normal;
   margin-top: 5px;
 }
@@ -169,7 +167,7 @@ label {
   gap: 20px;
   padding: 10px 20px;
   border-radius: 5px;
-  margin-left: auto; 
+  margin-left: auto;
 }
 
 /* Tabs */
@@ -194,7 +192,6 @@ section {
   text-align: left;
 }
 
-
 #aboutMeSection h2,
 #projectsSection h2,
 #contactSection h2 {
@@ -212,7 +209,7 @@ section {
 #aboutMeBio {
   border-radius: 10px;
   max-height: 400px;
-  padding: 10px; 
+  padding: 10px;
   overflow-y: auto;
   background: #757575;
   color: rgb(0 0 0); /* Text color */
@@ -254,10 +251,9 @@ section {
   width: 20%;
 }
 
-#contactSection p{
+#contactSection p {
   margin-top: 2rem;
 }
-
 
 .projectButtons:hover {
   background-color: #45a049;
@@ -324,26 +320,58 @@ select {
   padding: 0;
   margin: 0;
   border-radius: 10px;
-    max-height: 450px;
-    padding: 10px;
-    overflow-y: auto;
-    background: #757575;
+  max-height: 450px;
+  padding: 10px;
+  overflow-y: auto;
+  background: #757575;
 }
 
 .contact-list li {
   margin: 10px 0;
-  font-size: 16px; 
-    color: #000000;
-
+  font-size: 16px;
+  color: #000000;
 }
 
 .contact-list a {
   color: #ffffff;
   text-decoration: none;
-  
 }
 
 .contact-list a:hover {
   text-decoration: underline;
 }
 
+.welcome-screen {
+  text-align: center;
+  background-color: white;
+  padding: 50px;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.welcome-screen h1,
+.welcome-screen h2 {
+  opacity: 0;
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.results-table th,
+.results-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.results-table th {
+  background-color: #f4f4f4;
+}
+
+#resultsExplanation {
+  margin-top: 20px;
+  font-size: 1rem;
+  color: #333;
+}

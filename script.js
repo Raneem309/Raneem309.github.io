@@ -4,6 +4,7 @@ const projects = document.getElementById("projectTab");
 const contact = document.getElementById("contactTab");
 const projHeader = document.getElementById("projectHeader");
 const appContainer = document.getElementById("appContainer");
+let bmiStatus;
 
 //////// snake game //////////
 
@@ -109,165 +110,135 @@ function handleOpeningScreen() {
   }, 4000);
 }
 
-// Function to launch the Health Stats app
-function launchHealthStats() {
-  appContainer.classList.remove("displayNone");
-  projHeader.innerText = "Health Stats App";
-  document.getElementById("projectData").classList.add("displayNone"); // Hide the project section
-}
-
-// Function to handle the "Exit" button
+// Exit the app
 function exitApp() {
   projHeader.innerText = "A - Z";
   appContainer.classList.add("displayNone");
   document.getElementById("projectData").classList.remove("displayNone"); // Show project section again
 }
 
-// Function to calculate BMI
-// Health Stats Calculation Functions
+// Function to launch the Health Stats app
+function launchHealthStats() {
+  const welcomeScreen = document.getElementById("welcomeScreen");
+  welcomeScreen.classList.remove("displayNone");
+
+  const welcomeTitle = document.getElementById("welcomeTitle");
+  const welcomeSubtitle = document.getElementById("welcomeSubtitle");
+
+  // Fade in the welcome text
+  setTimeout(() => (welcomeTitle.style.opacity = "1"), 500);
+  setTimeout(() => (welcomeSubtitle.style.opacity = "1"), 1500);
+
+  // Listen for Enter key to start
+  document.addEventListener("keydown", function onEnterPress(e) {
+    if (e.key === "Enter") {
+      document.removeEventListener("keydown", onEnterPress); // Prevent multiple triggers
+      showCalculatorScreen();
+    }
+  });
+}
 
 function calculateHealthStats() {
-  // Collect user input
-  const name = document.getElementById("nameInput").value;
-  const age = parseInt(document.getElementById("ageInput").value);
-  const gender = document.getElementById("genderInput").value;
   const height = parseFloat(document.getElementById("heightInput").value);
   const weight = parseInt(document.getElementById("weightInput").value);
+  const age = parseInt(document.getElementById("ageInput").value);
+  const gender = document.getElementById("genderInput").value;
   const activityLevel = parseFloat(
     document.getElementById("activityLevelInput").value
   );
 
-  // Validate input
-  if (!name || !age || !gender || !height || !weight || !activityLevel) {
+  //check if all feilds are filled out
+  if (!height || !weight || !age || !gender || !activityLevel) {
     alert("Please fill in all fields.");
     return;
   }
 
-  // Calculate BMI
-  const bmi = calcBMI(height, weight);
-
-  // Calculate BMR
-  const bmr = calcBMR(height, weight, gender, age);
-
-  // Calculate TDEE
-  const tdee = calcTDEE(bmr, activityLevel);
-
-  // Display results
-  displayResults(
-    name,
-    age,
-    gender,
-    height,
-    weight,
-    activityLevel,
-    bmi,
-    bmr,
-    tdee
-  );
-}
-
-function calcBMI(height, weight) {
-  return (703 * weight) / (height * 12 * (height * 12)); // Height in feet, weight in lbs
-}
-
-function calcBMR(height, weight, gender, age) {
-  if (gender === "M" || gender === "Male") {
-    return 66 + 6.23 * weight + 12.7 * height - 6.8 * age;
-  } else {
-    return 655 + 4.35 * weight + 4.7 * height - 4.7 * age;
-  }
-}
-
-function calcTDEE(bmr, activityLevel) {
-  return bmr * activityLevel;
+  const bmi = (703 * weight) / (height * 12 * height * 12);
+  const bmr =
+    gender === "Male"
+      ? 66 + 6.23 * weight + 12.7 * height * 12 - 6.8 * age
+      : 655 + 4.35 * weight + 4.7 * height * 12 - 4.7 * age;
+  const tdee = bmr * activityLevel;
+  evaluateBMI(bmi);
+  displayResults(bmi, bmr, tdee);
 }
 
 // Function to evaluate BMI and output the corresponding category
 function evaluateBMI(bmi) {
-  if (bmi < 18.5) return "Underweight (below 18.5)";
-  else if (bmi >= 18.5 && bmi < 24.9) return "Normal Weight (18.5 - 24.9)";
-  else if (bmi >= 25 && bmi < 29.9) return "Overweight (25 - 29.9)";
-  else return "Obese (above 29.9)";
+  if (bmi < 18.5) {
+    bmiStatus = "Underweight (below 18.5)";
+  } else if (bmi >= 18.5 && bmi < 24.9) {
+    bmiStatus = "Normal Weight (18.5 - 24.9)";
+  } else if (bmi >= 25 && bmi < 29.9) {
+    bmiStatus = "Overweight (25 - 29.9)";
+  } else {
+    bmiStatus = "Obese (above 29.9)";
+  }
 }
 
-// Display results
-function displayResults(
-  name,
-  age,
-  gender,
-  height,
-  weight,
-  activityLevel,
-  bmi,
-  bmr,
-  tdee
-) {
-  // Hide the input form and show the result container
-  document.getElementById("mainAppContainer").classList.add("displayNone");
+// Display results in a chart
+function displayResults(bmi, bmr, tdee) {
   const resultsContainer = document.getElementById("resultsContainer");
+  const resultsChart = document.getElementById("resultsChart");
+  const explanation = document.getElementById("resultsDescription");
+
+  document.getElementById("mainAppContainer").classList.add("displayNone");
   resultsContainer.classList.remove("displayNone");
 
-  // Show the user's results
-  const bmiCategory = evaluateBMI(bmi);
-  const bulk = tdee + 500;
-  const cut = tdee - 500;
-
-  document.getElementById("resultName").innerText = `Name: ${name}`;
-  document.getElementById("resultAge").innerText = `Age: ${age}`;
-  document.getElementById("resultGender").innerText = `Gender: ${gender}`;
-  document.getElementById("resultHeight").innerText = `Height: ${height} feet`;
-  document.getElementById("resultWeight").innerText = `Weight: ${weight} lbs`;
-  document.getElementById(
-    "resultActivityLevel"
-  ).innerText = `Activity Level: ${activityLevel}`;
-  document.getElementById("resultBMI").innerText = `BMI: ${bmi.toFixed(
-    2
-  )} - ${bmiCategory}`;
-  document.getElementById("resultBMR").innerText = `BMR: ${bmr.toFixed(
-    2
-  )} calories/day`;
-  document.getElementById("resultTDEE").innerText = `TDEE: ${tdee.toFixed(
-    2
-  )} calories/day`;
-  document.getElementById("resultBulk").innerText = `Bulk: ${bulk.toFixed(
-    2
-  )} calories/day`;
-  document.getElementById("resultCut").innerText = `Cut: ${cut.toFixed(
-    2
-  )} calories/day`;
-  document.getElementById("resultTDEE").innerText = `TDEE: ${tdee.toFixed(
-    2
-  )} calories/day`;
-  document.getElementById("resultBulk").innerText = `To bulk: ${bulk.toFixed(
-    2
-  )} calories/day`;
-  document.getElementById("resultCut").innerText = `To cut: ${cut.toFixed(
-    2
-  )} calories/day`;
-
-  // Create a summary message
-  const summary = `
-    Your BMI is categorized as ${bmiCategory}. Your TDEE (Total Daily Energy Expenditure) is ${tdee.toFixed(
-    2
-  )} calories/day, meaning this is the amount of calories needed to maintain your current weight with your activity level.
-    If you want to gain weight (bulk), aim for approximately ${bulk.toFixed(
-      2
-    )} calories/day. 
-    If you aim to lose weight (cut), aim for approximately ${cut.toFixed(
-      2
-    )} calories/day.
+  resultsChart.innerHTML = `
+    <table class="results-table">
+      <thead>
+        <tr><th>Metric</th><th>Value</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>BMI</td><td>${bmi.toFixed(2)}</td></tr>
+        <tr><td>BMR</td><td>${Math.round(bmr)} kcal/day</td></tr>
+        <tr><td>TDEE</td><td>${Math.round(tdee)} kcal/day</td></tr>
+      </tbody>
+    </table>
   `;
 
-  document.getElementById("resultsText").innerText = summary;
-  // Display more information on TDEE, BMI, and BMR
-  document.getElementById("moreInfo").innerHTML = `
-    <h3>More Information</h3>
-    <p>BMI (Body Mass Index) is a measure of body fat based on your weight and height. Your BMI category is ${bmiCategory}.</p>
-    <p>TDEE (Total Daily Energy Expenditure) is the number of calories you burn in a day based on your activity level. For weight maintenance, ${tdee.toFixed(
-      2
-    )} calories/day is recommended.</p>
-    <p>BMR (Basal Metabolic Rate) is the number of calories your body needs to perform basic functions at rest. Your BMR is ${bmr.toFixed(
-      2
-    )} calories/day.</p>
+  explanation.innerHTML = `
+    <p><strong>BMI (Body Mass Index):</strong> A measure of body fat based on height and weight. ${bmiStatus}</p>
+    <p><strong>BMR (Basal Metabolic Rate):</strong> The number of calories your body needs at rest.</p>
+    <p><strong>TDEE (Total Daily Energy Expenditure):</strong> The number of calories you burn daily including activity level.</p>
+    <p>Use this information to plan your caloric intake for weight maintenance, loss, or gain.</p>
+  `;
+}
+
+// Show the calculator screen
+function showCalculatorScreen() {
+  const project1 = document.getElementById("project1");
+  project1.innerHTML = `
+    <h1>FIT MINDSET</h1>
+    <h2>a BMI, BMR, and TDEE Calculator</h2>
+    <div id="mainAppContainer">
+      <label for="nameInput">First and Last Initial: </label>
+      <input type="text" id="nameInput" />
+      <label for="ageInput">Age: </label>
+      <input type="number" id="ageInput" />
+      <label for="genderInput">Sex (Male/Female): </label>
+      <input type="text" id="genderInput" />
+      <label for="heightInput">Height (in feet, e.g., 5.9): </label>
+      <input type="number" step="0.1" id="heightInput" />
+      <label for="weightInput">Weight (in lbs): </label>
+      <input type="number" id="weightInput" />
+      <label for="activityLevelInput">Activity Level: </label>
+      <select id="activityLevelInput">
+        <option value="1.2">Sedentary (0-1 days)</option>
+        <option value="1.4">Light (1-3 days)</option>
+        <option value="1.6">Moderate (3-5 days)</option>
+        <option value="1.7">Very Active (6-7 days)</option>
+        <option value="1.9">Extremely Active (2x/day)</option>
+      </select>
+      <button id="submitButton" onclick="calculateHealthStats()">Submit</button>
+      <button id="exitButton" onclick="exitApp()">Exit</button>
+    </div>
+    <div id="resultsContainer" class="displayNone">
+      <h3>Your Health Stats</h3>
+      <div id="chartContainer"></div>
+      <p id="resultsExplanation"></p>
+      <button id="restartButton" onclick="launchHealthStats()">Restart</button>
+    </div>
   `;
 }

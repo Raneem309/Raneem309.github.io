@@ -25,7 +25,7 @@
           </div>
         </div>
         <section id="homeTabSection">
-
+          A Digitital Portfolio by Raneem Ali
         </section>
         <section class="displayNone" id="aboutMeSection">
           <h2>About Me</h2>
@@ -103,12 +103,19 @@
             >
               Submit
             </button>
+            <button id="appRestartBTN" type="button" onclick="restartApp()" class="displayNone">
+              Restart
+            </button>
             <button id="exitButton" onclick="exitApp()">Exit</button>
-
+            <div id="welcomeScreen" class="displayNone">
+              <h1 id="welcomeTitle">Welcome to Fit Mindset</h1>
+              <h2 id="welcomeSubtitle">[Press ENTER to get Started]</h2>
+            </div>
             <!-- Display Results after Submit -->
             <div id="resultsContainer" class="displayNone">
-              <h4>Your Health Stats</h4>
-              <p id="resultsText"></p>
+              <h3>Your Results</h3>
+              <div id="resultsChart"></div>
+              <p id="resultsDescription"></p>
             </div>
           </div>
         </section>
