@@ -9,8 +9,10 @@
   </head>
   <body>
     <div id="openingScreen">
-      <span id="openName">Raneem Ali</span> <span id="openTitle">Portfolio</span>
-    </div>    <div class="background">
+      <span id="openName">Raneem Ali</span>
+      <span id="openTitle">Portfolio</span>
+    </div>
+    <div class="background">
       <div class="container">
         <div id="headerContainer">
           <div id="nameTitleContainer">
@@ -28,17 +30,20 @@
           A Digitital Portfolio by Raneem Ali
         </section>
         <section class="displayNone" id="aboutMeSection">
-          <h2>About Me</h2>
+          <h2 id="aboutMeBioHeader">About Me</h2>
           <div id="aboutMeBio"></div>
         </section>
 
         <section class="displayNone" id="projectsSection">
+          <h2 id="projectHeader">A-Z</h2>
           <div id="projectData">
-            <h2 id="projectHeader">A-Z</h2>
             <div id="projectsGrid">
               <div class="project" id="project1">
                 <h3>Fit Mindset</h3>
-                <h4>An application to help track your calories and maintain a balanced lifestyle.</h4>
+                <h4>
+                  An application to help track your calories and maintain a
+                  balanced lifestyle.
+                </h4>
                 <button class="projectButtons" onclick="launchHealthStats()">
                   Start App
                 </button>
@@ -46,9 +51,7 @@
               <div class="project" id="project2">
                 <h3>Weather App</h3>
                 <h4>A weather application for the US</h4>
-                <button class="projectButtons" onclick="">
-                  Start App
-                </button>
+                <button class="projectButtons" onclick="">Start App</button>
               </div>
               <div class="project" id="project3">
                 <h3>Project 3</h3>
@@ -96,21 +99,6 @@
               <div></div>
             </div>
 
-            <!-- Submit, Restart and Exit buttons -->
-            <button
-              id="appSubmitBTN"
-              type="button"
-              onclick="calculateHealthStats()"
-              class="displayNone"
-            >
-              Submit
-            </button>
-            <button id="appRestartBTN" type="button" onclick="restartApp()" class="displayNone">
-              Restart
-            </button>
-            <button id="exitButton" onclick="exitApp()">Exit</button>
-
-
             <div id="welcomeScreen" class="displayNone">
               <h1 id="welcomeTitle">Welcome to Fit Mindset</h1>
               <h2 id="welcomeSubtitle">[Press ENTER to get Started]</h2>
@@ -121,11 +109,31 @@
               <div id="resultsChart"></div>
               <p id="resultsDescription"></p>
             </div>
+
+            <!-- Submit, Restart and Exit buttons -->
+            <button
+              id="appSubmitBTN"
+              type="button"
+              onclick="calculateHealthStats()"
+              class="displayNone"
+            >
+              Submit
+            </button>
+            <button
+              id="appRestartBTN"
+              type="button"
+              onclick="restartApp()"
+              class="displayNone"
+            >
+              Restart
+            </button>
+            <button id="exitButton" onclick="exitApp()">Exit</button>
+            <!-- Submit, Restart and Exit buttons -->
           </div>
         </section>
 
         <section class="displayNone" id="contactSection">
-          <h2>Contact</h2>
+          <h2 id="contactHeader">Contact</h2>
           <div id="contactInfo"></div>
         </section>
       </div>

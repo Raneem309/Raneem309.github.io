@@ -127,6 +127,7 @@ function launchHealthStats() {
   const welcomeSubtitle = document.getElementById("welcomeSubtitle");
 
   projectData.classList.add("displayNone");
+  document.getElementById("projectHeader").classList.add("displayNone");
   appContainer.classList.remove("displayNone");
 
   // Fade in the welcome text
@@ -139,6 +140,7 @@ function launchHealthStats() {
       document.removeEventListener("keydown", onEnterPress); // Prevent multiple triggers
       document.getElementById("appSubmitBTN").classList.remove("displayNone");
       document.getElementById("mainAppContainer").classList.remove("displayNone");
+      document.getElementById("projectHeader").classList.remove("displayNone");
       welcomeScreen.classList.add("displayNone");
       showCalculatorScreen();
     }

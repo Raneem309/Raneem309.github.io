@@ -26,6 +26,13 @@ label {
   font-style: italic;
 }
 
+.project h4 {
+  color: white;
+  margin-bottom: -2rem;
+}
+.project h3 {
+  margin-bottom: 2rem;
+}
 #nameTitleContainer h2 {
   text-decoration: underline;
   color: #000000;
@@ -192,9 +199,9 @@ section {
   text-align: left;
 }
 
-#aboutMeSection h2,
-#projectsSection h2,
-#contactSection h2 {
+#projectHeader,
+#aboutMeBioHeader,
+#contactHeader {
   margin-bottom: 20px;
   font-size: 16px;
   margin-top: 1rem;
@@ -284,7 +291,8 @@ select {
   background-color: #d22e22;
 }
 
-#appSubmitBTN, #appRestartBTN {
+#appSubmitBTN,
+#appRestartBTN {
   background-color: #00f71d;
   color: white;
   padding: 10px;
@@ -298,7 +306,7 @@ select {
 
 #appContainer {
   border-radius: 10px;
-  max-height: 420px;
+  max-height: 400px;
   padding: 10px;
   border-style: double;
   background: #757575;
@@ -319,7 +327,6 @@ select {
   list-style-type: none;
   border-radius: 10px;
   max-height: 450px;
-  padding: 10px;
   overflow-y: auto;
   background: #757575;
 }
@@ -340,18 +347,17 @@ select {
   text-decoration: underline;
 }
 
-.welcome-screen {
+#welcomeScreen {
   text-align: center;
-  background-color: white;
   padding: 50px;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
+  /* opacity: 1;
+  transition: opacity 1s ease-in-out; */
 }
 
-.welcome-screen h1,
-.welcome-screen h2 {
+/* #welcomeScreen h1,
+#welcomeScreen h2 {
   opacity: 0;
-}
+} */
 
 .results-table {
   width: 100%;
@@ -375,7 +381,7 @@ select {
   color: #333;
 }
 
-#homeTabSection{
+#homeTabSection {
   padding: 20px 40px;
   border: 2px groove;
   border-radius: 10px;
