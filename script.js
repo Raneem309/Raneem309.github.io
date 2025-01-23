@@ -142,7 +142,6 @@ function launchHealthStats() {
       document.getElementById("mainAppContainer").classList.remove("displayNone");
       document.getElementById("projectHeader").classList.remove("displayNone");
       welcomeScreen.classList.add("displayNone");
-      showCalculatorScreen();
     }
   });
 }

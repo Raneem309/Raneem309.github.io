@@ -45,15 +45,10 @@ label {
   text-decoration-color: #ffffff;
   text-decoration-thickness: 2px;
   text-underline-offset: 3px;
-  font-size: 20px;
-  margin-bottom: .2rem;
+  margin-bottom: 1.5rem;
+  font-size: 18px;
 }
 
-#appContainer h4 {
-  text-decoration-color: #ffffff;
-  font-size: 10px;
-  margin-bottom: .5rem;
-}
 
 /* Background layer */
 .background {
@@ -325,8 +320,6 @@ select {
   max-height: 330px;
   overflow-y: auto;
 }
-
-
 
 .contact-list {
   list-style-type: none;
