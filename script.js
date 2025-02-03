@@ -119,40 +119,12 @@ function handleOpeningScreen() {
 
 // Exit the app
 function exitApp() {
-  projHeader.innerText = "A - Z";
-  document.getElementById("mainAppContainer").classList.add("displayNone");
-  appContainer.classList.add("displayNone");
-  document.getElementById("projectData").classList.remove("displayNone"); // Show project section again
+  document.getElementById("projectData").classList.remove("displayNone");
+  document.getElementById("appContainer").classList.add("displayNone");
+  document.getElementById("appContainer").classList.remove("fullSection"); // Remove full section styling
+  document.getElementById("projectHeader").innerText = "A - Z";
 }
 
-// Function to launch the Health Stats app
-function launchHealthStats() {
-  const projectData = document.getElementById("projectData");
-  const welcomeScreen = document.getElementById("welcomeScreen");
-  welcomeScreen.classList.remove("displayNone");
-
-  const welcomeTitle = document.getElementById("welcomeTitle");
-  const welcomeSubtitle = document.getElementById("welcomeSubtitle");
-
-  projectData.classList.add("displayNone");
-  document.getElementById("projectHeader").innerText = "Fit Mindset"
-  appContainer.classList.remove("displayNone");
-
-  // Fade in the welcome text
-  setTimeout(() => (welcomeTitle.style.opacity = "1"), 500);
-  setTimeout(() => (welcomeSubtitle.style.opacity = "1"), 1500);
-
-  // Listen for Enter key to start
-  document.addEventListener("keydown", function onEnterPress(e) {
-    if (e.key === "Enter") {
-      document.removeEventListener("keydown", onEnterPress); // Prevent multiple triggers
-      document.getElementById("appSubmitBTN").classList.remove("displayNone");
-      document.getElementById("mainAppContainer").classList.remove("displayNone");
-      document.getElementById("projectHeader").classList.remove("displayNone");
-      welcomeScreen.classList.add("displayNone");
-    }
-  });
-}
 
 function calculateHealthStats() {
   const height = parseFloat(document.getElementById("heightInput").value);
@@ -227,36 +199,32 @@ function displayResults(bmi, bmr, tdee) {
 }
 
 async function getWeather() {
-  const apiKey = 'd2993b0e09e1e2d7429ef71487c9543f'; // Replace with your OpenWeatherMap API key
-  const location = document.getElementById('location').value;
-  const forecastDiv = document.getElementById('forecast');
-  
-  if (!location) {
-      alert("Please enter a location");
-      return;
-  }
-  
-  try {
-      const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast/daily?q=${location}&cnt=7&appid=${apiKey}&units=metric`);
-      const data = await response.json();
-      
-      if (data.cod !== "200") {
-          throw new Error(data.message);
-      }
-      
-      forecastDiv.innerHTML = data.list.map(day => 
-          `<p>${new Date(day.dt * 1000).toDateString()}: ${day.temp.day}°C, ${day.weather[0].description}</p>`
-      ).join('');
-  } catch (error) {
-      forecastDiv.innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
-  }
-}
-function launchWeatherApp() {
-  document.getElementById('project2Container').classList.remove('displayNone');
-}
+  const apiKey = "f2ebd821732c6bbb4ceeb84d71225ca0";  // Replace with your real API key
+  const location = document.getElementById("location").value;
+  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}&units=metric`;
 
-function launchTimerApp() {
-  document.getElementById('project3Container').classList.remove('displayNone');
+  try {
+      const response = await fetch(url);
+      if (!response.ok) {
+          throw new Error("Failed to fetch weather data");
+      }
+      const data = await response.json();
+
+      // Extract relevant forecast data (every 8 hours = 3 times per day)
+      let forecastHTML = "<h2>5-Day Forecast</h2>";
+      for (let i = 0; i < data.list.length; i += 8) {  // Picks 1 reading per day
+          const day = data.list[i];
+          const date = new Date(day.dt * 1000).toLocaleDateString();
+          const temp = day.main.temp;
+          const desc = day.weather[0].description;
+          forecastHTML += `<p><strong>${date}:</strong> ${temp}°C - ${desc}</p>`;
+      }
+
+      document.getElementById("forecast").innerHTML = forecastHTML;
+  } catch (error) {
+      console.error(error);
+      document.getElementById("forecast").innerText = "Error retrieving weather data.";
+  }
 }
 
 
@@ -308,4 +276,36 @@ document.addEventListener("DOMContentLoaded", function () {
       renderer.render(scene, camera);
   }
   animate();
+});
+
+function launchApp(appId, headerText) {
+  const projectData = document.getElementById("projectData");
+  const appContainer = document.getElementById("appContainer");
+  const projectHeader = document.getElementById("projectHeader");
+  
+  // Hide project list and show app container
+  projectData.classList.add("displayNone");
+  appContainer.classList.remove("displayNone");
+  appContainer.classList.add("fullSection"); // Ensure full section coverage
+  projectHeader.innerText = headerText;
+  
+  // Hide all app containers
+  document.querySelectorAll(".appContent").forEach(app => {
+      app.classList.add("displayNone");
+  });
+  
+  // Show the selected app
+  document.getElementById(appId).classList.remove("displayNone");
+}
+
+document.getElementById("project1").querySelector("button").addEventListener("click", () => {
+  launchApp("project1Container", "Fit Mindset");
+});
+
+document.getElementById("project2").querySelector("button").addEventListener("click", () => {
+  launchApp("project2Container", "Weather App");
+});
+
+document.getElementById("project3").querySelector("button").addEventListener("click", () => {
+  launchApp("project3Container", "Time Control");
 });
