@@ -308,7 +308,7 @@ select {
   margin-top: 1rem;
 }
 
-#appContainer {
+.projectContainers {
   border-radius: 10px;
   max-height: 400px;
   padding: 10px;
@@ -317,7 +317,7 @@ select {
   color: rgb(0 0 0); /* Text color */
 }
 
-#mainAppContainer {
+.mainProjectContainers {
   max-height: 330px;
   overflow-y: auto;
 }
@@ -375,7 +375,7 @@ select {
   color: #333;
 }
 
-#homeTabSection {
+#homeHeader {
   padding: 20px 40px;
   border: 2px groove;
   border-radius: 10px;

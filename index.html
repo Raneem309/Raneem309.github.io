@@ -28,7 +28,8 @@
         </div>
         <section id="homeTabSection">
           <div id="cubeContainer"></div>
-          A Digitital Portfolio by Raneem Ali
+          <div id="homeHeader">A Digitital Portfolio by Raneem Ali
+          </div>
         </section>
         <section class="displayNone" id="aboutMeSection">
           <h2 id="aboutMeBioHeader">About Me</h2>
@@ -53,10 +54,6 @@
                 <h3>Weather App</h3>
                 <h4>A weather application for the US</h4>
                 <button class="projectButtons" onclick="launchWeatherApp()">Start App</button>
-                <div id="project2Container" class="displayNone">
-                  <input type="text" id="location" placeholder="Enter location">
-                  <button onclick="getWeather()">Get Forecast</button>
-                  <div id="forecast"></div>
               </div>
               </div>
               <div class="project" id="project3">
@@ -65,19 +62,13 @@
                 <button class="projectButtons" onclick="launchTimerApp()">
                   Start Time Control
                 </button>
-                <div id="project3Container" class="displayNone">
-                  <h2 id="timerDisplay">00:00:00</h2>
-                  <button onclick="startTimer()">Start</button>
-                  <button onclick="stopTimer()">Stop</button>
-                  <button onclick="resetTimer()">Reset</button>
-              </div>
               </div>
             </div>
           </div>
 
           <!-- Existing appContainer structure with input fields -->
-          <div id="appContainer" class="displayNone">
-            <div id="mainAppContainer" class="displayNone">
+          <div id="project1Container" class="displayNone projectContainers">
+            <div id="mainAppContainer" class="displayNone mainProjectContainers">
               <h3>Enter Your Information Below to Calculate your Results</h3>
               <!-- Input fields remain here -->
               <label for="nameInput">First Name: </label>
@@ -147,7 +138,28 @@
             <button id="exitButton" onclick="exitApp()">Exit</button>
             <!-- Submit, Restart and Exit buttons -->
           </div>
+
+          <!-- Weather APP -->
+          <div id="project2Container" class="displayNone projectContainers">
+            <div class="mainAppContainer mainProjectContainers">
+              <input type="text" id="location" placeholder="Enter location">
+              <button onclick="getWeather()">Get Forecast</button>
+              <div id="forecast"></div>
+            </div>
+
+
+            <!-- Stop Watch -->
+            <div id="project3Container" class="displayNone projectContainers">
+              <div class="mainProjectContainers" >
+                <h2 id="timerDisplay">00:00:00</h2>
+                <button onclick="startTimer()">Start</button>
+                <button onclick="stopTimer()">Stop</button>
+                <button onclick="resetTimer()">Reset</button>
+              </div>
+          </div>
         </section>
+
+
 
         <section class="displayNone" id="contactSection">
           <h2 id="contactHeader">Contact</h2>

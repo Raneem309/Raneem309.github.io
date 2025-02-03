@@ -3,7 +3,7 @@ const about = document.getElementById("aboutMeTab");
 const projects = document.getElementById("projectTab");
 const contact = document.getElementById("contactTab");
 const projHeader = document.getElementById("projectHeader");
-const appContainer = document.getElementById("appContainer");
+const project1Container = document.getElementById("project1Container");
 let bmiStatus;
 let healthAppUserName;
 
@@ -11,9 +11,6 @@ let timer;
 let time = 0;
 let running = false;
 
-//////// snake game //////////
-
-//////// snake game //////////
 
 window.onload = function () {
   tabLinks();
@@ -121,7 +118,7 @@ function handleOpeningScreen() {
 function exitApp() {
   projHeader.innerText = "A - Z";
   document.getElementById("mainAppContainer").classList.add("displayNone");
-  appContainer.classList.add("displayNone");
+  project1Container.classList.add("displayNone");
   document.getElementById("projectData").classList.remove("displayNone"); // Show project section again
 }
 
@@ -136,7 +133,7 @@ function launchHealthStats() {
 
   projectData.classList.add("displayNone");
   document.getElementById("projectHeader").innerText = "Fit Mindset"
-  appContainer.classList.remove("displayNone");
+  project1Container.classList.remove("displayNone");
 
   // Fade in the welcome text
   setTimeout(() => (welcomeTitle.style.opacity = "1"), 500);
