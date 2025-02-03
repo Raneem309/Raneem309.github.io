@@ -21,6 +21,8 @@ window.onload = function () {
   handleOpeningScreen();
 };
 
+
+
 function loadInitialData() {
   let bio = `
 Hi, I'm Raneem Ali, a dedicated and detail-oriented software and web developer based in Brooklyn, NY. With a solid foundation in programming languages such as JavaScript, HTML, CSS, Python, and Java, I specialize in creating scalable, responsive, and user-friendly web applications. My passion for problem-solving and innovation drives me to continuously learn and refine my technical expertise.<br><br>
@@ -278,3 +280,32 @@ function resetTimer() {
   time = 0;
   document.getElementById('timerDisplay').textContent = "00:00:00";
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Set up scene, camera, and renderer
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, 300 / 300, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer();
+  
+  // Get the container and set size
+  const container = document.getElementById("cubeContainer");
+  renderer.setSize(300, 300); // Adjust the size as needed
+  container.appendChild(renderer.domElement);
+
+  // Create a cube
+  const geometry = new THREE.BoxGeometry();
+  const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+  const cube = new THREE.Mesh(geometry, material);
+  scene.add(cube);
+
+  camera.position.z = 2;
+
+  // Animation loop
+  function animate() {
+      requestAnimationFrame(animate);
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
+      renderer.render(scene, camera);
+  }
+  animate();
+});
