@@ -5,6 +5,11 @@ const contact = document.getElementById("contactTab");
 const projHeader = document.getElementById("projectHeader");
 const appContainer = document.getElementById("appContainer");
 let bmiStatus;
+let healthAppUserName;
+
+let timer;
+let time = 0;
+let running = false;
 
 //////// snake game //////////
 
@@ -155,7 +160,7 @@ function calculateHealthStats() {
   const activityLevel = parseFloat(
     document.getElementById("activityLevelInput").value
   );
-
+  healthAppUserName = document.getElementById("nameInput").value;
   //check if all feilds are filled out
   if (!height || !weight || !age || !gender || !activityLevel) {
     alert("Please fill in all fields.");
@@ -215,5 +220,61 @@ function displayResults(bmi, bmr, tdee) {
     <p><strong>TDEE (Total Daily Energy Expenditure):</strong> The number of calories you burn daily including activity level.</p>
     <p>Use this information to plan your caloric intake for weight maintenance, loss, or gain.</p>
   `;
+
+  document.getElementById("headerResults").innerHTML = `Hi ${healthAppUserName}! \n Here are your calculated health results.`
 }
 
+async function getWeather() {
+  const apiKey = 'd2993b0e09e1e2d7429ef71487c9543f'; // Replace with your OpenWeatherMap API key
+  const location = document.getElementById('location').value;
+  const forecastDiv = document.getElementById('forecast');
+  
+  if (!location) {
+      alert("Please enter a location");
+      return;
+  }
+  
+  try {
+      const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast/daily?q=${location}&cnt=7&appid=${apiKey}&units=metric`);
+      const data = await response.json();
+      
+      if (data.cod !== "200") {
+          throw new Error(data.message);
+      }
+      
+      forecastDiv.innerHTML = data.list.map(day => 
+          `<p>${new Date(day.dt * 1000).toDateString()}: ${day.temp.day}°C, ${day.weather[0].description}</p>`
+      ).join('');
+  } catch (error) {
+      forecastDiv.innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
+  }
+}
+function launchWeatherApp() {
+  document.getElementById('project2Container').classList.remove('displayNone');
+}
+
+function launchTimerApp() {
+  document.getElementById('project3Container').classList.remove('displayNone');
+}
+
+
+function startTimer() {
+  if (!running) {
+      running = true;
+      timer = setInterval(() => {
+          time++;
+          document.getElementById('timerDisplay').textContent = new Date(time * 1000).toISOString().substr(11, 8);
+      }, 1000);
+  }
+}
+
+function stopTimer() {
+  clearInterval(timer);
+  running = false;
+}
+
+function resetTimer() {
+  stopTimer();
+  time = 0;
+  document.getElementById('timerDisplay').textContent = "00:00:00";
+}

@@ -348,15 +348,10 @@ select {
 
 #welcomeScreen {
   text-align: center;
-  padding: 50px;
-  /* opacity: 1;
-  transition: opacity 1s ease-in-out; */
+  padding: 160px;
+
 }
 
-/* #welcomeScreen h1,
-#welcomeScreen h2 {
-  opacity: 0;
-} */
 
 .results-table {
   width: 100%;

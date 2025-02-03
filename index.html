@@ -51,13 +51,25 @@
               <div class="project" id="project2">
                 <h3>Weather App</h3>
                 <h4>A weather application for the US</h4>
-                <button class="projectButtons" onclick="">Start App</button>
+                <button class="projectButtons" onclick="launchWeatherApp()">Start App</button>
+                <div id="project2Container" class="displayNone">
+                  <input type="text" id="location" placeholder="Enter location">
+                  <button onclick="getWeather()">Get Forecast</button>
+                  <div id="forecast"></div>
+              </div>
               </div>
               <div class="project" id="project3">
-                <h3>Project 3</h3>
-                <button class="projectButtons" onclick="">
+                <h3>Time Control</h3>
+                <h4>Timer/Stopwatch</h4>
+                <button class="projectButtons" onclick="launchTimerApp()">
                   Start [Project 3]
                 </button>
+                <div id="project3Container" class="displayNone">
+                  <h2 id="timerDisplay">00:00:00</h2>
+                  <button onclick="startTimer()">Start</button>
+                  <button onclick="stopTimer()">Stop</button>
+                  <button onclick="resetTimer()">Reset</button>
+              </div>
               </div>
             </div>
           </div>
@@ -65,9 +77,9 @@
           <!-- Existing appContainer structure with input fields -->
           <div id="appContainer" class="displayNone">
             <div id="mainAppContainer" class="displayNone">
-              <h3>Enter Your Information Below to CalCulate your Results</h3>
+              <h3>Enter Your Information Below to Calculate your Results</h3>
               <!-- Input fields remain here -->
-              <label for="nameInput">First and Last Initial: </label>
+              <label for="nameInput">First Name: </label>
               <input type="text" id="nameInput" />
               <div></div>
 
@@ -75,8 +87,12 @@
               <input type="number" id="ageInput" />
               <div></div>
 
-              <label for="genderInput">Gender (M/F): </label>
-              <input type="text" id="genderInput" />
+              <label for="genderInput">Sex (Male/Female): </label>
+              <select id="genderInput">
+                <option value=""></option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
               <div></div>
 
               <label for="heightInput">Height (in feet, e.g., 5.9): </label>
@@ -105,7 +121,7 @@
             </div>
             <!-- Display Results after Submit -->
             <div id="resultsContainer" class="displayNone">
-              <h3>Your Results</h3>
+              <h3 id="headerResults"></h3>
               <div id="resultsChart"></div>
               <p id="resultsDescription"></p>
             </div>
