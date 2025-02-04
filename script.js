@@ -134,7 +134,7 @@ function exitApp() {
   for (let ele of projectContainers) {
     ele.classList.add("displayNone");
   }
-  forecast.innerHTML = ""
+  forecastContianer.innerHTML = ""
   resetTimer();
   document
     .getElementById("mainAppContainer")
@@ -459,7 +459,7 @@ async function getLocations() {
 // Function to fetch weather data
 async function getWeather() {
   const inputElement = document.getElementById("location");
-  const forecastElement = document.getElementById("forecast");
+  const forecastElement = document.getElementById("forecastContianer");
 
   if (!inputElement || !forecastElement) {
     console.error("Error: Missing input or forecast element.");
@@ -480,7 +480,7 @@ async function getWeather() {
 
     const data = await response.json();
     
-    forecastElement.innerHTML = `<h3>${inputElement.value}</h3>`; // Display user-friendly location name
+    document.getElementById("forecast").innerHTML = `<h3>${inputElement.value}</h3>`; // Display user-friendly location name
 
     let forecastHTML = "";
     for (let i = 0; i < data.list.length; i += 8) { // Get one reading per day
@@ -497,6 +497,7 @@ async function getWeather() {
     forecastElement.innerText = "Error retrieving weather data.";
   }
 
-  forecastElement.classList.remove("displayNone");
+  document.getElementById("forecast").classList.remove("displayNone");
+  
 }
 
