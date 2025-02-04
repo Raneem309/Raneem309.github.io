@@ -385,6 +385,13 @@ async function getLocations() {
   const suggestionsElement = document.getElementById("suggestions");
   const weatherBtn = document.getElementById("weatherBtn");
 
+  if(suggestionsElement.innerText !== ""){
+    suggestionsElement.classList.remove("displayNone");
+  }else{
+    suggestionsElement.classList.add("displayNone");
+    suggestions.innerText = "";
+  }
+  
   if (inputElement.value === "") {
     weatherBtn.style.cursor = "";
     weatherBtn.style.backgroundColor = "#003e0700";
@@ -440,6 +447,7 @@ async function getLocations() {
 
         let option = document.createElement("option");
         option.textContent = displayName;
+        option.classList.add("suggestions-item")
         option.dataset.apiName = apiFormattedName; // Store formatted value
         option.onclick = () => {
           inputElement.value = displayName;

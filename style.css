@@ -395,26 +395,18 @@ select {
 }
 
 #suggestions {
-  list-style: none;
-  padding: 0;
-  margin-top: 1px;
-  position: absolute;
+  padding: 12;
+  margin-bottom: 1rem;
   background: rgba(0, 0, 0, 0.278);
   border: 1px solid #000000;
   max-height: 150px;
   overflow-y: auto;
-  width: 200px;
-}
-
-#suggestions li {
-  padding: 10px;
   cursor: pointer;
 }
 
-#suggestions li:hover {
-  background: #ffffff91;
+.suggestions-item :hover{
+  background-color: rgba(124, 124, 124, 0.579);
 }
-
 
 #cubeContainer {
   display: flex;
@@ -443,4 +435,12 @@ canvas {
 
 #forecast{
   padding: 2rem;
+}
+
+#project2Container{
+  height: 100vh;
+}
+
+#location, select{
+  margin-bottom: 0 !important;
 }
