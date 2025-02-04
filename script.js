@@ -308,15 +308,17 @@ document.addEventListener("DOMContentLoaded", function () {
   floor.receiveShadow = true;
   scene.add(floor);
 
+  // Animation loop
+  function animate() {
+      requestAnimationFrame(animate);
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
+      renderer.render(scene, camera);
+  }
   animate();
 });
 
-function animate() {
-  requestAnimationFrame(animate);
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.01;
-  renderer.render(scene, camera);
-}
+
 
 
 // Function to fetch and display location suggestions

@@ -416,18 +416,18 @@ select {
 }
 
 
-/* Container styling */
 #cubeContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
   overflow: hidden;
+  width: 100%;       /* Full width */
+  height: 300px;     /* Fixed height */
 }
 
-/* Cube styling (Three.js materials reflect this) */
+/* Canvas styling */
 canvas {
   width: 100%;
   height: 100%;
 }
-
