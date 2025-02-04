@@ -296,7 +296,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const cube = new THREE.Mesh(geometry, material);
   cube.castShadow = true; // Cube casts shadow
   cube.receiveShadow = true; // Cube receives shadow
-  cube.scale.set(4, 4, 4); // Scale the cube by 15% (without moving)
+  cube.scale.set(2, 2, 2);
 
   scene.add(cube);
 
@@ -310,7 +310,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const floorMaterial = new THREE.ShadowMaterial({ opacity: 0.3 });
   const floor = new THREE.Mesh(floorGeometry, floorMaterial);
   floor.rotation.x = -Math.PI / 2; // Rotate to be horizontal
-  floor.position.y = -1.5; // Move floor 1.5rem below the cube (adjust this as needed)
+  floor.position.y = -2.5; // Increased distance between cube and shadow
   floor.receiveShadow = true;
   scene.add(floor);
 
