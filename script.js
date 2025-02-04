@@ -269,17 +269,44 @@ document.addEventListener("DOMContentLoaded", function () {
   // Set up Three.js scene
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-  camera.position.z = 2;
+  camera.position.z = 3; // Move back slightly for better visibility
 
-  // Create renderer and attach to container
+  // Create renderer and enable shadows
   const renderer = new THREE.WebGLRenderer({ alpha: true });
+  renderer.shadowMap.enabled = true; // Enable shadows
   const container = document.getElementById("cubeContainer");
   renderer.setSize(container.clientWidth, container.clientHeight);
   container.appendChild(renderer.domElement);
 
-  // Create a cube
-  const cube = new THREE.Mesh(new THREE.BoxGeometry(), new THREE.MeshBasicMaterial({ color: "white" }));
+  // Add lighting for shadows
+  const light = new THREE.DirectionalLight(0xffffff, 1);
+  light.position.set(2, 2, 5);
+  light.castShadow = true; // Enable shadow casting
+  scene.add(light);
+
+  // Create cube with solid and wireframe material
+  const geometry = new THREE.BoxGeometry();
+  const material = new THREE.MeshStandardMaterial({ color: "green" }); // Main color
+  const wireframeMaterial = new THREE.LineBasicMaterial({ color: "black" }); // Edge lines
+
+  const cube = new THREE.Mesh(geometry, material);
+  cube.castShadow = true; // Cube casts shadow
+  cube.receiveShadow = true; // Cube receives shadow
   scene.add(cube);
+
+  // Add wireframe edges to show cube dimensions
+  const edges = new THREE.EdgesGeometry(geometry);
+  const wireframe = new THREE.LineSegments(edges, wireframeMaterial);
+  cube.add(wireframe);
+
+  // Create a shadow-receiving floor
+  const floorGeometry = new THREE.PlaneGeometry(5, 5);
+  const floorMaterial = new THREE.ShadowMaterial({ opacity: 0.3 });
+  const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+  floor.rotation.x = -Math.PI / 2; // Rotate to be horizontal
+  floor.position.y = -1; // Move slightly below the cube
+  floor.receiveShadow = true;
+  scene.add(floor);
 
   // Animation loop
   function animate() {
@@ -290,6 +317,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   animate();
 });
+
 
 
 
