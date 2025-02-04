@@ -433,12 +433,11 @@ canvas {
 
 #weatherBtn{
   float: right;
-  background-color: #003e07;;
+  background-color: #003e0700;;
   color: white;
   padding: 10px;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
   border-style: groove;
 }
 

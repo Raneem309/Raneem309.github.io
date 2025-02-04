@@ -379,8 +379,8 @@ function cubeTalk() {
 }
 
 // Function to fetch and display location suggestions
+// Function to get location suggestions
 async function getLocations() {
-  
   const inputElement = document.getElementById("location");
   const suggestionsElement = document.getElementById("suggestions");
   const weatherBtn = document.getElementById("weatherBtn");
@@ -415,9 +415,8 @@ async function getLocations() {
     let data = await response.json();
     console.log("API Response:", data);
 
-    // Clear previous suggestions
     suggestionsElement.innerHTML = "";
-    let seenLocations = new Set(); // Avoid duplicates
+    let seenLocations = new Set();
 
     if (data.length === 0) {
       let option = document.createElement("option");
@@ -433,34 +432,29 @@ async function getLocations() {
       let country = place.country;
       let state = place.state || "";
 
-      // Convert state abbreviation to full name if in the US
-      if (country === "US" && stateNames[state]) {
-        state = stateNames[state]; // Convert to full state name
-      }
-
-      // Build the display name
       let displayName = country === "US" && state ? `${city}, ${state}, ${country}` : `${city}, ${country}`;
+      let apiFormattedName = country === "US" && state ? `${city},${state},${country}` : `${city},${country}`;
 
-      // Prevent duplicate locations
       if (!seenLocations.has(displayName)) {
         seenLocations.add(displayName);
 
         let option = document.createElement("option");
         option.textContent = displayName;
+        option.dataset.apiName = apiFormattedName; // Store formatted value
         option.onclick = () => {
           inputElement.value = displayName;
-          suggestionsElement.classList.add("hidden"); // Hide dropdown after selection
+          inputElement.dataset.apiValue = apiFormattedName; // Save formatted value for API
+          suggestionsElement.classList.add("hidden");
         };
         suggestionsElement.appendChild(option);
       }
     });
 
-    suggestionsElement.classList.remove("hidden"); // Show dropdown
+    suggestionsElement.classList.remove("hidden");
   } catch (error) {
     console.error("Error fetching location suggestions:", error);
   }
 }
-
 
 // Function to fetch weather data
 async function getWeather() {
@@ -472,9 +466,9 @@ async function getWeather() {
     return;
   }
 
-  const location = inputElement.value.trim();
+  const location = inputElement.dataset.apiValue; // Use stored API-compatible value
   if (!location) {
-    alert("Please enter a valid location.");
+    alert("Please select a valid location from the suggestions.");
     return;
   }
 
@@ -486,22 +480,23 @@ async function getWeather() {
 
     const data = await response.json();
     
-    // Extract relevant forecast data (every 8 hours = 3 times per day)
-    forecastElement.querySelector("h3").innerHTML = location  
-      
-    for (let i = 0; i < data.list.length; i += 8) {
-      // Picks 1 reading per day
+    forecastElement.innerHTML = `<h3>${inputElement.value}</h3>`; // Display user-friendly location name
+
+    let forecastHTML = "";
+    for (let i = 0; i < data.list.length; i += 8) { // Get one reading per day
       const day = data.list[i];
       const date = new Date(day.dt * 1000).toLocaleDateString();
       const temp = day.main.temp;
       const desc = day.weather[0].description;
-      let forecastHTML = `<p><strong>${date}:</strong> ${temp}°C - ${desc}</p>`;
+      forecastHTML += `<p><strong>${date}:</strong> ${temp}°C - ${desc}</p>`;
     }
 
-    forecastElement.innerHTML = forecastHTML;
+    forecastElement.innerHTML += forecastHTML;
   } catch (error) {
     console.error("Error retrieving weather data:", error);
     forecastElement.innerText = "Error retrieving weather data.";
   }
-  forecastElement.classList.remove("displayNone")
+
+  forecastElement.classList.remove("displayNone");
 }
+
