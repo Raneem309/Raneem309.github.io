@@ -431,10 +431,19 @@ canvas {
   border: none;
   border-radius: 5px;
   border-style: groove;
+  margin-top: 2rem;
 }
 
 #forecast{
   padding: 2rem;
+}
+.mainAppContainer {
+  overflow-y: auto; 
+}
+#forecastContianer {
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 10px;
 }
 
 #project2Container{

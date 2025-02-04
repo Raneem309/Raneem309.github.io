@@ -453,18 +453,80 @@ async function getLocations() {
 }
 
 // Function to handle location selection
-function selectLocation(inputElement, suggestionsElement, displayName, apiFormattedName) {
-  inputElement.value = displayName;
-  inputElement.dataset.apiValue = apiFormattedName;
-  suggestionsElement.classList.add("displayNone");
-  document.getElementById("weatherBtn").disabled = false;
+async function getLocations() {
+  const inputElement = document.getElementById("location");
+  const suggestionsElement = document.getElementById("suggestions");
+  const weatherBtn = document.getElementById("weatherBtn");
+
+  if (inputElement.value === "") {
+    weatherBtn.style.cursor = "";
+    weatherBtn.style.backgroundColor = "#003e0700";
+    weatherBtn.disabled = true;
+  } else {
+    weatherBtn.style.cursor = "pointer";
+    weatherBtn.style.backgroundColor = "#003e07";
+    weatherBtn.disabled = false;
+  }
+
+  let query = inputElement.value.trim();
+  if (query.length < 3) {
+    suggestionsElement.classList.add("displayNone");
+    return;
+  }
+
+  let url = `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${apiKey}`;
+
+  try {
+    let response = await fetch(url);
+    if (!response.ok) throw new Error("Failed to fetch location suggestions");
+
+    let data = await response.json();
+    suggestionsElement.innerHTML = "";
+    let seenLocations = new Set();
+
+    if (data.length === 0) {
+      let option = document.createElement("div");
+      option.textContent = "No results found";
+      option.classList.add("no-results");
+      suggestionsElement.appendChild(option);
+      suggestionsElement.classList.remove("displayNone");
+      return;
+    }
+
+    data.forEach((place) => {
+      let city = place.name;
+      let country = place.country;
+      let state = place.state || "";
+      let displayName = country === "US" && state ? `${city}, ${state}, ${country}` : `${city}, ${country}`;
+      let apiFormattedName = country === "US" && state ? `${city},${state},${country}` : `${city},${country}`;
+
+      if (!seenLocations.has(displayName)) {
+        seenLocations.add(displayName);
+
+        let option = document.createElement("div");
+        option.textContent = displayName;
+        option.classList.add("suggestions-item");
+        option.dataset.apiName = apiFormattedName;
+        option.onclick = () => {
+          inputElement.value = displayName;
+          inputElement.dataset.apiValue = apiFormattedName;
+          suggestionsElement.classList.add("displayNone");
+        };
+        suggestionsElement.appendChild(option);
+      }
+    });
+
+    suggestionsElement.classList.remove("displayNone");
+  } catch (error) {
+    console.error("Error fetching location suggestions:", error);
+  }
 }
 
-// Fetch and display weather data
+// Function to fetch weather data
 async function getWeather() {
   const inputElement = document.getElementById("location");
   const forecastElement = document.getElementById("forecastContianer");
-  const suggestionsElement = document.getElementById("suggestions");
+  const forecastHeader = document.querySelector("#forecast h3");
 
   if (!inputElement || !forecastElement) {
     console.error("Error: Missing input or forecast element.");
@@ -484,12 +546,15 @@ async function getWeather() {
     if (!response.ok) throw new Error("Failed to fetch weather data");
 
     const data = await response.json();
-    
-    // Clear previous forecast
-    forecastElement.innerHTML = `<h3>5-Day Forecast for ${inputElement.value}</h3>`;
+
+    // Update forecast heading with the new city name
+    forecastHeader.textContent = inputElement.value;
+
+    // Clear previous forecast only when new weather is generated
+    forecastElement.innerHTML = "";
 
     let forecastHTML = "";
-    for (let i = 0; i < data.list.length; i += 8) {
+    for (let i = 0; i < data.list.length; i += 8) { // Get one reading per day
       const day = data.list[i];
       const date = new Date(day.dt * 1000).toLocaleDateString();
       const temp = day.main.temp;
@@ -497,17 +562,12 @@ async function getWeather() {
       forecastHTML += `<p><strong>${date}:</strong> ${temp}°C - ${desc}</p>`;
     }
 
-    forecastElement.innerHTML += forecastHTML;
-    forecastElement.classList.remove("displayNone");
+    forecastElement.innerHTML = forecastHTML;
 
   } catch (error) {
     console.error("Error retrieving weather data:", error);
     forecastElement.innerText = "Error retrieving weather data.";
   }
-}
 
-// Ensure the suggestion box reappears when user types again
-document.getElementById("location").addEventListener("input", () => {
-  document.getElementById("suggestions").classList.remove("displayNone");
-  document.getElementById("forecastContianer").innerHTML = ""; // Reset forecast when typing a new city
-});
+  document.getElementById("forecast").classList.remove("displayNone");
+}
