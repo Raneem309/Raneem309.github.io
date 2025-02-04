@@ -268,7 +268,7 @@ function resetTimer() {
 document.addEventListener("DOMContentLoaded", function () {
   // Set up Three.js scene
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.position.z = 3; // Move back slightly for better visibility
 
   // Create renderer and enable shadows
@@ -292,6 +292,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const cube = new THREE.Mesh(geometry, material);
   cube.castShadow = true; // Cube casts shadow
   cube.receiveShadow = true; // Cube receives shadow
+  cube.scale.set(1.15, 1.15, 1.15); // Scale the cube by 15% (without moving)
+
   scene.add(cube);
 
   // Add wireframe edges to show cube dimensions
@@ -304,7 +306,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const floorMaterial = new THREE.ShadowMaterial({ opacity: 0.3 });
   const floor = new THREE.Mesh(floorGeometry, floorMaterial);
   floor.rotation.x = -Math.PI / 2; // Rotate to be horizontal
-  floor.position.y = -1; // Move slightly below the cube
+  floor.position.y = -1.5; // Move floor 1.5rem below the cube (adjust this as needed)
   floor.receiveShadow = true;
   scene.add(floor);
 
@@ -316,7 +318,15 @@ document.addEventListener("DOMContentLoaded", function () {
       renderer.render(scene, camera);
   }
   animate();
+
+  // Resize handler to update renderer and camera
+  window.addEventListener('resize', () => {
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+  });
 });
+
 
 
 
