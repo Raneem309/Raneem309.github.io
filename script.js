@@ -7,6 +7,8 @@ const project1Container = document.getElementById("project1Container");
 const projectData = document.getElementById("projectData");
 let bmiStatus;
 let healthAppUserName;
+const apiKey = "f2ebd821732c6bbb4ceeb84d71225ca0"; 
+
 
 let timer;
 let time = 0;
@@ -118,8 +120,10 @@ function handleOpeningScreen() {
 // Exit the app
 function exitApp() {
   projHeader.innerText = "A - Z";
-  document.getElementById("mainAppContainer").classList.add("displayNone");
-  project1Container.classList.add("displayNone");
+  let projectContainers = document.getElementsByClassName("projectContainers");
+  for (let ele of projectContainers){
+    ele.classList.add("displayNone")
+}
   document.getElementById("projectData").classList.remove("displayNone"); // Show project section again
 }
 
@@ -223,40 +227,18 @@ function displayResults(bmi, bmr, tdee) {
   document.getElementById("headerResults").innerHTML = `Hi ${healthAppUserName}! \n Here are your calculated health results.`
 }
 
-async function getWeather() {
-  const apiKey = "f2ebd821732c6bbb4ceeb84d71225ca0";  // Replace with your real API key
-  const location = document.getElementById("location").value;
-  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}&units=metric`;
 
-  try {
-      const response = await fetch(url);
-      if (!response.ok) {
-          throw new Error("Failed to fetch weather data");
-      }
-      const data = await response.json();
-
-      // Extract relevant forecast data (every 8 hours = 3 times per day)
-      let forecastHTML = "<h2>5-Day Forecast</h2>";
-      for (let i = 0; i < data.list.length; i += 8) {  // Picks 1 reading per day
-          const day = data.list[i];
-          const date = new Date(day.dt * 1000).toLocaleDateString();
-          const temp = day.main.temp;
-          const desc = day.weather[0].description;
-          forecastHTML += `<p><strong>${date}:</strong> ${temp}°C - ${desc}</p>`;
-      }
-
-      document.getElementById("forecast").innerHTML = forecastHTML;
-  } catch (error) {
-      console.error(error);
-      document.getElementById("forecast").innerText = "Error retrieving weather data.";
-  }
-}
 function launchWeatherApp() {
+  document.getElementById("projectHeader").innerText = "Weather App"
+
+  document.getElementById("location").value = ""
   projectData.classList.add("displayNone");
   document.getElementById('project2Container').classList.remove('displayNone');
 }
 
 function launchTimerApp() {
+  resetTimer();
+  document.getElementById("projectHeader").innerText = "Time Control"
   projectData.classList.add("displayNone");
   document.getElementById('project3Container').classList.remove('displayNone');
 }
@@ -312,3 +294,56 @@ document.addEventListener("DOMContentLoaded", function () {
   animate();
 });
 
+async function getLocations() {
+  let query = document.getElementById("location").value;
+  if (query.length < 3) return; // Prevent excessive API calls
+
+  let url = `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${apiKey}`;
+
+  try {
+      let response = await fetch(url);
+      let data = await response.json();
+
+      let suggestions = document.getElementById("suggestions");
+      suggestions.innerHTML = ""; // Clear previous suggestions
+
+      data.forEach((place) => {
+          let li = document.createElement("li");
+          li.textContent = `${place.name}, ${place.country}`;
+          li.onclick = () => {
+              document.getElementById("location").value = li.textContent;
+              suggestions.innerHTML = ""; // Hide suggestions after selection
+          };
+          suggestions.appendChild(li);
+      });
+  } catch (error) {
+      console.error("Error fetching location suggestions:", error);
+  }
+}
+async function getWeather() {
+  const location = document.getElementById("location").value;
+  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}&units=metric`;
+
+  try {
+      const response = await fetch(url);
+      if (!response.ok) {
+          throw new Error("Failed to fetch weather data");
+      }
+      const data = await response.json();
+
+      // Extract relevant forecast data (every 8 hours = 3 times per day)
+      let forecastHTML = `<h2>${location} 5-Day Forecast</h2>`;
+      for (let i = 0; i < data.list.length; i += 8) {  // Picks 1 reading per day
+          const day = data.list[i];
+          const date = new Date(day.dt * 1000).toLocaleDateString();
+          const temp = day.main.temp;
+          const desc = day.weather[0].description;
+          forecastHTML += `<p><strong>${date}:</strong> ${temp}°C - ${desc}</p>`;
+      }
+
+      document.getElementById("forecast").innerHTML = forecastHTML;
+  } catch (error) {
+      console.error(error);
+      document.getElementById("forecast").innerText = "Error retrieving weather data.";
+  }
+}

@@ -58,7 +58,7 @@
               </div>
               <div class="project" id="project3">
                 <h3>Time Control</h3>
-                <h4>Timer/Stopwatch</h4>
+                <h4>Stopwatch</h4>
                 <button class="projectButtons" onclick="launchTimerApp()">
                   Start Time Control
                 </button>
@@ -146,8 +146,9 @@
           <!-- Weather APP -->
           <div id="project2Container" class="displayNone projectContainers">
             <div class="mainAppContainer mainProjectContainers">
-              <input type="text" id="location" placeholder="Enter location" />
-              <button onclick="getWeather()">Get Forecast</button>
+              <input type="text" id="location" placeholder="Enter location" onkeyup="getLocations()" />
+              <ul id="suggestions"></ul>
+             <button onclick="getWeather()">Get Forecast</button>
               <div id="forecast"></div>
             </div>
             <button class="exitButton" onclick="exitApp()">Exit</button>
@@ -156,10 +157,12 @@
           <!-- Stop Watch -->
           <div id="project3Container" class="displayNone projectContainers">
             <div class="mainProjectContainers">
-              <h2 id="timerDisplay">00:00:00</h2>
-              <button onclick="startTimer()">Start</button>
-              <button onclick="stopTimer()">Stop</button>
-              <button onclick="resetTimer()">Reset</button>
+              <div id="timerDisplay">00:00:00</div>
+              <div id="timerButtons">
+                <button id="startTimerBtn" onclick="startTimer()">Start</button>
+                <button id="stopTimerBtn" onclick="stopTimer()">Stop</button>
+                <button id="resetTimerBtn" onclick="resetTimer()">Reset</button>
+              </div>
             </div>
             <button class="exitButton" onclick="exitApp()">Exit</button>
           </div>
