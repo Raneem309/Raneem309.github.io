@@ -121,7 +121,13 @@ function exitApp() {
   for (let ele of projectContainers) {
     ele.classList.add("displayNone");
   }
-
+  document
+    .getElementById("mainAppContainer")
+    .querySelectorAll("select, input")
+    .forEach((element) => {
+      element.value = "";
+    });
+  document.getElementById("mainAppContainer").classList.add("displayNone");
   document.getElementById("resultsContainer").classList.add("displayNone");
   document.getElementById("appSubmitBTN").classList.add("displayNone");
   document.getElementById("appRestartBTN").classList.add("displayNone");
@@ -289,12 +295,12 @@ function cubeTalk() {
   // Set up Three.js scene
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(
-    50,
+    95,
     window.innerWidth / window.innerHeight,
-    0.2,
+    0.9,
     1000
   );
-  camera.position.z = 3; // Move back slightly for better visibility
+  camera.position.z = 2.5; // Move back slightly for better visibility
 
   // Create renderer and enable shadows
   const renderer = new THREE.WebGLRenderer({ alpha: true });
@@ -305,18 +311,18 @@ function cubeTalk() {
 
   // Add lighting for shadows
   const light = new THREE.DirectionalLight(0xffffff, 1);
-  light.position.set(4, 4, 5);
+  light.position.set(10, 10, 10);
   light.castShadow = true; // Enable shadow casting
   scene.add(light);
 
   // Create cube with solid and wireframe material
   const geometry = new THREE.BoxGeometry();
   const material = new THREE.MeshStandardMaterial({
-    color: "green", // Main color
-    opacity: 0.7, // 20% opacity, meaning 80% transparency
+    color: "black", // Main color
+    opacity: 0.5, // 20% opacity, meaning 80% transparency
     transparent: true, // Enable transparency
   });
-  const wireframeMaterial = new THREE.LineBasicMaterial({ color: "black" }); // Edge lines
+  const wireframeMaterial = new THREE.LineBasicMaterial({ color: "grey" }); // Edge lines
 
   const cube = new THREE.Mesh(geometry, material);
   cube.castShadow = true; // Cube casts shadow
@@ -335,7 +341,7 @@ function cubeTalk() {
   const floorMaterial = new THREE.ShadowMaterial({ opacity: 0.3 });
   const floor = new THREE.Mesh(floorGeometry, floorMaterial);
   floor.rotation.x = -Math.PI / 2; // Rotate to be horizontal
-  floor.position.y = -2.5; // Increased distance between cube and shadow
+  floor.position.y = -3.5; // Increased distance between cube and shadow
   floor.receiveShadow = true;
   scene.add(floor);
 
