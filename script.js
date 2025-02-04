@@ -294,56 +294,87 @@ document.addEventListener("DOMContentLoaded", function () {
   animate();
 });
 
+
+// Function to fetch and display location suggestions
 async function getLocations() {
-  let query = document.getElementById("location").value;
-  if (query.length < 3) return; // Prevent excessive API calls
+    const inputElement = document.getElementById("location");
+    const suggestionsElement = document.getElementById("suggestions");
 
-  let url = `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${apiKey}`;
+    if (!inputElement || !suggestionsElement) {
+        console.error("Error: Missing input or suggestions element.");
+        return;
+    }
 
-  try {
-      let response = await fetch(url);
-      let data = await response.json();
+    let query = inputElement.value.trim();
+    if (query.length < 3) return; // Prevent excessive API calls
 
-      let suggestions = document.getElementById("suggestions");
-      suggestions.innerHTML = ""; // Clear previous suggestions
+    let url = `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${apiKey}`;
 
-      data.forEach((place) => {
-          let li = document.createElement("li");
-          li.textContent = `${place.name}, ${place.country}`;
-          li.onclick = () => {
-              document.getElementById("location").value = li.textContent;
-              suggestions.innerHTML = ""; // Hide suggestions after selection
-          };
-          suggestions.appendChild(li);
-      });
-  } catch (error) {
-      console.error("Error fetching location suggestions:", error);
-  }
+    try {
+        let response = await fetch(url);
+        if (!response.ok) throw new Error("Failed to fetch location suggestions");
+
+        let data = await response.json();
+
+        // Clear previous suggestions
+        suggestionsElement.innerHTML = "";
+
+        if (data.length === 0) {
+            suggestionsElement.innerHTML = "<li>No results found</li>";
+            return;
+        }
+
+        data.forEach((place) => {
+            let li = document.createElement("li");
+            li.textContent = `${place.name}, ${place.country}`;
+            li.onclick = () => {
+                inputElement.value = li.textContent;
+                suggestionsElement.innerHTML = ""; // Hide suggestions after selection
+            };
+            suggestionsElement.appendChild(li);
+        });
+    } catch (error) {
+        console.error("Error fetching location suggestions:", error);
+    }
 }
+
+// Function to fetch weather data
 async function getWeather() {
-  const location = document.getElementById("location").value;
-  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}&units=metric`;
+    const inputElement = document.getElementById("location");
+    const forecastElement = document.getElementById("forecast");
 
-  try {
-      const response = await fetch(url);
-      if (!response.ok) {
-          throw new Error("Failed to fetch weather data");
-      }
-      const data = await response.json();
+    if (!inputElement || !forecastElement) {
+        console.error("Error: Missing input or forecast element.");
+        return;
+    }
 
-      // Extract relevant forecast data (every 8 hours = 3 times per day)
-      let forecastHTML = `<h2>${location} 5-Day Forecast</h2>`;
-      for (let i = 0; i < data.list.length; i += 8) {  // Picks 1 reading per day
-          const day = data.list[i];
-          const date = new Date(day.dt * 1000).toLocaleDateString();
-          const temp = day.main.temp;
-          const desc = day.weather[0].description;
-          forecastHTML += `<p><strong>${date}:</strong> ${temp}°C - ${desc}</p>`;
-      }
+    const location = inputElement.value.trim();
+    if (!location) {
+        alert("Please enter a valid location.");
+        return;
+    }
 
-      document.getElementById("forecast").innerHTML = forecastHTML;
-  } catch (error) {
-      console.error(error);
-      document.getElementById("forecast").innerText = "Error retrieving weather data.";
-  }
+    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}&units=metric`;
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Failed to fetch weather data");
+
+        const data = await response.json();
+
+        // Extract relevant forecast data (every 8 hours = 3 times per day)
+        let forecastHTML = `<h2>${location} 5-Day Forecast</h2>`;
+        for (let i = 0; i < data.list.length; i += 8) { // Picks 1 reading per day
+            const day = data.list[i];
+            const date = new Date(day.dt * 1000).toLocaleDateString();
+            const temp = day.main.temp;
+            const desc = day.weather[0].description;
+            forecastHTML += `<p><strong>${date}:</strong> ${temp}°C - ${desc}</p>`;
+        }
+
+        forecastElement.innerHTML = forecastHTML;
+    } catch (error) {
+        console.error("Error retrieving weather data:", error);
+        forecastElement.innerText = "Error retrieving weather data.";
+    }
 }
