@@ -146,16 +146,22 @@
           <!-- Weather APP -->
           <div id="project2Container" class="displayNone projectContainers">
             <div class="mainAppContainer mainProjectContainers">
-              <input type="text" list="suggestions" id="location" placeholder="Enter a City..." oninput="getLocations()" >
+              <input
+                type="text"
+                list="suggestions"
+                id="location"
+                placeholder="Enter a City..."
+                oninput="getLocations()"
+              />
               <div class="displayNone" id="suggestions"></div>
-              <button id="weatherBtn" onclick="getWeather()">Get Forecast</button>
+              <button id="weatherBtn" onclick="getWeather()">
+                Get Forecast
+              </button>
               <div class="displayNone" id="forecast">
-              <h2>5-Day Forecast</h2>
-              <h3></h3>
-              <div id="forecastContianer">
-
+                <h2>5-Day Forecast</h2>
+                <h3></h3>
               </div>
-            </div>
+              <div id="forecastContianer"></div>
             </div>
             <button class="exitButton" onclick="exitApp()">Exit</button>
           </div>

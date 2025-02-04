@@ -395,7 +395,7 @@ select {
 }
 
 #suggestions {
-  padding: 12;
+  padding: 3px;
   margin-bottom: 1rem;
   background: rgba(0, 0, 0, 0.278);
   border: 1px solid #000000;
@@ -404,7 +404,7 @@ select {
   cursor: pointer;
 }
 
-.suggestions-item :hover{
+.suggestions-item:hover{
   background-color: rgba(124, 124, 124, 0.579);
 }
 
@@ -438,7 +438,8 @@ canvas {
 }
 
 #project2Container{
-  height: 100vh;
+  height: 100vh; 
+  overflow-y: auto; /* Enable scrolling */
 }
 
 #location, select{
