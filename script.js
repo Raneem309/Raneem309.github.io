@@ -288,7 +288,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const geometry = new THREE.BoxGeometry();
   const material = new THREE.MeshStandardMaterial({
     color: "green",      // Main color
-    opacity: 0.2,        // 20% opacity, meaning 80% transparency
+    opacity: 0.7,        // 20% opacity, meaning 80% transparency
     transparent: true    // Enable transparency
 });
   const wireframeMaterial = new THREE.LineBasicMaterial({ color: "black" }); // Edge lines
@@ -296,7 +296,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const cube = new THREE.Mesh(geometry, material);
   cube.castShadow = true; // Cube casts shadow
   cube.receiveShadow = true; // Cube receives shadow
-  cube.scale.set(1.15, 1.15, 1.15); // Scale the cube by 15% (without moving)
+  cube.scale.set(4, 4, 4); // Scale the cube by 15% (without moving)
 
   scene.add(cube);
 
