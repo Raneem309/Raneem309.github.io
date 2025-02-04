@@ -129,11 +129,15 @@ function handleOpeningScreen() {
 
 // Exit the app
 function exitApp() {
+  let weatherBtn = document.getElementById("weatherBtn");
   projHeader.innerText = "A - Z";
   let projectContainers = document.getElementsByClassName("projectContainers");
   for (let ele of projectContainers) {
     ele.classList.add("displayNone");
   }
+    weatherBtn.style.cursor = "";
+    weatherBtn.style.backgroundColor = "#003e0700";
+    weatherBtn.disabled = true;
   forecastContianer.innerHTML = ""
   document.getElementById("location").value = "";
 
@@ -520,6 +524,13 @@ async function getLocations() {
   } catch (error) {
     console.error("Error fetching location suggestions:", error);
   }
+
+  if(inputElement.value === ""){
+    weatherBtn.disabled = true
+    weatherBtn.style.cursor = "";
+    weatherBtn.style.backgroundColor = "#003e0700";
+  }
+
 }
 
 // Function to fetch weather data
@@ -563,11 +574,13 @@ async function getWeather() {
     }
 
     forecastElement.innerHTML = forecastHTML;
+    forecastElement.classList.remove("displayNone")
 
   } catch (error) {
     console.error("Error retrieving weather data:", error);
     forecastElement.innerText = "Error retrieving weather data.";
   }
-
   document.getElementById("forecast").classList.remove("displayNone");
+  inputElement.value = ""
+
 }
