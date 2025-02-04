@@ -4,6 +4,7 @@ const projects = document.getElementById("projectTab");
 const contact = document.getElementById("contactTab");
 const projHeader = document.getElementById("projectHeader");
 const project1Container = document.getElementById("project1Container");
+const projectData = document.getElementById("projectData");
 let bmiStatus;
 let healthAppUserName;
 
@@ -124,7 +125,6 @@ function exitApp() {
 
 // Function to launch the Health Stats app
 function launchHealthStats() {
-  const projectData = document.getElementById("projectData");
   const welcomeScreen = document.getElementById("welcomeScreen");
   welcomeScreen.classList.remove("displayNone");
 
@@ -252,10 +252,12 @@ async function getWeather() {
   }
 }
 function launchWeatherApp() {
+  projectData.classList.add("displayNone");
   document.getElementById('project2Container').classList.remove('displayNone');
 }
 
 function launchTimerApp() {
+  projectData.classList.add("displayNone");
   document.getElementById('project3Container').classList.remove('displayNone');
 }
 

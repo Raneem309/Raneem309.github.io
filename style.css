@@ -278,7 +278,7 @@ select {
   margin-bottom: 1.5rem;
 }
 
-#exitButton {
+.exitButton {
   background-color: #ff1100;
   color: white;
   padding: 10px;
@@ -291,7 +291,7 @@ select {
   margin-top: 1rem;
 }
 
-#exitButton:hover {
+.exitButton:hover {
   background-color: #d22e22;
 }
 
