@@ -398,7 +398,7 @@ async function getLocations() {
         inputElement.value = li.textContent;
         suggestionsElement.innerHTML = ""; // Hide suggestions after selection
       };
-      suggestionsElement.appendChild(Selection);
+      suggestionsElement.appendChild(option);
     });
   } catch (error) {
     console.error("Error fetching location suggestions:", error);
