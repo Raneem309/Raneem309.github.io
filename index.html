@@ -146,7 +146,7 @@
           <!-- Weather APP -->
           <div id="project2Container" class="displayNone projectContainers">
             <div class="mainAppContainer mainProjectContainers">
-              <input type="text" id="location" placeholder="Enter a City..." onkeyup="getLocations()" />
+              <input type="text" list="suggestions" id="location" placeholder="Enter a City..." onkeyup="getLocations()" >
               <datalist id="suggestions"></datalist>
               <button onclick="getWeather()">Get Forecast</button>
               <div id="forecast"></div>
