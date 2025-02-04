@@ -286,7 +286,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Create cube with solid and wireframe material
   const geometry = new THREE.BoxGeometry();
-  const material = new THREE.MeshStandardMaterial({ color: "green" }); // Main color
+  const material = new THREE.MeshStandardMaterial({
+    color: "green",      // Main color
+    opacity: 0.2,        // 20% opacity, meaning 80% transparency
+    transparent: true    // Enable transparency
+});
   const wireframeMaterial = new THREE.LineBasicMaterial({ color: "black" }); // Edge lines
 
   const cube = new THREE.Mesh(geometry, material);
