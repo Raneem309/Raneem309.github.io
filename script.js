@@ -473,16 +473,17 @@ async function getWeather() {
     if (!response.ok) throw new Error("Failed to fetch weather data");
 
     const data = await response.json();
-
+    
     // Extract relevant forecast data (every 8 hours = 3 times per day)
-    let forecastHTML = `<h2>${location} 5-Day Forecast</h2>`;
+    forecastElement.querySelector("h3").innerHTML = location  
+      
     for (let i = 0; i < data.list.length; i += 8) {
       // Picks 1 reading per day
       const day = data.list[i];
       const date = new Date(day.dt * 1000).toLocaleDateString();
       const temp = day.main.temp;
       const desc = day.weather[0].description;
-      forecastHTML += `<p><strong>${date}:</strong> ${temp}°C - ${desc}</p>`;
+      let forecastHTML = `<p><strong>${date}:</strong> ${temp}°C - ${desc}</p>`;
     }
 
     forecastElement.innerHTML = forecastHTML;
@@ -490,4 +491,5 @@ async function getWeather() {
     console.error("Error retrieving weather data:", error);
     forecastElement.innerText = "Error retrieving weather data.";
   }
+  forecastElement.classList.remove("displayNone")
 }
