@@ -380,8 +380,20 @@ function cubeTalk() {
 
 // Function to fetch and display location suggestions
 async function getLocations() {
+  
   const inputElement = document.getElementById("location");
   const suggestionsElement = document.getElementById("suggestions");
+  const weatherBtn = document.getElementById("weatherBtn");
+
+  if (inputElement.value === "") {
+    weatherBtn.style.cursor = "";
+    weatherBtn.style.backgroundColor = "#003e0700";
+    weatherBtn.disabled = true;
+  } else {
+    weatherBtn.style.cursor = "pointer";
+    weatherBtn.style.backgroundColor = "#003e07";
+    weatherBtn.disabled = false;
+  }
 
   if (!inputElement || !suggestionsElement) {
     console.error("Error: Missing input or suggestions element.");
@@ -408,10 +420,10 @@ async function getLocations() {
     let seenLocations = new Set(); // Avoid duplicates
 
     if (data.length === 0) {
-      let li = document.createElement("li");
-      li.textContent = "No results found";
-      li.classList.add("no-results");
-      suggestionsElement.appendChild(li);
+      let option = document.createElement("option");
+      option.textContent = "No results found";
+      option.classList.add("no-results");
+      suggestionsElement.appendChild(option);
       suggestionsElement.classList.remove("hidden");
       return;
     }
@@ -433,13 +445,13 @@ async function getLocations() {
       if (!seenLocations.has(displayName)) {
         seenLocations.add(displayName);
 
-        let li = document.createElement("li");
-        li.textContent = displayName;
-        li.onclick = () => {
+        let option = document.createElement("option");
+        option.textContent = displayName;
+        option.onclick = () => {
           inputElement.value = displayName;
           suggestionsElement.classList.add("hidden"); // Hide dropdown after selection
         };
-        suggestionsElement.appendChild(li);
+        suggestionsElement.appendChild(option);
       }
     });
 

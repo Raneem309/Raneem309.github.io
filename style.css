@@ -436,10 +436,10 @@ canvas {
   background-color: #003e07;;
   color: white;
   padding: 10px;
-  position: fixed;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  border-style: groove;
 }
 
 #forecast{
