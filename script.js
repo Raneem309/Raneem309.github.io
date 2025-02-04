@@ -7,21 +7,18 @@ const project1Container = document.getElementById("project1Container");
 const projectData = document.getElementById("projectData");
 let bmiStatus;
 let healthAppUserName;
-const apiKey = "f2ebd821732c6bbb4ceeb84d71225ca0"; 
-
+const apiKey = "f2ebd821732c6bbb4ceeb84d71225ca0";
 
 let timer;
 let time = 0;
 let running = false;
 
-
 window.onload = function () {
+  cubeTalk();
   tabLinks();
   loadInitialData();
   handleOpeningScreen();
 };
-
-
 
 function loadInitialData() {
   let bio = `
@@ -121,10 +118,27 @@ function handleOpeningScreen() {
 function exitApp() {
   projHeader.innerText = "A - Z";
   let projectContainers = document.getElementsByClassName("projectContainers");
-  for (let ele of projectContainers){
-    ele.classList.add("displayNone")
+  for (let ele of projectContainers) {
+    ele.classList.add("displayNone");
+  }
+
+  document.getElementById("resultsContainer").classList.add("displayNone");
+  document.getElementById("appSubmitBTN").classList.add("displayNone");
+  document.getElementById("appRestartBTN").classList.add("displayNone");
+  document.getElementById("projectData").classList.remove("displayNone");
 }
-  document.getElementById("projectData").classList.remove("displayNone"); // Show project section again
+
+function restartApp() {
+  document
+    .getElementById("mainAppContainer")
+    .querySelectorAll("select, input")
+    .forEach((element) => {
+      element.value = "";
+    });
+  document.getElementById("resultsContainer").classList.add("displayNone");
+  document.getElementById("appRestartBTN").classList.add("displayNone");
+  document.getElementById("mainAppContainer").classList.remove("displayNone");
+  document.getElementById("appSubmitBTN").classList.remove("displayNone");
 }
 
 // Function to launch the Health Stats app
@@ -136,7 +150,7 @@ function launchHealthStats() {
   const welcomeSubtitle = document.getElementById("welcomeSubtitle");
 
   projectData.classList.add("displayNone");
-  document.getElementById("projectHeader").innerText = "Fit Mindset"
+  document.getElementById("projectHeader").innerText = "Fit Mindset";
   project1Container.classList.remove("displayNone");
 
   // Fade in the welcome text
@@ -148,7 +162,9 @@ function launchHealthStats() {
     if (e.key === "Enter") {
       document.removeEventListener("keydown", onEnterPress); // Prevent multiple triggers
       document.getElementById("appSubmitBTN").classList.remove("displayNone");
-      document.getElementById("mainAppContainer").classList.remove("displayNone");
+      document
+        .getElementById("mainAppContainer")
+        .classList.remove("displayNone");
       document.getElementById("projectHeader").classList.remove("displayNone");
       welcomeScreen.classList.add("displayNone");
     }
@@ -198,7 +214,7 @@ function displayResults(bmi, bmr, tdee) {
   const resultsContainer = document.getElementById("resultsContainer");
   const resultsChart = document.getElementById("resultsChart");
   const explanation = document.getElementById("resultsDescription");
-  
+
   document.getElementById("appRestartBTN").classList.remove("displayNone");
 
   document.getElementById("mainAppContainer").classList.add("displayNone");
@@ -224,33 +240,37 @@ function displayResults(bmi, bmr, tdee) {
     <p>Use this information to plan your caloric intake for weight maintenance, loss, or gain.</p>
   `;
 
-  document.getElementById("headerResults").innerHTML = `Hi ${healthAppUserName}! \n Here are your calculated health results.`
+  document.getElementById(
+    "headerResults"
+  ).innerHTML = `Hi ${healthAppUserName}! \n Here are your calculated health results.`;
 }
 
-
 function launchWeatherApp() {
-  document.getElementById("projectHeader").innerText = "Weather App"
+  document.getElementById("projectHeader").innerText = "Weather App";
 
-  document.getElementById("location").value = ""
+  document.getElementById("location").value = "";
   projectData.classList.add("displayNone");
-  document.getElementById('project2Container').classList.remove('displayNone');
+  document.getElementById("project2Container").classList.remove("displayNone");
 }
 
 function launchTimerApp() {
   resetTimer();
-  document.getElementById("projectHeader").innerText = "Time Control"
+  document.getElementById("projectHeader").innerText = "Time Control";
   projectData.classList.add("displayNone");
-  document.getElementById('project3Container').classList.remove('displayNone');
+  document.getElementById("project3Container").classList.remove("displayNone");
 }
-
 
 function startTimer() {
   if (!running) {
-      running = true;
-      timer = setInterval(() => {
-          time++;
-          document.getElementById('timerDisplay').textContent = new Date(time * 1000).toISOString().substr(11, 8);
-      }, 1000);
+    running = true;
+    timer = setInterval(() => {
+      time++;
+      document.getElementById("timerDisplay").textContent = new Date(
+        time * 1000
+      )
+        .toISOString()
+        .substr(11, 8);
+    }, 1000);
   }
 }
 
@@ -262,13 +282,18 @@ function stopTimer() {
 function resetTimer() {
   stopTimer();
   time = 0;
-  document.getElementById('timerDisplay').textContent = "00:00:00";
+  document.getElementById("timerDisplay").textContent = "00:00:00";
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+function cubeTalk() {
   // Set up Three.js scene
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const camera = new THREE.PerspectiveCamera(
+    50,
+    window.innerWidth / window.innerHeight,
+    0.2,
+    1000
+  );
   camera.position.z = 3; // Move back slightly for better visibility
 
   // Create renderer and enable shadows
@@ -280,17 +305,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Add lighting for shadows
   const light = new THREE.DirectionalLight(0xffffff, 1);
-  light.position.set(2, 2, 5);
+  light.position.set(4, 4, 5);
   light.castShadow = true; // Enable shadow casting
   scene.add(light);
 
   // Create cube with solid and wireframe material
   const geometry = new THREE.BoxGeometry();
   const material = new THREE.MeshStandardMaterial({
-    color: "green",      // Main color
-    opacity: 0.7,        // 20% opacity, meaning 80% transparency
-    transparent: true    // Enable transparency
-});
+    color: "green", // Main color
+    opacity: 0.7, // 20% opacity, meaning 80% transparency
+    transparent: true, // Enable transparency
+  });
   const wireframeMaterial = new THREE.LineBasicMaterial({ color: "black" }); // Edge lines
 
   const cube = new THREE.Mesh(geometry, material);
@@ -316,105 +341,102 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Animation loop
   function animate() {
-      requestAnimationFrame(animate);
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
-      renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+    renderer.render(scene, camera);
   }
   animate();
 
   // Resize handler to update renderer and camera
-  window.addEventListener('resize', () => {
-      renderer.setSize(container.clientWidth, container.clientHeight);
-      camera.aspect = container.clientWidth / container.clientHeight;
-      camera.updateProjectionMatrix();
+  window.addEventListener("resize", () => {
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    camera.aspect = container.clientWidth / container.clientHeight;
+    camera.updateProjectionMatrix();
   });
-});
-
-
-
-
+}
 
 // Function to fetch and display location suggestions
 async function getLocations() {
-    const inputElement = document.getElementById("location");
-    const suggestionsElement = document.getElementById("suggestions");
+  const inputElement = document.getElementById("location");
+  const suggestionsElement = document.getElementById("suggestions");
 
-    if (!inputElement || !suggestionsElement) {
-        console.error("Error: Missing input or suggestions element.");
-        return;
+  if (!inputElement || !suggestionsElement) {
+    console.error("Error: Missing input or suggestions element.");
+    return;
+  }
+
+  let query = inputElement.value.trim();
+  if (query.length < 3) return; // Prevent excessive API calls
+
+  let url = `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${apiKey}`;
+
+  try {
+    let response = await fetch(url);
+    if (!response.ok) throw new Error("Failed to fetch location suggestions");
+
+    let data = await response.json();
+
+    // Clear previous suggestions
+    suggestionsElement.innerHTML = "";
+
+    if (data.length === 0) {
+      suggestionsElement.innerHTML = "<select>No results found</select>";
+      return;
     }
 
-    let query = inputElement.value.trim();
-    if (query.length < 3) return; // Prevent excessive API calls
-
-    let url = `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${apiKey}`;
-
-    try {
-        let response = await fetch(url);
-        if (!response.ok) throw new Error("Failed to fetch location suggestions");
-
-        let data = await response.json();
-
-        // Clear previous suggestions
-        suggestionsElement.innerHTML = "";
-
-        if (data.length === 0) {
-            suggestionsElement.innerHTML = "<li>No results found</li>";
-            return;
-        }
-
-        data.forEach((place) => {
-            let li = document.createElement("li");
-            li.textContent = `${place.name}, ${place.country}`;
-            li.onclick = () => {
-                inputElement.value = li.textContent;
-                suggestionsElement.innerHTML = ""; // Hide suggestions after selection
-            };
-            suggestionsElement.appendChild(li);
-        });
-    } catch (error) {
-        console.error("Error fetching location suggestions:", error);
-    }
+    data.forEach((place) => {
+      let li = document.createElement("li");
+      li.textContent = `${place.name}, ${place.country}`;
+      li.onclick = () => {
+        inputElement.value = li.textContent;
+        suggestionsElement.innerHTML = ""; // Hide suggestions after selection
+      };
+      suggestionsElement.appendChild(Selection);
+    });
+  } catch (error) {
+    console.error("Error fetching location suggestions:", error);
+  }
 }
 
 // Function to fetch weather data
 async function getWeather() {
-    const inputElement = document.getElementById("location");
-    const forecastElement = document.getElementById("forecast");
+  const inputElement = document.getElementById("location");
+  const forecastElement = document.getElementById("forecast");
 
-    if (!inputElement || !forecastElement) {
-        console.error("Error: Missing input or forecast element.");
-        return;
+  if (!inputElement || !forecastElement) {
+    console.error("Error: Missing input or forecast element.");
+    return;
+  }
+
+  const location = inputElement.value.trim();
+  if (!location) {
+    alert("Please enter a valid location.");
+    return;
+  }
+
+  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}&units=metric`;
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Failed to fetch weather data");
+
+    const data = await response.json();
+
+    // Extract relevant forecast data (every 8 hours = 3 times per day)
+    let forecastHTML = `<h2>${location} 5-Day Forecast</h2>`;
+    for (let i = 0; i < data.list.length; i += 8) {
+      // Picks 1 reading per day
+      const day = data.list[i];
+      const date = new Date(day.dt * 1000).toLocaleDateString();
+      const temp = day.main.temp;
+      const desc = day.weather[0].description;
+      forecastHTML += `<p><strong>${date}:</strong> ${temp}°C - ${desc}</p>`;
     }
 
-    const location = inputElement.value.trim();
-    if (!location) {
-        alert("Please enter a valid location.");
-        return;
-    }
-
-    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}&units=metric`;
-
-    try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error("Failed to fetch weather data");
-
-        const data = await response.json();
-
-        // Extract relevant forecast data (every 8 hours = 3 times per day)
-        let forecastHTML = `<h2>${location} 5-Day Forecast</h2>`;
-        for (let i = 0; i < data.list.length; i += 8) { // Picks 1 reading per day
-            const day = data.list[i];
-            const date = new Date(day.dt * 1000).toLocaleDateString();
-            const temp = day.main.temp;
-            const desc = day.weather[0].description;
-            forecastHTML += `<p><strong>${date}:</strong> ${temp}°C - ${desc}</p>`;
-        }
-
-        forecastElement.innerHTML = forecastHTML;
-    } catch (error) {
-        console.error("Error retrieving weather data:", error);
-        forecastElement.innerText = "Error retrieving weather data.";
-    }
+    forecastElement.innerHTML = forecastHTML;
+  } catch (error) {
+    console.error("Error retrieving weather data:", error);
+    forecastElement.innerText = "Error retrieving weather data.";
+  }
 }
