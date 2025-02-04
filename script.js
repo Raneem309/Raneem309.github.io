@@ -8,6 +8,19 @@ const projectData = document.getElementById("projectData");
 let bmiStatus;
 let healthAppUserName;
 const apiKey = "f2ebd821732c6bbb4ceeb84d71225ca0";
+const stateNames = {
+  AL: "Alabama", AK: "Alaska", AZ: "Arizona", AR: "Arkansas", CA: "California",
+  CO: "Colorado", CT: "Connecticut", DE: "Delaware", FL: "Florida", GA: "Georgia",
+  HI: "Hawaii", ID: "Idaho", IL: "Illinois", IN: "Indiana", IA: "Iowa",
+  KS: "Kansas", KY: "Kentucky", LA: "Louisiana", ME: "Maine", MD: "Maryland",
+  MA: "Massachusetts", MI: "Michigan", MN: "Minnesota", MS: "Mississippi",
+  MO: "Missouri", MT: "Montana", NE: "Nebraska", NV: "Nevada", NH: "New Hampshire",
+  NJ: "New Jersey", NM: "New Mexico", NY: "New York", NC: "North Carolina",
+  ND: "North Dakota", OH: "Ohio", OK: "Oklahoma", OR: "Oregon", PA: "Pennsylvania",
+  RI: "Rhode Island", SC: "South Carolina", SD: "South Dakota", TN: "Tennessee",
+  TX: "Texas", UT: "Utah", VT: "Vermont", VA: "Virginia", WA: "Washington",
+  WV: "West Virginia", WI: "Wisconsin", WY: "Wyoming"
+};
 
 let timer;
 let time = 0;
@@ -121,6 +134,8 @@ function exitApp() {
   for (let ele of projectContainers) {
     ele.classList.add("displayNone");
   }
+  forecast.innerHTML = ""
+  resetTimer();
   document
     .getElementById("mainAppContainer")
     .querySelectorAll("select, input")
@@ -366,15 +381,18 @@ function cubeTalk() {
 // Function to fetch and display location suggestions
 async function getLocations() {
   const inputElement = document.getElementById("location");
-  const dataListElement = document.getElementById("suggestions");
+  const suggestionsElement = document.getElementById("suggestions");
 
-  if (!inputElement || !dataListElement) {
-    console.error("Error: Missing input or datalist element.");
+  if (!inputElement || !suggestionsElement) {
+    console.error("Error: Missing input or suggestions element.");
     return;
   }
 
   let query = inputElement.value.trim();
-  if (query.length < 3) return; // Prevent excessive API calls
+  if (query.length < 3) {
+    suggestionsElement.classList.add("hidden");
+    return;
+  }
 
   let url = `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${apiKey}`;
 
@@ -383,24 +401,49 @@ async function getLocations() {
     if (!response.ok) throw new Error("Failed to fetch location suggestions");
 
     let data = await response.json();
+    console.log("API Response:", data);
 
     // Clear previous suggestions
-    dataListElement.innerHTML = "";
+    suggestionsElement.innerHTML = "";
+    let seenLocations = new Set(); // Avoid duplicates
 
     if (data.length === 0) {
-      let option = document.createElement("option");
-      option.value = "No results found";
-      option.disabled = true;
-      dataListElement.appendChild(option);
+      let li = document.createElement("li");
+      li.textContent = "No results found";
+      li.classList.add("no-results");
+      suggestionsElement.appendChild(li);
+      suggestionsElement.classList.remove("hidden");
       return;
     }
 
     data.forEach((place) => {
-      let option = document.createElement("option");
-      option.value = `${place.name}, ${place.country}`;
-      dataListElement.appendChild(option);
+      let city = place.name;
+      let country = place.country;
+      let state = place.state || "";
+
+      // Convert state abbreviation to full name if in the US
+      if (country === "US" && stateNames[state]) {
+        state = stateNames[state]; // Convert to full state name
+      }
+
+      // Build the display name
+      let displayName = country === "US" && state ? `${city}, ${state}, ${country}` : `${city}, ${country}`;
+
+      // Prevent duplicate locations
+      if (!seenLocations.has(displayName)) {
+        seenLocations.add(displayName);
+
+        let li = document.createElement("li");
+        li.textContent = displayName;
+        li.onclick = () => {
+          inputElement.value = displayName;
+          suggestionsElement.classList.add("hidden"); // Hide dropdown after selection
+        };
+        suggestionsElement.appendChild(li);
+      }
     });
 
+    suggestionsElement.classList.remove("hidden"); // Show dropdown
   } catch (error) {
     console.error("Error fetching location suggestions:", error);
   }
