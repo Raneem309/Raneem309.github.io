@@ -145,6 +145,7 @@ function restartApp() {
   document.getElementById("appRestartBTN").classList.add("displayNone");
   document.getElementById("mainAppContainer").classList.remove("displayNone");
   document.getElementById("appSubmitBTN").classList.remove("displayNone");
+  document.getElementById("mainAppContainer").scrollTop = 0;
 }
 
 // Function to launch the Health Stats app
@@ -365,9 +366,8 @@ function cubeTalk() {
 // Function to fetch and display location suggestions
 async function getLocations() {
   const inputElement = document.getElementById("location");
-  const suggestionsElement = document.getElementById("suggestions");
 
-  if (!inputElement || !suggestionsElement) {
+  if (!inputElement) {
     console.error("Error: Missing input or suggestions element.");
     return;
   }
@@ -384,10 +384,10 @@ async function getLocations() {
     let data = await response.json();
 
     // Clear previous suggestions
-    suggestionsElement.innerHTML = "";
+    inputElement.innerHTML = "";
 
     if (data.length === 0) {
-      suggestionsElement.innerHTML = "<select>No results found</select>";
+      inputElement.innerHTML = "<select>No results found</select>";
       return;
     }
 
@@ -396,9 +396,9 @@ async function getLocations() {
       li.textContent = `${place.name}, ${place.country}`;
       li.onclick = () => {
         inputElement.value = li.textContent;
-        suggestionsElement.innerHTML = ""; // Hide suggestions after selection
+        inputElement.innerHTML = ""; // Hide suggestions after selection
       };
-      suggestionsElement.appendChild(option);
+      inputElement.appendChild(option);
     });
   } catch (error) {
     console.error("Error fetching location suggestions:", error);

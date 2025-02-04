@@ -146,9 +146,10 @@
           <!-- Weather APP -->
           <div id="project2Container" class="displayNone projectContainers">
             <div class="mainAppContainer mainProjectContainers">
-              <input type="text" id="location" placeholder="Enter location" onkeyup="getLocations()" />
-              <select id="suggestions"></select>
-             <button onclick="getWeather()">Get Forecast</button>
+              <select id="location" placeholder="Enter location" onkeyup="getLocations()" >
+              <option value=""></option>
+            </select>
+              <button onclick="getWeather()">Get Forecast</button>
               <div id="forecast"></div>
             </div>
             <button class="exitButton" onclick="exitApp()">Exit</button>
