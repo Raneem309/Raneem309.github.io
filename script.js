@@ -266,23 +266,20 @@ function resetTimer() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Set up scene, camera, and renderer
+  // Set up Three.js scene
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(75, 300 / 300, 0.1, 1000);
-  const renderer = new THREE.WebGLRenderer();
-  
-  // Get the container and set size
+  const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+  camera.position.z = 2;
+
+  // Create renderer and attach to container
+  const renderer = new THREE.WebGLRenderer({ alpha: true });
   const container = document.getElementById("cubeContainer");
-  renderer.setSize(300, 300); // Adjust the size as needed
+  renderer.setSize(container.clientWidth, container.clientHeight);
   container.appendChild(renderer.domElement);
 
   // Create a cube
-  const geometry = new THREE.BoxGeometry();
-  const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-  const cube = new THREE.Mesh(geometry, material);
+  const cube = new THREE.Mesh(new THREE.BoxGeometry(), new THREE.MeshBasicMaterial({ color: "white" }));
   scene.add(cube);
-
-  camera.position.z = 2;
 
   // Animation loop
   function animate() {
@@ -293,6 +290,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   animate();
 });
+
 
 
 // Function to fetch and display location suggestions
