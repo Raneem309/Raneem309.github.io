@@ -383,7 +383,7 @@ select {
   animation: glow-border 1s infinite alternate;
   border-bottom-style: groove;
   color: #000000;
-  margin-top: 30rem;
+  margin-top: 7rem;
   text-align: -webkit-center;
   font-size: 20px;
 }
