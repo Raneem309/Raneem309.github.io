@@ -366,9 +366,10 @@ function cubeTalk() {
 // Function to fetch and display location suggestions
 async function getLocations() {
   const inputElement = document.getElementById("location");
+  const dataListElement = document.getElementById("suggestions");
 
-  if (!inputElement) {
-    console.error("Error: Missing input or suggestions element.");
+  if (!inputElement || !dataListElement) {
+    console.error("Error: Missing input or datalist element.");
     return;
   }
 
@@ -384,26 +385,27 @@ async function getLocations() {
     let data = await response.json();
 
     // Clear previous suggestions
-    inputElement.innerHTML = "";
+    dataListElement.innerHTML = "";
 
     if (data.length === 0) {
-      inputElement.innerHTML = "<select>No results found</select>";
+      let option = document.createElement("option");
+      option.value = "No results found";
+      option.disabled = true;
+      dataListElement.appendChild(option);
       return;
     }
 
     data.forEach((place) => {
-      let li = document.createElement("li");
-      li.textContent = `${place.name}, ${place.country}`;
-      li.onclick = () => {
-        inputElement.value = li.textContent;
-        inputElement.innerHTML = ""; // Hide suggestions after selection
-      };
-      inputElement.appendChild(option);
+      let option = document.createElement("option");
+      option.value = `${place.name}, ${place.country}`;
+      dataListElement.appendChild(option);
     });
+
   } catch (error) {
     console.error("Error fetching location suggestions:", error);
   }
 }
+
 
 // Function to fetch weather data
 async function getWeather() {
