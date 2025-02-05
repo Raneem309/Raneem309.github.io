@@ -461,20 +461,21 @@ async function getLocations() {
   let inputElement = document.getElementById("location");
   let suggestionsElement = document.getElementById("suggestions");
   let weatherBtn = document.getElementById("weatherBtn");
+  let locationValid = false; // Track if the location is valid
 
-  if (inputElement.value === "") {
+  // Reset suggestions and button state
+  suggestionsElement.innerHTML = "";
+  suggestionsElement.classList.add("displayNone");
+  
+  if (inputElement.value.trim() === "") {
+    weatherBtn.disabled = true;
     weatherBtn.style.cursor = "";
     weatherBtn.style.backgroundColor = "#003e0700";
-    weatherBtn.disabled = true;
-  } else {
-    weatherBtn.style.cursor = "pointer";
-    weatherBtn.style.backgroundColor = "#003e07";
-    weatherBtn.disabled = false;
+    return;
   }
 
   let query = inputElement.value.trim();
   if (query.length < 3) {
-    suggestionsElement.classList.add("displayNone");
     return;
   }
 
@@ -485,7 +486,6 @@ async function getLocations() {
     if (!response.ok) throw new Error("Failed to fetch location suggestions");
 
     let data = await response.json();
-    suggestionsElement.innerHTML = "";
     let seenLocations = new Set();
 
     if (data.length === 0) {
@@ -497,6 +497,7 @@ async function getLocations() {
       return;
     }
 
+    // Populate the valid suggestions list
     data.forEach((place) => {
       let city = place.name;
       let country = place.country;
@@ -514,23 +515,28 @@ async function getLocations() {
         option.onclick = () => {
           inputElement.value = displayName;
           inputElement.dataset.apiValue = apiFormattedName;
+          locationValid = true;  // Mark the location as valid
           suggestionsElement.classList.add("displayNone");
+          weatherBtn.disabled = false; // Enable the button once a valid city is selected
+          weatherBtn.style.cursor = "pointer";
+          weatherBtn.style.backgroundColor = "#003e07";
         };
         suggestionsElement.appendChild(option);
       }
     });
 
     suggestionsElement.classList.remove("displayNone");
+    
   } catch (error) {
     console.error("Error fetching location suggestions:", error);
   }
 
-  if(inputElement.value === ""){
-    weatherBtn.disabled = true
+  if (!locationValid) {
+    // If the location is invalid, disable the button
+    weatherBtn.disabled = true;
     weatherBtn.style.cursor = "";
     weatherBtn.style.backgroundColor = "#003e0700";
   }
-
 }
 
 // Function to fetch weather data
@@ -574,13 +580,14 @@ async function getWeather() {
     }
 
     forecastElement.innerHTML = forecastHTML;
-    forecastElement.classList.remove("displayNone")
+    forecastElement.classList.remove("displayNone");
 
   } catch (error) {
     console.error("Error retrieving weather data:", error);
     forecastElement.innerText = "Error retrieving weather data.";
   }
+  
   document.getElementById("forecast").classList.remove("displayNone");
-  inputElement.value = ""
-
+  
+  inputElement.value = "";
 }

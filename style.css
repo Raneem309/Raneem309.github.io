@@ -388,11 +388,7 @@ select {
   font-size: 20px;
 }
 
-#project3Container {
-  align-content: center;
-  padding: 18%;
-  display: flex;
-}
+
 
 #suggestions {
   padding: 3px;
