@@ -399,9 +399,9 @@ function cubeTalk() {
 }
 
 async function getLocations() {
-  const inputElement = document.getElementById("location");
-  const suggestionsElement = document.getElementById("suggestions");
-  const weatherBtn = document.getElementById("weatherBtn");
+  let inputElement = document.getElementById("location");
+  let suggestionsElement = document.getElementById("suggestions");
+  let weatherBtn = document.getElementById("weatherBtn");
 
   if (!inputElement || !suggestionsElement) {
     console.error("Error: Missing input or suggestions element.");
@@ -458,9 +458,9 @@ async function getLocations() {
 
 // Function to handle location selection
 async function getLocations() {
-  const inputElement = document.getElementById("location");
-  const suggestionsElement = document.getElementById("suggestions");
-  const weatherBtn = document.getElementById("weatherBtn");
+  let inputElement = document.getElementById("location");
+  let suggestionsElement = document.getElementById("suggestions");
+  let weatherBtn = document.getElementById("weatherBtn");
 
   if (inputElement.value === "") {
     weatherBtn.style.cursor = "";
@@ -535,28 +535,28 @@ async function getLocations() {
 
 // Function to fetch weather data
 async function getWeather() {
-  const inputElement = document.getElementById("location");
-  const forecastElement = document.getElementById("forecastContianer");
-  const forecastHeader = document.querySelector("#forecast h3");
+  let inputElement = document.getElementById("location");
+  let forecastElement = document.getElementById("forecastContianer");
+  let forecastHeader = document.querySelector("#forecast h3");
 
   if (!inputElement || !forecastElement) {
     console.error("Error: Missing input or forecast element.");
     return;
   }
 
-  const location = inputElement.dataset.apiValue;
+  let location = inputElement.dataset.apiValue;
   if (!location) {
     alert("Please select a valid location from the suggestions.");
     return;
   }
 
-  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}&units=metric`;
+  let url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}&units=metric`;
 
   try {
-    const response = await fetch(url);
+    let response = await fetch(url);
     if (!response.ok) throw new Error("Failed to fetch weather data");
 
-    const data = await response.json();
+    let data = await response.json();
 
     // Update forecast heading with the new city name
     forecastHeader.textContent = inputElement.value;
@@ -566,10 +566,10 @@ async function getWeather() {
 
     let forecastHTML = "";
     for (let i = 0; i < data.list.length; i += 8) { // Get one reading per day
-      const day = data.list[i];
-      const date = new Date(day.dt * 1000).toLocaleDateString();
-      const temp = day.main.temp;
-      const desc = day.weather[0].description;
+      let day = data.list[i];
+      let date = new Date(day.dt * 1000).toLocaleDateString();
+      let temp = day.main.temp;
+      let desc = day.weather[0].description;
       forecastHTML += `<p><strong>${date}:</strong> ${temp}°C - ${desc}</p>`;
     }
 

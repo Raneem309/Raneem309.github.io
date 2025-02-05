@@ -447,10 +447,56 @@ canvas {
 }
 
 #project2Container{
-  height: 100vh; 
-  overflow-y: auto; /* Enable scrolling */
+  height: 100vh;
+  overflow-y: auto;
 }
 
 #location, select{
   margin-bottom: 0 !important;
+}
+
+#timerButtons{
+  justify-self: center;
+  margin-top: 2rem;
+}
+
+#startTimerBtn{
+  margin: 10px 5px;
+  background-color: #037c03;
+  color: rgb(0, 0, 0);
+  padding: 6px;
+  width: 6rem;
+  border: groove;
+  border-color: black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#stopTimerBtn{
+  margin: 10px 5px;
+  background-color: #ff1100;
+  color: rgb(0, 0, 0);
+  padding: 6px;
+  width: 6rem;
+  border: groove;
+  border-color: black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#resetTimerBtn{
+  margin: 10px 5px;
+  background-color: #d9c100;
+  color: #000000;
+  padding: 6px;
+  width: 6rem;
+  border: groove;
+  border-color: black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#timerDisplay{
+  justify-self: center;
+  font-size: 5rem;
 }
