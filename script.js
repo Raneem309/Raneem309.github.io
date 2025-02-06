@@ -4,7 +4,7 @@
 const apiKey = "f2ebd821732c6bbb4ceeb84d71225ca0"; // OpenWeatherMap API key
 let bmiStatus;
 let healthAppUserName;
-let tempUnit = "C"; // Temperature unit: "C" for Celsius, "F" for Fahrenheit
+let tempUnit = "C"; // "C" for Celsius, "F" for Fahrenheit
 
 // Stopwatch variables
 let timer;
@@ -20,13 +20,7 @@ window.onload = function () {
   handleOpeningScreen(); // Show and fade out opening screen
 };
 
-/* ---------------- Load Static Data ---------------- */
-function loadInitialData() {
-  // (Additional static data can be loaded here if needed)
-}
-
 /* ---------------- Tab Functions ---------------- */
-// Initialize header tab click and hover events
 function initTabLinks() {
   const tabs = document.querySelectorAll(".tab");
   tabs.forEach((tab) => {
@@ -43,7 +37,6 @@ function initTabLinks() {
   });
 }
 
-// Update active tab indicator: active tab shows a rotating cube icon
 function updateActiveTab(activeTab) {
   const tabs = document.querySelectorAll(".tab");
   tabs.forEach((tab) => {
@@ -57,7 +50,6 @@ function updateActiveTab(activeTab) {
   });
 }
 
-// Show the appropriate section based on the clicked tab
 function handleTabs(tabId) {
   const sections = document.querySelectorAll("section");
   sections.forEach((section) => section.classList.add("displayNone"));
@@ -69,13 +61,12 @@ function handleTabs(tabId) {
     document.getElementById("contactSection").classList.remove("displayNone");
   } else if (tabId === "homeTab") {
     document.getElementById("homeTabSection").classList.remove("displayNone");
-    // Ensure the Three.js cube is present by clearing and reinitializing
+    // Reinitialize cube on Home tab
     cubeTalk();
   }
 }
 
 /* ---------------- Opening Screen ---------------- */
-// Display opening screen text and fade out after a delay
 function handleOpeningScreen() {
   const openingScreen = document.getElementById("openingScreen");
   const openName = document.getElementById("openName");
@@ -92,7 +83,6 @@ function handleOpeningScreen() {
 }
 
 /* ---------------- About Me Section ---------------- */
-// Initialize interactive sidebar options in the About Me section
 function initAboutSection() {
   const aboutOptions = document.querySelectorAll(".aboutOption");
   aboutOptions.forEach((option) => {
@@ -107,22 +97,40 @@ function initAboutSection() {
   });
 }
 
+/* ---------------- Launch Functions for Projects ---------------- */
+function launchWeatherApp() {
+  // Show Weather App container and hide project grid
+  document.getElementById("projectData").classList.add("displayNone");
+  document.getElementById("project2Container").classList.remove("displayNone");
+}
+
+function launchTimerApp() {
+  // Show Stopwatch container and hide project grid
+  document.getElementById("projectData").classList.add("displayNone");
+  document.getElementById("project3Container").classList.remove("displayNone");
+}
+
 /* ---------------- Health App (Fit Mindset) Functions ---------------- */
-// Launch the Health App: show the welcome screen
 function launchHealthStats() {
-  document.getElementById("projectHeader").innerText = "Fit Mindset";
+  // Show Health App container and hide project grid
   document.getElementById("projectData").classList.add("displayNone");
   document.getElementById("project1Container").classList.remove("displayNone");
+  // Show welcome screen and hide input/results sections
   document.getElementById("fitMindsetWelcome").classList.remove("displayNone");
+  document.getElementById("mainAppContainer").classList.add("displayNone");
+  document.getElementById("resultsContainer").classList.add("displayNone");
+  // Hide Submit and Restart buttons initially
+  document.getElementById("appSubmitBTN").classList.add("displayNone");
+  document.getElementById("appRestartBTN").classList.add("displayNone");
 }
 
-// Called when the user clicks the “Start” button on the welcome screen
 function startFitMindset() {
+  // When user clicks start: hide welcome and show input form and submit button
   document.getElementById("fitMindsetWelcome").classList.add("displayNone");
   document.getElementById("mainAppContainer").classList.remove("displayNone");
+  document.getElementById("appSubmitBTN").classList.remove("displayNone");
 }
 
-// Calculate health statistics (BMI, BMR, TDEE)
 function calculateHealthStats() {
   const height = parseFloat(document.getElementById("heightInput").value);
   const weight = parseFloat(document.getElementById("weightInput").value);
@@ -144,9 +152,12 @@ function calculateHealthStats() {
   
   evaluateBMI(bmi);
   displayHealthResults(bmi, bmr, tdee);
+  
+  // Hide the input form and Submit button after submission
+  document.getElementById("mainAppContainer").classList.add("displayNone");
+  document.getElementById("appSubmitBTN").classList.add("displayNone");
 }
 
-// Determine BMI category
 function evaluateBMI(bmi) {
   if (bmi < 18.5) {
     bmiStatus = "Underweight (below 18.5)";
@@ -159,26 +170,20 @@ function evaluateBMI(bmi) {
   }
 }
 
-// Display health results as colored cards instead of a pie chart
 function displayHealthResults(bmi, bmr, tdee) {
-  // Hide the input form and show the results container
-  document.getElementById("mainAppContainer").classList.add("displayNone");
   const resultsContainer = document.getElementById("resultsContainer");
   resultsContainer.classList.remove("displayNone");
-  // Set header text
   resultsContainer.innerHTML = `<h3 id="headerResults">Hi ${healthAppUserName}! Here are your calculated health results.</h3>`;
   
-  // Create a container for the result cards
+  // Create cards for each metric
   const cardContainer = document.createElement("div");
   cardContainer.className = "healthCards";
   
-  // BMI card with color based on healthy range
-  let bmiColor = "#36A2EB"; // default blue for healthy
-  if(bmi < 18.5) {
-     bmiColor = "#FF6384"; // red-ish for underweight
-  } else if(bmi >= 25) {
-     bmiColor = "#FFCE56"; // yellow-ish for overweight
-  }
+  // Determine color for BMI card based on range
+  let bmiColor = "#36A2EB"; // healthy blue
+  if (bmi < 18.5) { bmiColor = "#FF6384"; } 
+  else if (bmi >= 25) { bmiColor = "#FFCE56"; }
+  
   const bmiCard = document.createElement("div");
   bmiCard.className = "healthCard";
   bmiCard.style.borderColor = bmiColor;
@@ -186,14 +191,12 @@ function displayHealthResults(bmi, bmr, tdee) {
                        <p>${bmi.toFixed(2)}</p>
                        <p>${bmiStatus}</p>`;
   
-  // BMR card
   const bmrCard = document.createElement("div");
   bmrCard.className = "healthCard";
   bmrCard.style.borderColor = "#8A2BE2";
   bmrCard.innerHTML = `<h4>BMR</h4>
                        <p>${Math.round(bmr)} kcal/day</p>`;
   
-  // TDEE card
   const tdeeCard = document.createElement("div");
   tdeeCard.className = "healthCard";
   tdeeCard.style.borderColor = "#3CB371";
@@ -203,27 +206,27 @@ function displayHealthResults(bmi, bmr, tdee) {
   cardContainer.appendChild(bmiCard);
   cardContainer.appendChild(bmrCard);
   cardContainer.appendChild(tdeeCard);
-  
   resultsContainer.appendChild(cardContainer);
   
-  // Append an explanation paragraph
   const explanation = document.createElement("p");
-  explanation.innerHTML = `<strong>BMI</strong> indicates body fat, <strong>BMR</strong> shows the calories needed at rest, and <strong>TDEE</strong> is your total daily energy expenditure.`;
+  explanation.innerHTML = `<strong>BMI</strong> indicates body fat, <strong>BMR</strong> is calories needed at rest, and <strong>TDEE</strong> is your total daily energy expenditure.`;
   resultsContainer.appendChild(explanation);
+  
+  // Show Restart button after results are displayed
+  document.getElementById("appRestartBTN").classList.remove("displayNone");
 }
 
-// Restart the Health App: clear results and show the input form again
 function restartApp() {
+  // Reset: hide results, show input form and Submit button, clear inputs
   document.getElementById("resultsContainer").classList.add("displayNone");
   document.getElementById("mainAppContainer").classList.remove("displayNone");
+  document.getElementById("appSubmitBTN").classList.remove("displayNone");
   document.getElementById("appRestartBTN").classList.add("displayNone");
-  // Reset form values
   const inputs = document.getElementById("mainAppContainer").querySelectorAll("input, select");
   inputs.forEach((el) => el.value = "");
 }
 
 /* ---------------- Weather App Functions ---------------- */
-// Fetch location suggestions as the user types
 async function getLocations() {
   const inputElement = document.getElementById("location");
   const suggestionsElement = document.getElementById("suggestions");
@@ -276,7 +279,6 @@ async function getLocations() {
   }
 }
 
-// Toggle between Celsius and Fahrenheit; refresh forecast if displayed
 function toggleTemperatureUnit() {
   tempUnit = tempUnit === "C" ? "F" : "C";
   if (!document.getElementById("forecast").classList.contains("displayNone")) {
@@ -284,7 +286,6 @@ function toggleTemperatureUnit() {
   }
 }
 
-// Fetch and display the 5‑day weather forecast
 async function getWeather() {
   const inputElement = document.getElementById("location");
   const forecastElement = document.getElementById("forecastContianer");
@@ -295,7 +296,7 @@ async function getWeather() {
     alert("Please select a valid location from the suggestions.");
     return;
   }
-  const units = "metric"; // using metric units
+  const units = "metric";
   const url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}&units=${units}`;
   try {
     const response = await fetch(url);
@@ -304,7 +305,6 @@ async function getWeather() {
     forecastHeader.textContent = inputElement.value;
     forecastElement.innerHTML = "";
     let forecastHTML = "";
-    // Loop through forecast data (one reading per day)
     for (let i = 0; i < data.list.length; i += 8) {
       const dayData = data.list[i];
       const dateObj = new Date(dayData.dt * 1000);
@@ -345,7 +345,6 @@ async function getWeather() {
 }
 
 /* ---------------- Stopwatch Functions ---------------- */
-// Toggle the stopwatch (start/stop)
 function toggleTimer() {
   const toggleBtn = document.getElementById("toggleTimerBtn");
   if (!timerRunning) {
@@ -361,7 +360,6 @@ function toggleTimer() {
   }
 }
 
-// Start the stopwatch timer
 function startTimer() {
   if (!timerRunning) {
     timerRunning = true;
@@ -372,13 +370,11 @@ function startTimer() {
   }
 }
 
-// Stop the stopwatch timer
 function stopTimer() {
   clearInterval(timer);
   timerRunning = false;
 }
 
-// Reset the stopwatch and clear lap times
 function resetTimer() {
   stopTimer();
   timeInSeconds = 0;
@@ -390,7 +386,6 @@ function resetTimer() {
   document.getElementById("resetTimerBtn").disabled = true;
 }
 
-// Update the displayed time on the stopwatch
 function updateTimeDisplay() {
   const display = document.getElementById("timeDisplay");
   const hrs = String(Math.floor(timeInSeconds / 3600)).padStart(2, '0');
@@ -399,7 +394,6 @@ function updateTimeDisplay() {
   display.innerText = `${hrs}:${mins}:${secs}`;
 }
 
-// Record a lap time and display it
 function recordLap() {
   if (!timerRunning) return;
   lapTimes.push(timeInSeconds);
@@ -414,10 +408,9 @@ function recordLap() {
 }
 
 /* ---------------- Three.js Cube in Home Section ---------------- */
-// Initialize a rotating cube in the Home section
 function cubeTalk() {
   const container = document.getElementById("cubeContainer");
-  // Clear any previous canvas elements
+  // Clear previous content (if any)
   container.innerHTML = "";
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(95, container.clientWidth / container.clientHeight, 0.9, 1000);
@@ -474,7 +467,6 @@ function cubeTalk() {
 }
 
 /* ---------------- Exit App Function ---------------- */
-// Exit the current app/project, reset states and show the main project grid
 function exitApp() {
   document.getElementById("projectHeader").innerText = "A - Z";
   const projectContainers = document.querySelectorAll(".projectContainers");

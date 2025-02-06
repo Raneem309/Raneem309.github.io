@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css" />
     <!-- Three.js for 3D animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <!-- (Chart.js is no longer used in the Health App) -->
   </head>
   <body>
     <!-- Opening Screen -->
@@ -37,8 +36,6 @@
         </div>
       </div>
 
-      <!-- Sections -->
-
       <!-- Home Section -->
       <section id="homeTabSection">
         <!-- Container for the Three.js cube -->
@@ -46,7 +43,7 @@
         <div id="homeHeader">A Digital Portfolio by Raneem Ali</div>
       </section>
 
-      <!-- About Me Section (Interactive Resume) -->
+      <!-- About Me Section -->
       <section id="aboutMeSection" class="displayNone">
         <h2 id="aboutMeHeader">About Me</h2>
         <div id="aboutMeContent">
@@ -128,9 +125,8 @@
 
         <!-- Health App Container -->
         <div id="project1Container" class="displayNone projectContainers">
-          <!-- Welcome Screen with Animated (Standing) SVG Human -->
+          <!-- Welcome Screen with Rotating SVG "Person" and Start Button -->
           <div id="fitMindsetWelcome">
-            <!-- The SVG rotates only around its Y‑axis so it always stays upright -->
             <svg id="humanSVG" width="150" height="150" viewBox="0 0 64 64">
               <circle cx="32" cy="16" r="10" fill="#ccc" />
               <rect x="26" y="28" width="12" height="20" fill="#ccc" />
@@ -142,7 +138,7 @@
             <div id="fitWelcomeText">Press Start to Enter</div>
             <button id="fitStartBTN" onclick="startFitMindset()">Start</button>
           </div>
-          <!-- Main Input Form (Vertical Layout) -->
+          <!-- Main Input Form -->
           <div id="mainAppContainer" class="displayNone mainProjectContainers">
             <h3>Enter Your Information to Calculate Your Results</h3>
             <label for="nameInput">First Name: </label>
@@ -169,26 +165,19 @@
               <option value="1.9">Extremely Active (2x/day)</option>
             </select>
           </div>
-          <!-- Submit Button (styled) -->
-          <button id="appSubmitBTN" onclick="calculateHealthStats()">Submit</button>
-          <!-- Results Container (Displays Health Cards) -->
-          <div id="resultsContainer" class="displayNone">
-            <!-- Header and cards will be injected by JS -->
-          </div>
-          <!-- Restart & Exit Buttons (inside container) -->
-          <button id="appRestartBTN" onclick="restartApp()">Restart</button>
+          <!-- Submit Button (appears only after Start is clicked) -->
+          <button id="appSubmitBTN" class="actionButton displayNone" onclick="calculateHealthStats()">Submit</button>
+          <!-- Results Container (will display calculated results) -->
+          <div id="resultsContainer" class="displayNone"></div>
+          <!-- Restart & Exit Buttons -->
+          <button id="appRestartBTN" class="actionButton displayNone" onclick="restartApp()">Restart</button>
           <button class="exitButton" onclick="exitApp()">Exit</button>
         </div>
 
         <!-- Weather App Container -->
         <div id="project2Container" class="displayNone projectContainers">
           <div class="mainAppContainer mainProjectContainers">
-            <input
-              type="text"
-              id="location"
-              placeholder="Enter a City..."
-              oninput="getLocations()"
-            />
+            <input type="text" id="location" placeholder="Enter a City..." oninput="getLocations()" />
             <div id="suggestions" class="displayNone"></div>
             <button id="weatherBtn" onclick="getWeather()" disabled>Get Forecast</button>
             <button id="toggleTempUnit" onclick="toggleTemperatureUnit()">°F / °C</button>
@@ -223,31 +212,14 @@
         <h2 id="contactHeader">Contact</h2>
         <div id="contactInfo">
           <ul class="contact-list">
-            <li>
-              <strong>Phone:</strong>
-              <a href="tel:+17032689046">(703) 268-9046</a>
-            </li>
-            <li>
-              <strong>Email:</strong>
-              <a href="mailto:Raneem309@gmail.com">Raneem309@gmail.com</a>
-            </li>
-            <li>
-              <strong>LinkedIn:</strong>
-              <a href="https://www.linkedin.com/in/raneem-ali/" target="_blank"
-                >linkedin.com/in/raneem-ali</a
-              >
-            </li>
-            <li>
-              <strong>GitHub:</strong>
-              <a href="https://github.com/Raneem309" target="_blank"
-                >github.com/Raneem309</a
-              >
-            </li>
+            <li><strong>Phone:</strong> <a href="tel:+17032689046">(703) 268-9046</a></li>
+            <li><strong>Email:</strong> <a href="mailto:Raneem309@gmail.com">Raneem309@gmail.com</a></li>
+            <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/raneem-ali/" target="_blank">linkedin.com/in/raneem-ali</a></li>
+            <li><strong>GitHub:</strong> <a href="https://github.com/Raneem309" target="_blank">github.com/Raneem309</a></li>
           </ul>
         </div>
       </section>
     </div>
-    <!-- Main JavaScript File -->
     <script src="script.js"></script>
   </body>
 </html>

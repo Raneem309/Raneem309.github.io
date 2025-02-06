@@ -23,7 +23,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Global paragraph spacing (increased line height) */
+/* Global paragraph spacing */
 p {
   line-height: 2;
   margin-bottom: 1rem;
@@ -236,7 +236,39 @@ section {
 }
 
 /* ---------------- Health App Styles ---------------- */
-/* Ensure inputs are vertical and spaced */
+/* Welcome screen (rotating person & Start button) */
+#fitMindsetWelcome {
+  text-align: center;
+  padding: 2rem;
+}
+
+#humanSVG {
+  animation: rotateHuman 3s linear infinite;
+}
+
+@keyframes rotateHuman {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
+#fitWelcomeText {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: #000;
+}
+
+/* Royal blue Start button styling */
+#fitStartBTN {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: royalblue;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Input form styling (vertical layout) */
 #mainAppContainer label,
 #mainAppContainer input,
 #mainAppContainer select {
@@ -247,17 +279,38 @@ section {
   color: #000;
 }
 
-/* Style the Submit button */
-#appSubmitBTN {
+/* Style for Submit and Restart buttons (positioned bottom left) */
+.actionButton {
   background-color: #4CAF50;
   color: #fff;
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
 }
-#appSubmitBTN:hover {
+
+.actionButton:hover {
   background-color: #45a049;
+}
+
+/* Exit button (always bottom right) */
+.exitButton {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 20px;
+  right: 30px;
+  background: #ff1100;
+  color: #fff;
+}
+
+.exitButton:hover {
+  background: #d22e22;
 }
 
 /* Health Results Cards */
@@ -391,43 +444,6 @@ section {
   padding: 0.5rem;
   border-radius: 5px;
   color: #000;
-}
-
-/* ---------------- Contact Section ---------------- */
-#contactSection {
-  color: #000;
-}
-
-.contact-list {
-  list-style: none;
-  padding: 1rem;
-  background: #757575;
-  border-radius: 10px;
-}
-
-.contact-list li {
-  margin-bottom: 0.5rem;
-}
-
-/* ---------------- Exit & Restart Buttons (Inside Container) ---------------- */
-.exitButton,
-#appRestartBTN {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 1rem;
-  background: #ff1100;
-  color: #fff;
-}
-
-.exitButton:hover {
-  background: #d22e22;
-}
-
-#appRestartBTN {
-  background: #00f71d;
-  color: #fff;
 }
 
 /* ---------------- Home Section ---------------- */
