@@ -7,37 +7,33 @@
     <link rel="stylesheet" href="style.css" />
     <!-- Three.js for 3D animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <!-- Chart.js for health app pie chart -->
+    <!-- Chart.js for the health app pie chart -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
-    <!-- Opening screen with fade animation -->
+    <!-- Opening Screen -->
     <div id="openingScreen">
       <span id="openName">Raneem Ali</span>
       <span id="openTitle">Portfolio</span>
     </div>
-    <!-- Background layer -->
+    <!-- Background Layer -->
     <div class="background"></div>
-    <!-- Main container -->
+    <!-- Main Container -->
     <div class="container">
-      <!-- Header with name and tabs -->
+      <!-- Header with Name and Tabs -->
       <div id="headerContainer">
         <div id="nameTitleContainer">
           <h1 id="name">Raneem Ali</h1>
           <h2 id="title">Web/Software Developer</h2>
         </div>
         <div id="mainHeader" class="center-tabs">
-          <!-- Each tab has a data-original attribute for its default text -->
+          <!-- Each tab has a data-original attribute for its default text.
+               The active tab shows a rotating cube icon. -->
           <div id="homeTab" class="tab active" data-original="Home">
-            <!-- Active tab shows a rotating cube icon -->
             <div class="activeCube"></div>
           </div>
-          <div id="aboutMeTab" class="tab" data-original="About Me">
-            About Me
-          </div>
-          <div id="projectTab" class="tab" data-original="Projects">
-            Projects
-          </div>
+          <div id="aboutMeTab" class="tab" data-original="About Me">About Me</div>
+          <div id="projectTab" class="tab" data-original="Projects">Projects</div>
           <div id="contactTab" class="tab" data-original="Contact">Contact</div>
         </div>
       </div>
@@ -46,6 +42,7 @@
 
       <!-- Home Section -->
       <section id="homeTabSection">
+        <!-- This container will hold the Three.js cube -->
         <div id="cubeContainer"></div>
         <div id="homeHeader">A Digital Portfolio by Raneem Ali</div>
       </section>
@@ -57,66 +54,43 @@
           <!-- Sidebar with interactive options -->
           <div class="aboutSidebar">
             <ul>
-              <li data-tab="summary" class="aboutOption active">
-                Professional Summary
-              </li>
+              <li data-tab="summary" class="aboutOption active">Professional Summary</li>
               <li data-tab="skills" class="aboutOption">Skills</li>
               <li data-tab="experience" class="aboutOption">Experience</li>
               <li data-tab="education" class="aboutOption">Education</li>
             </ul>
           </div>
-          <!-- Main content area -->
+          <!-- Main Content Area -->
           <div class="aboutMain">
             <div class="aboutTab" id="about-summary">
               <p>
-                I am a dedicated and detail-oriented software and web developer
-                based in Brooklyn, NY. I specialize in creating scalable,
-                responsive, and user‑friendly web applications. My passion for
-                problem‑solving and continuous learning drives me to deliver
-                innovative solutions.
+                I am a dedicated and detail‑oriented software and web developer based in Brooklyn, NY.
+                I specialize in creating scalable, responsive, and user‑friendly web applications.
+                My passion for problem‑solving and continuous learning drives me to deliver innovative solutions.
               </p>
             </div>
             <div class="aboutTab displayNone" id="about-skills">
-              <p>
-                <strong>Languages:</strong> JavaScript, HTML, CSS, Python, Java
-              </p>
+              <p><strong>Languages:</strong> JavaScript, HTML, CSS, Python, Java</p>
               <p><strong>Cloud Computing:</strong> AWS, Azure</p>
-              <p>
-                <strong>Tools &amp; Platforms:</strong> Microsoft 365, VS Code,
-                SharePoint, GitHub, Power Automate
-              </p>
-              <p>
-                <strong>Methodologies:</strong> Agile, DevSecOps, Unit Testing,
-                Debugging, Deployment Strategies
-              </p>
+              <p><strong>Tools &amp; Platforms:</strong> Microsoft 365, VS Code, SharePoint, GitHub, Power Automate</p>
+              <p><strong>Methodologies:</strong> Agile, DevSecOps, Unit Testing, Debugging, Deployment Strategies</p>
             </div>
             <div class="aboutTab displayNone" id="about-experience">
               <p>
-                <strong
-                  >Agility Consultants, Washington, DC — Junior
-                  Developer</strong
-                ><br />
+                <strong>Agility Consultants, Washington, DC — Junior Developer</strong><br />
                 Oct 2023 - Oct 2024<br />
-                - Developed and maintained responsive, scalable web
-                applications.<br />
-                - Optimized user experiences and ensured cross‑browser
-                compatibility.<br />
-                - Integrated RESTful APIs and collaborated with backend
-                developers.<br />
+                - Developed and maintained responsive, scalable web applications.<br />
+                - Optimized user experiences and ensured cross‑browser compatibility.<br />
+                - Integrated RESTful APIs and collaborated with backend developers.<br />
                 - Executed unit testing and debugging strategies.<br />
-                - Leveraged GitHub for version control and adopted Agile
-                methodologies.
+                - Leveraged GitHub for version control and adopted Agile methodologies.
               </p>
               <p>
-                <strong
-                  >The Grooming Lounge, Tysons, VA — First Line Manager</strong
-                ><br />
+                <strong>The Grooming Lounge, Tysons, VA — First Line Manager</strong><br />
                 Sept 2019 - Sept 2023<br />
                 - Managed and optimized database operations.<br />
-                - Supervised a team of 20 staff members and delivered staff
-                training.<br />
-                - Implemented secure client information systems and streamlined
-                workflows.
+                - Supervised a team of 20 staff members and delivered staff training.<br />
+                - Implemented secure client information systems and streamlined workflows.
               </p>
             </div>
             <div class="aboutTab displayNone" id="about-education">
@@ -132,81 +106,44 @@
 
       <!-- Projects Section -->
       <section id="projectsSection" class="displayNone">
-        <h2 id="projectHeader">A-Z</h2>
+        <h2 id="projectHeader">A‑Z</h2>
         <div id="projectData">
           <div id="projectsGrid">
             <div class="project" id="project1">
               <h3>Fit Mindset</h3>
-              <h4>
-                An application to help track your calories and maintain a
-                balanced lifestyle.
-              </h4>
-              <button class="projectButtons" onclick="launchHealthStats()">
-                Start App
-              </button>
+              <h4>An application to help track your calories and maintain a balanced lifestyle.</h4>
+              <button class="projectButtons" onclick="launchHealthStats()">Start App</button>
             </div>
             <div class="project" id="project2">
               <h3>Weather App</h3>
               <h4>A weather application for the US</h4>
-              <button class="projectButtons" onclick="launchWeatherApp()">
-                Start App
-              </button>
+              <button class="projectButtons" onclick="launchWeatherApp()">Start App</button>
             </div>
             <div class="project" id="project3">
               <h3>Time Control</h3>
               <h4>Stopwatch</h4>
-              <button class="projectButtons" onclick="launchTimerApp()">
-                Start Time Control
-              </button>
+              <button class="projectButtons" onclick="launchTimerApp()">Start Time Control</button>
             </div>
           </div>
         </div>
 
         <!-- Health App Container -->
         <div id="project1Container" class="displayNone projectContainers">
-          <!-- Welcome Screen with animated human SVG -->
+          <!-- Welcome Screen with Animated (Rotating) SVG Human -->
           <div id="fitMindsetWelcome">
-            <!-- A simple SVG representing a genderless human figure -->
+            <!-- The SVG rotates only around its Y‑axis so it always stays upright -->
             <svg id="humanSVG" width="150" height="150" viewBox="0 0 64 64">
               <circle cx="32" cy="16" r="10" fill="#ccc" />
               <rect x="26" y="28" width="12" height="20" fill="#ccc" />
-              <line
-                x1="26"
-                y1="28"
-                x2="16"
-                y2="44"
-                stroke="#ccc"
-                stroke-width="2"
-              />
-              <line
-                x1="38"
-                y1="28"
-                x2="48"
-                y2="44"
-                stroke="#ccc"
-                stroke-width="2"
-              />
-              <line
-                x1="26"
-                y1="48"
-                x2="20"
-                y2="60"
-                stroke="#ccc"
-                stroke-width="2"
-              />
-              <line
-                x1="38"
-                y1="48"
-                x2="44"
-                y2="60"
-                stroke="#ccc"
-                stroke-width="2"
-              />
+              <line x1="26" y1="28" x2="16" y2="44" stroke="#ccc" stroke-width="2" />
+              <line x1="38" y1="28" x2="48" y2="44" stroke="#ccc" stroke-width="2" />
+              <line x1="26" y1="48" x2="20" y2="60" stroke="#ccc" stroke-width="2" />
+              <line x1="38" y1="48" x2="44" y2="60" stroke="#ccc" stroke-width="2" />
             </svg>
             <div id="fitWelcomeText">Press Start to Enter</div>
             <button id="fitStartBTN" onclick="startFitMindset()">Start</button>
           </div>
-          <!-- Main App Container (user input) -->
+          <!-- Main Input Form (Vertical layout) -->
           <div id="mainAppContainer" class="displayNone mainProjectContainers">
             <h3>Enter Your Information to Calculate Your Results</h3>
             <label for="nameInput">First Name: </label>
@@ -233,21 +170,16 @@
               <option value="1.9">Extremely Active (2x/day)</option>
             </select>
           </div>
-          <!-- Results Container with Chart.js canvas -->
+          <!-- Submit Button to Trigger Calculation -->
+          <button id="appSubmitBTN" onclick="calculateHealthStats()">Submit</button>
+          <!-- Results Container (Displays Chart & Explanation) -->
           <div id="resultsContainer" class="displayNone">
             <h3 id="headerResults"></h3>
             <canvas id="healthChart"></canvas>
             <p id="resultsDescription"></p>
           </div>
-          <!-- Restart and Exit Buttons -->
-          <button
-            id="appRestartBTN"
-            type="button"
-            onclick="restartApp()"
-            class="displayNone"
-          >
-            Restart
-          </button>
+          <!-- Restart & Exit Buttons (inside container) -->
+          <button id="appRestartBTN" onclick="restartApp()">Restart</button>
           <button class="exitButton" onclick="exitApp()">Exit</button>
         </div>
 
@@ -261,12 +193,8 @@
               oninput="getLocations()"
             />
             <div id="suggestions" class="displayNone"></div>
-            <button id="weatherBtn" onclick="getWeather()" disabled>
-              Get Forecast
-            </button>
-            <button id="toggleTempUnit" onclick="toggleTemperatureUnit()">
-              °F / °C
-            </button>
+            <button id="weatherBtn" onclick="getWeather()" disabled>Get Forecast</button>
+            <button id="toggleTempUnit" onclick="toggleTemperatureUnit()">°F / °C</button>
             <div id="forecast" class="displayNone">
               <h2>5-Day Forecast</h2>
               <div id="forecastContianer"></div>
@@ -278,21 +206,14 @@
         <!-- Stopwatch App Container -->
         <div id="project3Container" class="displayNone projectContainers">
           <div class="stopwatchContainer">
-            <!-- Stopwatch display with background image -->
             <div id="stopwatchDisplay">
-              <img
-                src="images/stopwatch.png"
-                alt="Stopwatch"
-                id="stopwatchImg"
-              />
+              <img src="images/stopwatch.png" alt="Stopwatch" id="stopwatchImg" />
               <div id="timeDisplay">00:00:00</div>
             </div>
             <div id="stopwatchButtons">
               <button id="toggleTimerBtn" onclick="toggleTimer()">Start</button>
               <button id="lapBtn" onclick="recordLap()" disabled>Lap</button>
-              <button id="resetTimerBtn" onclick="resetTimer()" disabled>
-                Reset
-              </button>
+              <button id="resetTimerBtn" onclick="resetTimer()" disabled>Reset</button>
             </div>
             <div id="lapContainer"></div>
           </div>
@@ -329,7 +250,7 @@
         </div>
       </section>
     </div>
-    <!-- Main JavaScript file -->
+    <!-- Main JavaScript File -->
     <script src="script.js"></script>
   </body>
 </html>

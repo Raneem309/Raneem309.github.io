@@ -23,6 +23,12 @@ body {
   overflow-x: hidden;
 }
 
+/* Global paragraph spacing */
+p {
+  line-height: 2;
+  margin-bottom: 1rem;
+}
+
 /* ---------------- Opening Screen ---------------- */
 #openingScreen {
   position: fixed;
@@ -117,12 +123,8 @@ body {
 }
 
 @keyframes rotateCube {
-  from {
-    transform: rotateY(0deg);
-  }
-  to {
-    transform: rotateY(360deg);
-  }
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
 }
 
 /* ---------------- Sections ---------------- */
@@ -179,7 +181,8 @@ section {
   color: #000;
 }
 
-.aboutTab {
+.aboutMain p {
+  line-height: 2;
   margin-bottom: 1rem;
 }
 
@@ -238,17 +241,14 @@ section {
   padding: 2rem;
 }
 
+/* Rotate only around Y-axis so the figure remains upright */
 #humanSVG {
   animation: rotateHuman 3s linear infinite;
 }
 
 @keyframes rotateHuman {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
 }
 
 #fitWelcomeText {
@@ -263,6 +263,18 @@ section {
   cursor: pointer;
 }
 
+/* Health App Input Styles: vertical layout */
+#mainAppContainer label,
+#mainAppContainer input,
+#mainAppContainer select {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #000;
+}
+
+/* Results Container */
 #resultsContainer {
   text-align: center;
 }
@@ -404,19 +416,14 @@ section {
   margin-bottom: 0.5rem;
 }
 
-/* ---------------- Common Buttons ---------------- */
+/* ---------------- Exit & Restart Buttons (Inside Container) ---------------- */
 .exitButton,
 #appRestartBTN {
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  position: fixed;
-  bottom: 20px;
-}
-
-.exitButton {
-  right: 30px;
+  margin-top: 1rem;
   background: #ff1100;
   color: #fff;
 }
@@ -426,7 +433,6 @@ section {
 }
 
 #appRestartBTN {
-  left: 30px;
   background: #00f71d;
   color: #fff;
 }
@@ -468,11 +474,6 @@ section {
 }
 
 @keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
+  from { opacity: 1; }
+  to { opacity: 0; visibility: hidden; }
 }
