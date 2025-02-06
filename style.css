@@ -1,498 +1,478 @@
+/* style.css */
+
+/* Import custom font */
 @font-face {
   font-family: "PPNeueMontreal-Medium";
-  src: url("fonts/PPNeueMontreal-Medium.otf"), format("truetype");
-  font-weight: normal; /* Adjust if you have multiple weights */
-  font-style: normal; /* Adjust if the font has italic versions */
+  src: url("fonts/PPNeueMontreal-Medium.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
+/* ---------------- Reset & Global Styles ---------------- */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* HTML and body styles */
 html,
 body {
-  font-family: "PPNeueMontreal-Medium", monospace;
-  color: white;
-  height: 100%;
+  font-family: "PPNeueMontreal-Medium", sans-serif;
+  color: #fff;
   background-color: #d3d3d3;
-  overflow: hidden;
-  letter-spacing: 0.1rem;
+  overflow-x: hidden;
 }
 
-label {
-  font-style: italic;
-}
-
-.project h4 {
-  color: white;
-  margin-bottom: -2rem;
-}
-.project h3 {
-  margin-bottom: 2rem;
-}
-#nameTitleContainer h2 {
-  text-decoration: underline;
-  color: #000000;
-  /* text-decoration-thickness: 2px; */
-  text-underline-offset: 3px;
-}
-
-#project1Container h3 {
-  text-decoration: underline;
-  text-decoration-color: #ffffff;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 11px;
-  margin-bottom: 1rem;
-  font-size: 20px;
-  margin-top: .5rem;
-}
-
-
-/* Background layer */
-.background {
-  background-size: cover !important;
+/* ---------------- Opening Screen ---------------- */
+#openingScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
   background: url("images/portCover1.jpg") no-repeat center center;
-  z-index: -1; /* Push background behind other content */
-}
-
-/* Main container */
-.container {
-  width: 80vw; /* Adjust width */
-  height: 80vh; /* Adjust height */
-  padding: 2rem;
+  background-size: cover;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start; /* Align to the left */
-  background: rgb(255 255 255);
-  backdrop-filter: invert(52%);
-  border: 1px solid #d3d3d3; /* Border matching outside background */
-  border-radius: 50px; /* Optional rounded corners */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional shadow */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  opacity: 90%;
-  transform: translate(-50%, -50%); /* Perfect centering */
-  /* mix-blend-mode: difference; invert colors*/
-  /* background: url(images/MATRIX.gif); */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  text-align: center;
+  font-size: 2rem;
+  animation: fadeOut 6s forwards;
 }
 
-.container::before {
-  border-radius: 50px; /* Optional rounded corners */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional shadow */
-  content: "";
-  position: absolute;
+#openName,
+#openTitle {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  margin: 0.5rem;
+}
+
+/* ---------------- Background Layer ---------------- */
+.background {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8); /* Black with 20% opacity */
-  z-index: -1; /* Ensure the overlay is below the content */
-}
-
-/* Initial Screen */
-#openingScreen {
-  position: fixed;
-  width: 100vw; /* Full width of the viewport */
-  height: 100vh; /* Full height of the viewport */
-  display: flex; /* Enables flexbox for centering */
-  justify-content: center; /* Centers horizontally */
-  align-items: center; /* Centers vertically */
-  background-size: cover !important;
   background: url("images/portCover1.jpg") no-repeat center center;
-  color: white; /* Text color */
-  font-size: 2rem;
-  z-index: 9999;
-  text-align: center;
-  animation: fadeOut 6s forwards;
-  font-family: "PPNeueMontreal-Medium", monospace;
+  background-size: cover;
+  z-index: -2;
 }
 
-#openName {
-  color: rgba(123, 123, 123, 0.857); /* Light grey with transparency */
-  font-weight: normal;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-  margin-right: 1rem;
+/* ---------------- Main Container ---------------- */
+.container {
+  position: relative;
+  max-width: 1200px;
+  margin: 5vh auto;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 20px;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-#openTitle {
-  color: rgba(255, 255, 255, 0.857); /* White with transparency */
-  font-weight: normal;
-  margin-left: 1rem;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-}
-
-@keyframes fadeOut {
-  0% {
-    opacity: 3;
-    visibility: visible;
-  }
-  100% {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-/* Header container */
+/* ---------------- Header ---------------- */
 #headerContainer {
   display: flex;
-  justify-content: space-between; /* Space between name/title and tabs */
-  align-items: flex-start; /* Align to the top */
-  width: 90%;
-  position: absolute;
-  /* top: 0; */
-  /* left: 0; */
-  padding: 10px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
 }
 
-/* Name and title container */
-#nameTitleContainer {
-  display: flex;
-  flex-direction: column; /* Stack name and title vertically */
-  align-items: flex-start; /* Align name and title to the left */
-  margin-bottom: 20px; /* Add spacing between name/title and sections */
+#nameTitleContainer h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
 }
 
-#name {
-  font-size: 24px; /* Match the font size with the tabs */
-  font-weight: bold;
-  color: #d3d3d3;
-}
-
-#title {
-  font-size: 16px;
-  font-weight: normal;
-  margin-top: 5px;
+#nameTitleContainer h2 {
+  font-size: 1.2rem;
+  text-decoration: underline;
+  color: #fff;
 }
 
 #mainHeader {
   display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 10px 20px;
-  border-radius: 5px;
-  margin-left: auto;
+  gap: 1rem;
 }
 
-/* Tabs */
 .tab {
-  cursor: pointer;
-  padding: 10px 20px;
-  text-align: center;
+  padding: 0.5rem 1rem;
   border-radius: 5px;
-  font-size: 18px;
-  color: #d3d3d3;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .tab:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Sections */
+/* Active tab: displays a rotating cube icon */
+.activeCube {
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(45deg, #fff, #ccc);
+  animation: rotateCube 2s linear infinite;
+  margin: auto;
+}
+
+@keyframes rotateCube {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+/* ---------------- Sections ---------------- */
 section {
-  width: 100%;
-  margin-top: 6rem;
-  margin-left: 0.5rem;
-  text-align: left;
-}
-
-#projectHeader,
-#aboutMeBioHeader,
-#contactHeader {
-  margin-bottom: 20px;
-  font-size: 16px;
+  padding: 1rem;
   margin-top: 1rem;
-  color: #d3d3d3;
 }
 
-/* Hidden sections initially */
 .displayNone {
   display: none !important;
 }
 
-#aboutMeBio {
-  border-radius: 10px;
-  max-height: 400px;
-  padding: 10px;
-  overflow-y: auto;
+/* ---------------- About Me Section ---------------- */
+#aboutMeSection {
+  color: #000;
+}
+
+#aboutMeContent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.aboutSidebar {
+  flex: 1 1 200px;
   background: #757575;
-  color: rgb(0 0 0); /* Text color */
+  padding: 1rem;
+  border-radius: 10px;
 }
 
-/* Align A-Z and Contact to the left */
-#projectsSection,
-#contactSection {
-  text-align: left;
+.aboutSidebar ul {
+  list-style: none;
 }
 
-/* Projects Section Grid Layout */
+.aboutSidebar li {
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  background: #ccc;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.aboutSidebar li.active,
+.aboutSidebar li:hover {
+  background: #999;
+}
+
+.aboutMain {
+  flex: 2 1 400px;
+  background: #e0e0e0;
+  padding: 1rem;
+  border-radius: 10px;
+  color: #000;
+}
+
+.aboutTab {
+  margin-bottom: 1rem;
+}
+
+/* ---------------- Projects Section ---------------- */
+#projectsSection {
+  color: #000;
+}
+
+#projectData {
+  margin-bottom: 1rem;
+}
+
 #projectsGrid {
   display: grid;
-  gap: 20px;
-  color: rgb(0 0 0);
-  font-size: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
 }
 
 .project {
-  border-style: double;
   background: #757575;
-  padding: 20px;
+  padding: 1rem;
   border-radius: 8px;
+  text-align: center;
 }
 
 .project h3 {
-  font-size: 17px;
+  margin-bottom: 0.5rem;
 }
 
 .projectButtons {
   background-color: #000000ad;
-  color: white;
-  padding: 10px;
+  color: #fff;
+  padding: 0.5rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-left: 80%;
-  width: 20%;
-}
-
-#contactSection p {
-  margin-top: 2rem;
+  transition: background 0.3s;
 }
 
 .projectButtons:hover {
   background-color: #45a049;
 }
 
-input,
-select {
-  padding: 9px;
-  margin: 10px 0;
-  width: 100%;
-  margin-bottom: 1.5rem;
-}
-
-.exitButton {
-  background-color: #ff1100;
-  color: white;
-  padding: 10px;
-  position: absolute;
-  bottom: 20px;
-  right: 30px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 1rem;
-}
-
-.exitButton:hover {
-  background-color: #d22e22;
-}
-
-#appSubmitBTN,
-#appRestartBTN {
-  background-color: #00f71d;
-  color: white;
-  padding: 10px;
-  position: absolute;
-  bottom: 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 1rem;
-}
-
 .projectContainers {
-  border-radius: 10px;
-  max-height: 400px;
-  padding: 10px;
-  border-style: double;
   background: #757575;
-  color: rgb(0 0 0); /* Text color */
+  padding: 1rem;
+  border-radius: 10px;
+  margin-top: 1rem;
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
-.mainProjectContainers {
-  max-height: 330px;
+/* ---------------- Health App Styles ---------------- */
+#fitMindsetWelcome {
+  text-align: center;
+  padding: 2rem;
+}
+
+#humanSVG {
+  animation: rotateHuman 3s linear infinite;
+}
+
+@keyframes rotateHuman {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#fitWelcomeText {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: #000;
+}
+
+#fitStartBTN {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+#resultsContainer {
+  text-align: center;
+}
+
+#resultsDescription {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #000;
+}
+
+/* ---------------- Weather App Styles ---------------- */
+#project2Container input,
+#project2Container select {
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+#weatherBtn,
+#toggleTempUnit {
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#forecast {
+  margin-top: 1rem;
+}
+
+.forecastItem {
+  background: #e0e0e0;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #000;
+}
+
+.forecastDate {
+  flex: 1;
+}
+
+.weatherIcon {
+  width: 40px;
+  height: 40px;
+}
+
+.forecastTemp {
+  font-weight: bold;
+}
+
+.thermometer {
+  width: 10px;
+  height: 50px;
+  background: #ccc;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.thermometer-fill {
+  width: 100%;
+  background: linear-gradient(to top, red, blue);
+  position: absolute;
+  bottom: 0;
+}
+
+/* ---------------- Stopwatch Styles ---------------- */
+.stopwatchContainer {
+  text-align: center;
+}
+
+#stopwatchDisplay {
+  position: relative;
+  display: inline-block;
+}
+
+#stopwatchImg {
+  width: 150px;
+  height: auto;
+}
+
+#timeDisplay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  color: #000;
+  font-weight: bold;
+}
+
+#stopwatchButtons {
+  margin-top: 1rem;
+}
+
+#stopwatchButtons button {
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#stopwatchButtons button:disabled {
+  background: #888;
+  cursor: not-allowed;
+}
+
+#lapContainer {
+  margin-top: 1rem;
+  text-align: left;
+  max-height: 150px;
   overflow-y: auto;
+  background: #e0e0e0;
+  padding: 0.5rem;
+  border-radius: 5px;
+  color: #000;
+}
+
+/* ---------------- Contact Section ---------------- */
+#contactSection {
+  color: #000;
 }
 
 .contact-list {
-  list-style-type: none;
-  border-radius: 10px;
-  max-height: 450px;
-  overflow-y: auto;
+  list-style: none;
+  padding: 1rem;
   background: #757575;
+  border-radius: 10px;
 }
 
 .contact-list li {
-  margin: 10px 0;
-  font-size: 16px;
-  color: #000000;
-  padding: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
-.contact-list a {
-  color: #ffffff;
-  text-decoration: none;
+/* ---------------- Common Buttons ---------------- */
+.exitButton,
+#appRestartBTN {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  position: fixed;
+  bottom: 20px;
 }
 
-.contact-list a:hover {
-  text-decoration: underline;
+.exitButton {
+  right: 30px;
+  background: #ff1100;
+  color: #fff;
 }
 
-#welcomeScreen {
+.exitButton:hover {
+  background: #d22e22;
+}
+
+#appRestartBTN {
+  left: 30px;
+  background: #00f71d;
+  color: #fff;
+}
+
+/* ---------------- Home Section ---------------- */
+#homeTabSection {
   text-align: center;
-  padding: 160px;
-
-}
-
-
-.results-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-}
-
-.results-table th,
-.results-table td {
-  padding: 10px;
-  border: 1px solid #ddd;
-}
-
-.results-table th {
-  background-color: #f4f4f4;
-}
-
-#resultsExplanation {
-  margin-top: 20px;
-  font-size: 1rem;
-  color: #333;
+  padding: 1rem;
 }
 
 #homeHeader {
-  padding: 20px 40px;
-  border: 2px groove;
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 2px dashed #c5c5c5;
   border-radius: 10px;
-  border-color: #c5c5c5;
-  animation: glow-border 1s infinite alternate;
-  border-bottom-style: groove;
-  color: #000000;
-  margin-top: 7rem;
-  text-align: -webkit-center;
-  font-size: 20px;
+  color: #000;
 }
 
-
-
-#suggestions {
-  padding: 3px;
-  margin-bottom: 1rem;
-  background: rgba(0, 0, 0, 0.278);
-  border: 1px solid #000000;
-  max-height: 150px;
-  overflow-y: auto;
-  cursor: pointer;
+/* ---------------- Responsive Media Queries ---------------- */
+@media (max-width: 768px) {
+  .container {
+    margin: 2vh auto;
+    padding: 0.5rem;
+  }
+  #headerContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+  .aboutSidebar,
+  .aboutMain {
+    flex: 1 1 100%;
+  }
+  #stopwatchImg {
+    width: 100px;
+  }
+  #timeDisplay {
+    font-size: 1rem;
+  }
 }
 
-.suggestions-item:hover{
-  background-color: rgba(124, 124, 124, 0.579);
-}
-
-#cubeContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  overflow: hidden;
-  width: 100%;      
-  height: 300px;     
-}
-
-canvas {
-  margin-top: 4rem ;
-  position: fixed;
-}
-
-#weatherBtn{
-  float: right;
-  background-color: #003e0700;;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  border-style: groove;
-  margin-top: 2rem;
-}
-
-#forecast{
-  padding: 2rem;
-}
-.mainAppContainer {
-  overflow-y: auto; 
-}
-#forecastContianer {
-  max-height: 300px;
-  overflow-y: auto;
-  padding: 10px;
-}
-
-#project2Container{
-  height: 100vh;
-  overflow-y: auto;
-}
-
-#location, select{
-  margin-bottom: 0 !important;
-}
-
-#timerButtons{
-  justify-self: center;
-  margin-top: 2rem;
-}
-
-#startTimerBtn{
-  margin: 10px 5px;
-  background-color: #037c03;
-  color: rgb(0, 0, 0);
-  padding: 6px;
-  width: 6rem;
-  border: groove;
-  border-color: black;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#stopTimerBtn{
-  margin: 10px 5px;
-  background-color: #ff1100;
-  color: rgb(0, 0, 0);
-  padding: 6px;
-  width: 6rem;
-  border: groove;
-  border-color: black;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#resetTimerBtn{
-  margin: 10px 5px;
-  background-color: #d9c100;
-  color: #000000;
-  padding: 6px;
-  width: 6rem;
-  border: groove;
-  border-color: black;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#timerDisplay{
-  justify-self: center;
-  font-size: 5rem;
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
 }

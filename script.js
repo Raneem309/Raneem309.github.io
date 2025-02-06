@@ -1,244 +1,167 @@
-//Global Variables
-const about = document.getElementById("aboutMeTab");
-const projects = document.getElementById("projectTab");
-const contact = document.getElementById("contactTab");
-const projHeader = document.getElementById("projectHeader");
-const project1Container = document.getElementById("project1Container");
-const projectData = document.getElementById("projectData");
+/* script.js */
+
+/* ---------------- Global Variables ---------------- */
+const apiKey = "f2ebd821732c6bbb4ceeb84d71225ca0"; // OpenWeatherMap API key
 let bmiStatus;
 let healthAppUserName;
-const apiKey = "f2ebd821732c6bbb4ceeb84d71225ca0";
-const stateNames = {
-  AL: "Alabama", AK: "Alaska", AZ: "Arizona", AR: "Arkansas", CA: "California",
-  CO: "Colorado", CT: "Connecticut", DE: "Delaware", FL: "Florida", GA: "Georgia",
-  HI: "Hawaii", ID: "Idaho", IL: "Illinois", IN: "Indiana", IA: "Iowa",
-  KS: "Kansas", KY: "Kentucky", LA: "Louisiana", ME: "Maine", MD: "Maryland",
-  MA: "Massachusetts", MI: "Michigan", MN: "Minnesota", MS: "Mississippi",
-  MO: "Missouri", MT: "Montana", NE: "Nebraska", NV: "Nevada", NH: "New Hampshire",
-  NJ: "New Jersey", NM: "New Mexico", NY: "New York", NC: "North Carolina",
-  ND: "North Dakota", OH: "Ohio", OK: "Oklahoma", OR: "Oregon", PA: "Pennsylvania",
-  RI: "Rhode Island", SC: "South Carolina", SD: "South Dakota", TN: "Tennessee",
-  TX: "Texas", UT: "Utah", VT: "Vermont", VA: "Virginia", WA: "Washington",
-  WV: "West Virginia", WI: "Wisconsin", WY: "Wyoming"
-};
+let tempUnit = "C"; // Temperature unit: "C" for Celsius, "F" for Fahrenheit
 
+// Stopwatch variables
 let timer;
-let time = 0;
-let running = false;
+let timeInSeconds = 0;
+let timerRunning = false;
+let lapTimes = [];
 
+// Chart variable for health app results
+let healthChart;
+
+/* ---------------- Initialization on Window Load ---------------- */
 window.onload = function () {
-  cubeTalk();
-  tabLinks();
-  loadInitialData();
-  handleOpeningScreen();
+  cubeTalk(); // Initialize Three.js cube in Home section
+  initTabLinks(); // Initialize header tab click events and hover effects
+  initAboutSection(); // Initialize About Me interactive sidebar
+  loadInitialData(); // Load any static data (e.g., contact info)
+  handleOpeningScreen(); // Show opening screen and fade out
 };
 
+/* ---------------- Load Static Data ---------------- */
 function loadInitialData() {
-  let bio = `
-Hi, I'm Raneem Ali, a dedicated and detail-oriented software and web developer based in Brooklyn, NY. With a solid foundation in programming languages such as JavaScript, HTML, CSS, Python, and Java, I specialize in creating scalable, responsive, and user-friendly web applications. My passion for problem-solving and innovation drives me to continuously learn and refine my technical expertise.<br><br>
-
-I worked as a Junior Developer at Agility Consultants, where I collaborated with cross-functional teams to develop and maintain high-performance web applications. Leveraging JavaScript, HTML, and CSS, I optimized user experiences by ensuring responsiveness and cross-browser compatibility. I also implemented unit testing, debugging, and deployment strategies, ensuring the reliability and scalability of software solutions.<br><br>
-
-In addition to technical development, I have experience using Agile methodologies and version control systems like GitHub, enabling efficient workflows and collaborative project delivery. My exposure to cloud computing platforms such as AWS during my studies and Azure in the workplace has given me a solid understanding of their capabilities.<br><br>
-
-Prior to my development role, I honed my leadership and organizational skills as a First Line Manager at The Grooming Lounge, where I oversaw team operations, optimized database systems, and implemented streamlined workflows. This experience strengthened my ability to lead teams, train staff, and deliver results under tight deadlines.<br><br>
-
-I earned my degree in Management Information Systems from George Mason University, where I gained hands-on experience with programming languages, cloud computing, and system management. My time there provided me with a strong foundation in software development principles and problem-solving techniques.<br><br>
-
-With a commitment to building clean, functional, and scalable solutions, I am eager to bring my technical expertise and passion for development to a dynamic team. Let's connect and create innovative solutions together!
-  `;
-  aboutMeBio.innerHTML = bio;
-
-  const contactInfo = `
-    <div class="contact-list">
-      <li><strong>Phone:</strong> <a href="tel:+17032689046">(703) 268-9046</a></li>
-      <li><strong>Email:</strong> <a href="mailto:Raneem309@gmail.com">Raneem309@gmail.com</a></li>
-      <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/raneem-ali/" target="_blank">linkedin.com/in/raneem-ali</a></li>
-      <li><strong>GitHub:</strong> <a href="https://github.com/Raneem309" target="_blank">github.com/Raneem309</a></li>
-    </div>
-  `;
-
-  document.getElementById("contactInfo").innerHTML = contactInfo;
-
-  let homeText = `Welcome to `;
+  // (Additional data can be loaded here if needed)
 }
 
-function tabLinks() {
-  // Adding onclick for each tab
-  document.querySelectorAll(".tab").forEach((tab) => {
+/* ---------------- Tab Functions ---------------- */
+// Initialize header tab click and hover events
+function initTabLinks() {
+  const tabs = document.querySelectorAll(".tab");
+  tabs.forEach((tab) => {
     tab.addEventListener("click", function () {
+      updateActiveTab(this);
       handleTabs(this.id);
+    });
+    tab.addEventListener("mouseover", function () {
+      this.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
+    });
+    tab.addEventListener("mouseout", function () {
+      this.style.backgroundColor = "";
     });
   });
 }
 
+// Update active tab indicator: active tab shows a rotating cube icon
+function updateActiveTab(activeTab) {
+  const tabs = document.querySelectorAll(".tab");
+  tabs.forEach((tab) => {
+    if (tab === activeTab) {
+      tab.classList.add("active");
+      tab.innerHTML = '<div class="activeCube"></div>';
+    } else {
+      tab.classList.remove("active");
+      tab.innerHTML = tab.getAttribute("data-original");
+    }
+  });
+}
+
+// Show the appropriate section based on the clicked tab
 function handleTabs(tabId) {
-  // Hide all sections by default
   const sections = document.querySelectorAll("section");
   sections.forEach((section) => {
     section.classList.add("displayNone");
   });
-
-  // Show the corresponding section based on tab click
   if (tabId === "aboutMeTab") {
-    aboutMeSection.classList.remove("displayNone");
+    document.getElementById("aboutMeSection").classList.remove("displayNone");
   } else if (tabId === "projectTab") {
-    projectsSection.classList.remove("displayNone");
+    document.getElementById("projectsSection").classList.remove("displayNone");
   } else if (tabId === "contactTab") {
-    contactSection.classList.remove("displayNone");
+    document.getElementById("contactSection").classList.remove("displayNone");
   } else if (tabId === "homeTab") {
-    sections.forEach((section) => {
-      section.classList.add("displayNone");
-    });
-    homeTabSection.classList.remove("displayNone");
+    document.getElementById("homeTabSection").classList.remove("displayNone");
   }
 }
 
+/* ---------------- Opening Screen ---------------- */
+// Display opening screen text and fade out after a delay
 function handleOpeningScreen() {
   const openingScreen = document.getElementById("openingScreen");
   const openName = document.getElementById("openName");
   const openTitle = document.getElementById("openTitle");
   openingScreen.classList.remove("displayNone");
-
-  openingScreen.classList.remove("displayNone"); // Show the opening screen
-
-  // Fade in "Raneem Ali" immediately
   setTimeout(() => {
-    openName.style.opacity = "1"; // Make 'Raneem Ali' visible
-  }, 0); // Immediately after opening screen is visible
-
-  // Fade in "Portfolio" after 1 second
+    openName.style.opacity = "1";
+  }, 0);
   setTimeout(() => {
-    openTitle.style.opacity = "1"; // Make 'Portfolio' visible
-  }, 1000); // 1 second delay
-
-  // Fade out "Raneem Ali" after 5 seconds
+    openTitle.style.opacity = "1";
+  }, 1000);
   setTimeout(() => {
-    openName.style.opacity = "0"; // Make 'Raneem Ali' fade out
-  }, 5000); // 4 seconds delay
-
+    openName.style.opacity = "0";
+  }, 5000);
   setTimeout(() => {
     openingScreen.style.transition = "opacity 6s ease";
     openingScreen.style.opacity = "0";
-
     setTimeout(() => {
       openingScreen.classList.add("displayNone");
     }, 6000);
   }, 4000);
 }
 
-// Exit the app
-function exitApp() {
-  let weatherBtn = document.getElementById("weatherBtn");
-  projHeader.innerText = "A - Z";
-  let projectContainers = document.getElementsByClassName("projectContainers");
-  for (let ele of projectContainers) {
-    ele.classList.add("displayNone");
-  }
-    weatherBtn.style.cursor = "";
-    weatherBtn.style.backgroundColor = "#003e0700";
-    weatherBtn.disabled = true;
-  forecastContianer.innerHTML = ""
-  document.getElementById("location").value = "";
-
-  // Hide suggestions and clear them
-  const suggestionsElement = document.getElementById("suggestions");
-  suggestionsElement.innerHTML = "";
-  suggestionsElement.classList.add("displayNone");
-
-  // Hide and clear forecast container
-  const forecastElement = document.getElementById("forecastContianer");
-  forecastElement.innerHTML = "";
-  forecastElement.classList.add("displayNone");
-
-  // Reset forecast heading
-  document.getElementById("forecast").classList.add("displayNone");
-
-  resetTimer();
-
-  document
-    .getElementById("mainAppContainer")
-    .querySelectorAll("select, input")
-    .forEach((element) => {
-      element.value = "";
+/* ---------------- About Me Section ---------------- */
+// Initialize interactive sidebar options in the About Me section
+function initAboutSection() {
+  const aboutOptions = document.querySelectorAll(".aboutOption");
+  aboutOptions.forEach((option) => {
+    option.addEventListener("click", function () {
+      aboutOptions.forEach((opt) => opt.classList.remove("active"));
+      this.classList.add("active");
+      const tabId = this.getAttribute("data-tab");
+      const aboutTabs = document.querySelectorAll(".aboutTab");
+      aboutTabs.forEach((tab) => tab.classList.add("displayNone"));
+      document.getElementById("about-" + tabId).classList.remove("displayNone");
     });
-  document.getElementById("mainAppContainer").classList.add("displayNone");
-  document.getElementById("resultsContainer").classList.add("displayNone");
-  document.getElementById("appSubmitBTN").classList.add("displayNone");
-  document.getElementById("appRestartBTN").classList.add("displayNone");
-  document.getElementById("projectData").classList.remove("displayNone");
-}
-
-function restartApp() {
-  document
-    .getElementById("mainAppContainer")
-    .querySelectorAll("select, input")
-    .forEach((element) => {
-      element.value = "";
-    });
-  document.getElementById("resultsContainer").classList.add("displayNone");
-  document.getElementById("appRestartBTN").classList.add("displayNone");
-  document.getElementById("mainAppContainer").classList.remove("displayNone");
-  document.getElementById("appSubmitBTN").classList.remove("displayNone");
-  document.getElementById("mainAppContainer").scrollTop = 0;
-}
-
-// Function to launch the Health Stats app
-function launchHealthStats() {
-  const welcomeScreen = document.getElementById("welcomeScreen");
-  welcomeScreen.classList.remove("displayNone");
-
-  const welcomeTitle = document.getElementById("welcomeTitle");
-  const welcomeSubtitle = document.getElementById("welcomeSubtitle");
-
-  projectData.classList.add("displayNone");
-  document.getElementById("projectHeader").innerText = "Fit Mindset";
-  project1Container.classList.remove("displayNone");
-
-  // Fade in the welcome text
-  setTimeout(() => (welcomeTitle.style.opacity = "1"), 500);
-  setTimeout(() => (welcomeSubtitle.style.opacity = "1"), 1500);
-
-  // Listen for Enter key to start
-  document.addEventListener("keydown", function onEnterPress(e) {
-    if (e.key === "Enter") {
-      document.removeEventListener("keydown", onEnterPress); // Prevent multiple triggers
-      document.getElementById("appSubmitBTN").classList.remove("displayNone");
-      document
-        .getElementById("mainAppContainer")
-        .classList.remove("displayNone");
-      document.getElementById("projectHeader").classList.remove("displayNone");
-      welcomeScreen.classList.add("displayNone");
-    }
   });
 }
 
+/* ---------------- Health App (Fit Mindset) Functions ---------------- */
+// Launch the Health App: show the welcome screen
+function launchHealthStats() {
+  document.getElementById("projectHeader").innerText = "Fit Mindset";
+  document.getElementById("projectData").classList.add("displayNone");
+  document.getElementById("project1Container").classList.remove("displayNone");
+  document.getElementById("fitMindsetWelcome").classList.remove("displayNone");
+}
+
+// Called when the user clicks the “Start” button on the welcome screen
+function startFitMindset() {
+  document.getElementById("fitMindsetWelcome").classList.add("displayNone");
+  document.getElementById("mainAppContainer").classList.remove("displayNone");
+}
+
+// Calculate health statistics (BMI, BMR, TDEE)
 function calculateHealthStats() {
   const height = parseFloat(document.getElementById("heightInput").value);
-  const weight = parseInt(document.getElementById("weightInput").value);
+  const weight = parseFloat(document.getElementById("weightInput").value);
   const age = parseInt(document.getElementById("ageInput").value);
   const gender = document.getElementById("genderInput").value;
   const activityLevel = parseFloat(
     document.getElementById("activityLevelInput").value
   );
   healthAppUserName = document.getElementById("nameInput").value;
-  //check if all feilds are filled out
+
   if (!height || !weight || !age || !gender || !activityLevel) {
     alert("Please fill in all fields.");
     return;
   }
 
-  const bmi = (703 * weight) / (height * 12 * height * 12);
+  const bmi = (703 * weight) / Math.pow(height * 12, 2);
   const bmr =
     gender === "Male"
       ? 66 + 6.23 * weight + 12.7 * height * 12 - 6.8 * age
       : 655 + 4.35 * weight + 4.7 * height * 12 - 4.7 * age;
   const tdee = bmr * activityLevel;
+
   evaluateBMI(bmi);
-  displayResults(bmi, bmr, tdee);
+  displayHealthResults(bmi, bmr, tdee);
 }
 
-// Function to evaluate BMI and output the corresponding category
+// Determine BMI category
 function evaluateBMI(bmi) {
   if (bmi < 18.5) {
     bmiStatus = "Underweight (below 18.5)";
@@ -251,137 +174,306 @@ function evaluateBMI(bmi) {
   }
 }
 
-// Display results in a chart
-function displayResults(bmi, bmr, tdee) {
-  const resultsContainer = document.getElementById("resultsContainer");
-  const resultsChart = document.getElementById("resultsChart");
-  const explanation = document.getElementById("resultsDescription");
-
-  document.getElementById("appRestartBTN").classList.remove("displayNone");
-
+// Display results using Chart.js (doughnut chart)
+function displayHealthResults(bmi, bmr, tdee) {
   document.getElementById("mainAppContainer").classList.add("displayNone");
-  resultsContainer.classList.remove("displayNone");
+  document.getElementById("resultsContainer").classList.remove("displayNone");
+  document.getElementById("appRestartBTN").classList.remove("displayNone");
+  document.getElementById(
+    "headerResults"
+  ).innerText = `Hi ${healthAppUserName}! Here are your calculated health results.`;
 
-  resultsChart.innerHTML = `
-    <table class="results-table">
-      <thead>
-        <tr><th>Metric</th><th>Value</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>BMI</td><td>${bmi.toFixed(2)}</td></tr>
-        <tr><td>BMR</td><td>${Math.round(bmr)} kcal/day</td></tr>
-        <tr><td>TDEE</td><td>${Math.round(tdee)} kcal/day</td></tr>
-      </tbody>
-    </table>
-  `;
+  const ctx = document.getElementById("healthChart").getContext("2d");
+  const data = {
+    labels: ["BMI", "BMR", "TDEE"],
+    datasets: [
+      {
+        data: [parseFloat(bmi.toFixed(2)), Math.round(bmr), Math.round(tdee)],
+        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+      },
+    ],
+  };
 
-  explanation.innerHTML = `
+  if (healthChart) {
+    healthChart.destroy();
+  }
+  healthChart = new Chart(ctx, {
+    type: "doughnut",
+    data: data,
+    options: {
+      responsive: true,
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              let label = context.label || "";
+              if (label) {
+                label += ": ";
+              }
+              label += context.parsed;
+              return label;
+            },
+          },
+        },
+      },
+    },
+  });
+
+  document.getElementById("resultsDescription").innerHTML = `
     <p><strong>BMI (Body Mass Index):</strong> A measure of body fat based on height and weight. ${bmiStatus}</p>
     <p><strong>BMR (Basal Metabolic Rate):</strong> The number of calories your body needs at rest.</p>
     <p><strong>TDEE (Total Daily Energy Expenditure):</strong> The number of calories you burn daily including activity level.</p>
     <p>Use this information to plan your caloric intake for weight maintenance, loss, or gain.</p>
   `;
-
-  document.getElementById(
-    "headerResults"
-  ).innerHTML = `Hi ${healthAppUserName}! \n Here are your calculated health results.`;
 }
 
-function launchWeatherApp() {
-  document.getElementById("projectHeader").innerText = "Weather App";
-
-  document.getElementById("location").value = "";
-  projectData.classList.add("displayNone");
-  document.getElementById("project2Container").classList.remove("displayNone");
+/* ---------------- Weather App Functions ---------------- */
+// Fetch location suggestions as the user types
+async function getLocations() {
+  const inputElement = document.getElementById("location");
+  const suggestionsElement = document.getElementById("suggestions");
+  const weatherBtn = document.getElementById("weatherBtn");
+  let query = inputElement.value.trim();
+  if (query.length < 3) {
+    suggestionsElement.classList.add("displayNone");
+    return;
+  }
+  const url = `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${apiKey}`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Failed to fetch location suggestions");
+    const data = await response.json();
+    suggestionsElement.innerHTML = "";
+    let seenLocations = new Set();
+    if (data.length === 0) {
+      const option = document.createElement("div");
+      option.textContent = "No results found";
+      option.classList.add("no-results");
+      suggestionsElement.appendChild(option);
+    } else {
+      data.forEach((place) => {
+        let city = place.name;
+        let country = place.country;
+        let state = place.state || "";
+        let displayName =
+          country === "US" && state
+            ? `${city}, ${state}, ${country}`
+            : `${city}, ${country}`;
+        let apiFormattedName =
+          country === "US" && state
+            ? `${city},${state},${country}`
+            : `${city},${country}`;
+        if (!seenLocations.has(displayName)) {
+          seenLocations.add(displayName);
+          const option = document.createElement("div");
+          option.textContent = displayName;
+          option.classList.add("suggestions-item");
+          option.dataset.apiName = apiFormattedName;
+          option.onclick = function () {
+            inputElement.value = displayName;
+            inputElement.dataset.apiValue = apiFormattedName;
+            suggestionsElement.classList.add("displayNone");
+            weatherBtn.disabled = false;
+            weatherBtn.style.cursor = "pointer";
+            weatherBtn.style.backgroundColor = "#003e07";
+          };
+          suggestionsElement.appendChild(option);
+        }
+      });
+    }
+    suggestionsElement.classList.remove("displayNone");
+  } catch (error) {
+    console.error("Error fetching location suggestions:", error);
+  }
 }
 
-function launchTimerApp() {
-  resetTimer();
-  document.getElementById("projectHeader").innerText = "Time Control";
-  projectData.classList.add("displayNone");
-  document.getElementById("project3Container").classList.remove("displayNone");
+// Toggle between Celsius and Fahrenheit; refresh forecast if displayed
+function toggleTemperatureUnit() {
+  tempUnit = tempUnit === "C" ? "F" : "C";
+  if (!document.getElementById("forecast").classList.contains("displayNone")) {
+    getWeather();
+  }
 }
 
+// Fetch and display the 5‑day weather forecast
+async function getWeather() {
+  const inputElement = document.getElementById("location");
+  const forecastElement = document.getElementById("forecastContianer");
+  const forecastHeader = document.querySelector("#forecast h2");
+  const weatherBtn = document.getElementById("weatherBtn");
+  const location = inputElement.dataset.apiValue;
+  if (!location) {
+    alert("Please select a valid location from the suggestions.");
+    return;
+  }
+  const units = "metric"; // Fetch in Celsius
+  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}&units=${units}`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Failed to fetch weather data");
+    const data = await response.json();
+    forecastHeader.textContent = inputElement.value;
+    forecastElement.innerHTML = "";
+    let forecastHTML = "";
+    for (let i = 0; i < data.list.length; i += 8) {
+      const dayData = data.list[i];
+      const dateObj = new Date(dayData.dt * 1000);
+      const options = { weekday: "long", month: "short", day: "numeric" };
+      const formattedDate = dateObj.toLocaleDateString(undefined, options);
+      let tempC = dayData.main.temp;
+      let tempDisplay = tempC;
+      if (tempUnit === "F") {
+        tempDisplay = (tempC * 9) / 5 + 32;
+      }
+      tempDisplay = tempDisplay.toFixed(1);
+      const weatherDesc = dayData.weather[0].description;
+      const iconCode = dayData.weather[0].icon;
+      const iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`;
+      const thermometer = `<div class="thermometer">
+                              <div class="thermometer-fill" style="height: ${Math.min(
+                                Math.max((tempC + 10) * 3, 0),
+                                100
+                              )}%;"></div>
+                           </div>`;
+      forecastHTML += `
+        <div class="forecastItem">
+          <div class="forecastDate">${formattedDate}</div>
+          <img src="${iconUrl}" alt="${weatherDesc}" class="weatherIcon"/>
+          <div class="forecastTemp">${tempDisplay}°${tempUnit}</div>
+          ${thermometer}
+          <div class="forecastDesc">${weatherDesc}</div>
+        </div>
+      `;
+    }
+    forecastElement.innerHTML = forecastHTML;
+    document.getElementById("forecast").classList.remove("displayNone");
+  } catch (error) {
+    console.error("Error retrieving weather data:", error);
+    forecastElement.innerText = "Error retrieving weather data.";
+  }
+  inputElement.value = "";
+  weatherBtn.disabled = true;
+  weatherBtn.style.cursor = "";
+  weatherBtn.style.backgroundColor = "#003e0700";
+}
+
+/* ---------------- Stopwatch Functions ---------------- */
+// Toggle the stopwatch (start/stop)
+function toggleTimer() {
+  const toggleBtn = document.getElementById("toggleTimerBtn");
+  if (!timerRunning) {
+    startTimer();
+    toggleBtn.innerText = "Stop";
+    document.getElementById("lapBtn").disabled = false;
+    document.getElementById("resetTimerBtn").disabled = true;
+  } else {
+    stopTimer();
+    toggleBtn.innerText = "Start";
+    document.getElementById("lapBtn").disabled = true;
+    document.getElementById("resetTimerBtn").disabled = false;
+  }
+}
+
+// Start the stopwatch timer
 function startTimer() {
-  if (!running) {
-    running = true;
+  if (!timerRunning) {
+    timerRunning = true;
     timer = setInterval(() => {
-      time++;
-      document.getElementById("timerDisplay").textContent = new Date(
-        time * 1000
-      )
-        .toISOString()
-        .substr(11, 8);
+      timeInSeconds++;
+      updateTimeDisplay();
     }, 1000);
   }
 }
 
+// Stop the stopwatch timer
 function stopTimer() {
   clearInterval(timer);
-  running = false;
+  timerRunning = false;
 }
 
+// Reset the stopwatch and clear lap times
 function resetTimer() {
   stopTimer();
-  time = 0;
-  document.getElementById("timerDisplay").textContent = "00:00:00";
+  timeInSeconds = 0;
+  lapTimes = [];
+  updateTimeDisplay();
+  document.getElementById("lapContainer").innerHTML = "";
+  document.getElementById("toggleTimerBtn").innerText = "Start";
+  document.getElementById("lapBtn").disabled = true;
+  document.getElementById("resetTimerBtn").disabled = true;
 }
 
+// Update the displayed time on the stopwatch
+function updateTimeDisplay() {
+  const display = document.getElementById("timeDisplay");
+  const hrs = String(Math.floor(timeInSeconds / 3600)).padStart(2, "0");
+  const mins = String(Math.floor((timeInSeconds % 3600) / 60)).padStart(2, "0");
+  const secs = String(timeInSeconds % 60).padStart(2, "0");
+  display.innerText = `${hrs}:${mins}:${secs}`;
+}
+
+// Record a lap time and display it
+function recordLap() {
+  if (!timerRunning) return;
+  lapTimes.push(timeInSeconds);
+  const lapContainer = document.getElementById("lapContainer");
+  const lapItem = document.createElement("div");
+  const lapNumber = lapTimes.length;
+  const hrs = String(Math.floor(timeInSeconds / 3600)).padStart(2, "0");
+  const mins = String(Math.floor((timeInSeconds % 3600) / 60)).padStart(2, "0");
+  const secs = String(timeInSeconds % 60).padStart(2, "0");
+  lapItem.innerText = `Lap ${lapNumber}: ${hrs}:${mins}:${secs}`;
+  lapContainer.appendChild(lapItem);
+}
+
+/* ---------------- Three.js Cube in Home Section ---------------- */
+// Initialize a rotating cube in the Home section
 function cubeTalk() {
-  // Set up Three.js scene
+  const container = document.getElementById("cubeContainer");
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(
     95,
-    window.innerWidth / window.innerHeight,
+    container.clientWidth / container.clientHeight,
     0.9,
     1000
   );
-  camera.position.z = 2.5; // Move back slightly for better visibility
+  camera.position.z = 2.5;
 
-  // Create renderer and enable shadows
   const renderer = new THREE.WebGLRenderer({ alpha: true });
-  renderer.shadowMap.enabled = true; // Enable shadows
-  const container = document.getElementById("cubeContainer");
+  renderer.shadowMap.enabled = true;
   renderer.setSize(container.clientWidth, container.clientHeight);
   container.appendChild(renderer.domElement);
 
-  // Add lighting for shadows
   const light = new THREE.DirectionalLight(0xffffff, 1);
   light.position.set(10, 10, 10);
-  light.castShadow = true; // Enable shadow casting
+  light.castShadow = true;
   scene.add(light);
 
-  // Create cube with solid and wireframe material
   const geometry = new THREE.BoxGeometry();
   const material = new THREE.MeshStandardMaterial({
-    color: "black", // Main color
-    opacity: 0.5, // 20% opacity, meaning 80% transparency
-    transparent: true, // Enable transparency
+    color: "black",
+    opacity: 0.5,
+    transparent: true,
   });
-  const wireframeMaterial = new THREE.LineBasicMaterial({ color: "grey" }); // Edge lines
-
   const cube = new THREE.Mesh(geometry, material);
-  cube.castShadow = true; // Cube casts shadow
-  cube.receiveShadow = true; // Cube receives shadow
+  cube.castShadow = true;
+  cube.receiveShadow = true;
   cube.scale.set(2, 2, 2);
-
   scene.add(cube);
 
-  // Add wireframe edges to show cube dimensions
   const edges = new THREE.EdgesGeometry(geometry);
+  const wireframeMaterial = new THREE.LineBasicMaterial({ color: "grey" });
   const wireframe = new THREE.LineSegments(edges, wireframeMaterial);
   cube.add(wireframe);
 
-  // Create a shadow-receiving floor
   const floorGeometry = new THREE.PlaneGeometry(5, 5);
   const floorMaterial = new THREE.ShadowMaterial({ opacity: 0.3 });
   const floor = new THREE.Mesh(floorGeometry, floorMaterial);
-  floor.rotation.x = -Math.PI / 2; // Rotate to be horizontal
-  floor.position.y = -3.5; // Increased distance between cube and shadow
+  floor.rotation.x = -Math.PI / 2;
+  floor.position.y = -3.5;
   floor.receiveShadow = true;
   scene.add(floor);
 
-  // Animation loop
   function animate() {
     requestAnimationFrame(animate);
     cube.rotation.x += 0.01;
@@ -390,7 +482,6 @@ function cubeTalk() {
   }
   animate();
 
-  // Resize handler to update renderer and camera
   window.addEventListener("resize", () => {
     renderer.setSize(container.clientWidth, container.clientHeight);
     camera.aspect = container.clientWidth / container.clientHeight;
@@ -398,196 +489,34 @@ function cubeTalk() {
   });
 }
 
-async function getLocations() {
-  let inputElement = document.getElementById("location");
-  let suggestionsElement = document.getElementById("suggestions");
-  let weatherBtn = document.getElementById("weatherBtn");
+/* ---------------- Exit App Function ---------------- */
+// Exit the current app/project, reset states and show main project grid
+function exitApp() {
+  document.getElementById("projectHeader").innerText = "A - Z";
+  const projectContainers = document.querySelectorAll(".projectContainers");
+  projectContainers.forEach((container) =>
+    container.classList.add("displayNone")
+  );
 
-  if (!inputElement || !suggestionsElement) {
-    console.error("Error: Missing input or suggestions element.");
-    return;
-  }
-
-  let query = inputElement.value.trim();
-  if (query.length < 3) {
-    suggestionsElement.classList.add("displayNone");
-    return;
-  }
-
-  let url = `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${apiKey}`;
-
-  try {
-    let response = await fetch(url);
-    if (!response.ok) throw new Error("Failed to fetch location suggestions");
-
-    let data = await response.json();
-    suggestionsElement.innerHTML = "";
-    let seenLocations = new Set();
-
-    if (data.length === 0) {
-      let option = document.createElement("div");
-      option.textContent = "No results found";
-      option.classList.add("suggestions-item", "no-results");
-      suggestionsElement.appendChild(option);
-    } else {
-      data.forEach((place) => {
-        let city = place.name;
-        let country = place.country;
-        let state = place.state || "";
-        let displayName = country === "US" && state ? `${city}, ${state}, ${country}` : `${city}, ${country}`;
-        let apiFormattedName = country === "US" && state ? `${city},${state},${country}` : `${city},${country}`;
-
-        if (!seenLocations.has(displayName)) {
-          seenLocations.add(displayName);
-
-          let option = document.createElement("div");
-          option.textContent = displayName;
-          option.classList.add("suggestions-item");
-          option.dataset.apiName = apiFormattedName;
-          option.onclick = () => selectLocation(inputElement, suggestionsElement, displayName, apiFormattedName);
-          suggestionsElement.appendChild(option);
-        }
-      });
-    }
-
-    suggestionsElement.classList.remove("displayNone");
-  } catch (error) {
-    console.error("Error fetching location suggestions:", error);
-  }
-}
-
-// Function to handle location selection
-async function getLocations() {
-  let inputElement = document.getElementById("location");
-  let suggestionsElement = document.getElementById("suggestions");
-  let weatherBtn = document.getElementById("weatherBtn");
-  let locationValid = false; // Track if the location is valid
-
-  // Reset suggestions and button state
+  const weatherBtn = document.getElementById("weatherBtn");
+  weatherBtn.disabled = true;
+  weatherBtn.style.cursor = "";
+  weatherBtn.style.backgroundColor = "#003e0700";
+  document.getElementById("location").value = "";
+  const suggestionsElement = document.getElementById("suggestions");
   suggestionsElement.innerHTML = "";
   suggestionsElement.classList.add("displayNone");
-  
-  if (inputElement.value.trim() === "") {
-    weatherBtn.disabled = true;
-    weatherBtn.style.cursor = "";
-    weatherBtn.style.backgroundColor = "#003e0700";
-    return;
-  }
+  document.getElementById("forecastContianer").innerHTML = "";
+  document.getElementById("forecast").classList.add("displayNone");
 
-  let query = inputElement.value.trim();
-  if (query.length < 3) {
-    return;
-  }
+  resetTimer();
 
-  let url = `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${apiKey}`;
-
-  try {
-    let response = await fetch(url);
-    if (!response.ok) throw new Error("Failed to fetch location suggestions");
-
-    let data = await response.json();
-    let seenLocations = new Set();
-
-    if (data.length === 0) {
-      let option = document.createElement("div");
-      option.textContent = "No results found";
-      option.classList.add("no-results");
-      suggestionsElement.appendChild(option);
-      suggestionsElement.classList.remove("displayNone");
-      return;
-    }
-
-    // Populate the valid suggestions list
-    data.forEach((place) => {
-      let city = place.name;
-      let country = place.country;
-      let state = place.state || "";
-      let displayName = country === "US" && state ? `${city}, ${state}, ${country}` : `${city}, ${country}`;
-      let apiFormattedName = country === "US" && state ? `${city},${state},${country}` : `${city},${country}`;
-
-      if (!seenLocations.has(displayName)) {
-        seenLocations.add(displayName);
-
-        let option = document.createElement("div");
-        option.textContent = displayName;
-        option.classList.add("suggestions-item");
-        option.dataset.apiName = apiFormattedName;
-        option.onclick = () => {
-          inputElement.value = displayName;
-          inputElement.dataset.apiValue = apiFormattedName;
-          locationValid = true;  // Mark the location as valid
-          suggestionsElement.classList.add("displayNone");
-          weatherBtn.disabled = false; // Enable the button once a valid city is selected
-          weatherBtn.style.cursor = "pointer";
-          weatherBtn.style.backgroundColor = "#003e07";
-        };
-        suggestionsElement.appendChild(option);
-      }
-    });
-
-    suggestionsElement.classList.remove("displayNone");
-    
-  } catch (error) {
-    console.error("Error fetching location suggestions:", error);
-  }
-
-  if (!locationValid) {
-    // If the location is invalid, disable the button
-    weatherBtn.disabled = true;
-    weatherBtn.style.cursor = "";
-    weatherBtn.style.backgroundColor = "#003e0700";
-  }
-}
-
-// Function to fetch weather data
-async function getWeather() {
-  let inputElement = document.getElementById("location");
-  let forecastElement = document.getElementById("forecastContianer");
-  let forecastHeader = document.querySelector("#forecast h3");
-
-  if (!inputElement || !forecastElement) {
-    console.error("Error: Missing input or forecast element.");
-    return;
-  }
-
-  let location = inputElement.dataset.apiValue;
-  if (!location) {
-    alert("Please select a valid location from the suggestions.");
-    return;
-  }
-
-  let url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}&units=metric`;
-
-  try {
-    let response = await fetch(url);
-    if (!response.ok) throw new Error("Failed to fetch weather data");
-
-    let data = await response.json();
-
-    // Update forecast heading with the new city name
-    forecastHeader.textContent = inputElement.value;
-
-    // Clear previous forecast only when new weather is generated
-    forecastElement.innerHTML = "";
-
-    let forecastHTML = "";
-    for (let i = 0; i < data.list.length; i += 8) { // Get one reading per day
-      let day = data.list[i];
-      let date = new Date(day.dt * 1000).toLocaleDateString();
-      let temp = day.main.temp;
-      let desc = day.weather[0].description;
-      forecastHTML += `<p><strong>${date}:</strong> ${temp}°C - ${desc}</p>`;
-    }
-
-    forecastElement.innerHTML = forecastHTML;
-    forecastElement.classList.remove("displayNone");
-
-  } catch (error) {
-    console.error("Error retrieving weather data:", error);
-    forecastElement.innerText = "Error retrieving weather data.";
-  }
-  
-  document.getElementById("forecast").classList.remove("displayNone");
-  
-  inputElement.value = "";
+  const inputs = document
+    .getElementById("mainAppContainer")
+    .querySelectorAll("input, select");
+  inputs.forEach((el) => (el.value = ""));
+  document.getElementById("mainAppContainer").classList.add("displayNone");
+  document.getElementById("resultsContainer").classList.add("displayNone");
+  document.getElementById("appRestartBTN").classList.add("displayNone");
+  document.getElementById("projectData").classList.remove("displayNone");
 }
