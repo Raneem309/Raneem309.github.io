@@ -102,12 +102,16 @@ function launchWeatherApp() {
   // Show Weather App container and hide project grid
   document.getElementById("projectData").classList.add("displayNone");
   document.getElementById("project2Container").classList.remove("displayNone");
+  document.getElementById("projectHeader").innerText = "Weather App";
+
 }
 
 function launchTimerApp() {
   // Show Stopwatch container and hide project grid
   document.getElementById("projectData").classList.add("displayNone");
   document.getElementById("project3Container").classList.remove("displayNone");
+  document.getElementById("projectHeader").innerText = "Time Control";
+
 }
 
 /* ---------------- Health App (Fit Mindset) Functions ---------------- */
@@ -122,6 +126,9 @@ function launchHealthStats() {
   // Hide Submit and Restart buttons initially
   document.getElementById("appSubmitBTN").classList.add("displayNone");
   document.getElementById("appRestartBTN").classList.add("displayNone");
+
+  document.getElementById("projectHeader").innerText = "Fit Mindset";
+
 }
 
 function startFitMindset() {

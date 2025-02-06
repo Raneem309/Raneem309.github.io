@@ -19,7 +19,7 @@ html,
 body {
   font-family: "PPNeueMontreal-Medium", sans-serif;
   color: #fff;
-  background-color: #d3d3d3;
+  background-color: #d3d3d379;
   overflow-x: hidden;
 }
 
@@ -469,7 +469,6 @@ section {
   overflow: hidden;
   width: 100%;
   height: 300px;
-  background: #000;
 }
 
 /* ---------------- Responsive Media Queries ---------------- */
@@ -497,4 +496,14 @@ section {
 @keyframes fadeOut {
   from { opacity: 1; }
   to { opacity: 0; visibility: hidden; }
+}
+
+
+#aboutMeHeader, #contactHeader, #projectHeader{
+  margin-bottom: 2rem;
+  color: white;
+}
+
+#mainAppContainer h3{
+  margin-bottom: 1.5rem;
 }
