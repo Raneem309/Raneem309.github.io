@@ -12,21 +12,17 @@ let timeInSeconds = 0;
 let timerRunning = false;
 let lapTimes = [];
 
-// Chart variable for health app results
-let healthChart;
-
 /* ---------------- Initialization on Window Load ---------------- */
 window.onload = function () {
   cubeTalk();         // Initialize Three.js cube in Home section
-  initTabLinks();     // Initialize header tab click events and hover effects
-  initAboutSection(); // Initialize About Me interactive sidebar
-  loadInitialData();  // Load any static data (e.g., contact info)
-  handleOpeningScreen(); // Show opening screen and fade out
+  initTabLinks();     // Initialize header tab events
+  initAboutSection(); // Initialize About Me sidebar options
+  handleOpeningScreen(); // Show and fade out opening screen
 };
 
 /* ---------------- Load Static Data ---------------- */
 function loadInitialData() {
-  // Additional static data can be loaded here if needed.
+  // (Additional static data can be loaded here if needed)
 }
 
 /* ---------------- Tab Functions ---------------- */
@@ -64,9 +60,7 @@ function updateActiveTab(activeTab) {
 // Show the appropriate section based on the clicked tab
 function handleTabs(tabId) {
   const sections = document.querySelectorAll("section");
-  sections.forEach((section) => {
-    section.classList.add("displayNone");
-  });
+  sections.forEach((section) => section.classList.add("displayNone"));
   if (tabId === "aboutMeTab") {
     document.getElementById("aboutMeSection").classList.remove("displayNone");
   } else if (tabId === "projectTab") {
@@ -75,11 +69,8 @@ function handleTabs(tabId) {
     document.getElementById("contactSection").classList.remove("displayNone");
   } else if (tabId === "homeTab") {
     document.getElementById("homeTabSection").classList.remove("displayNone");
-    // Ensure the Three.js cube is present
-    const cubeContainer = document.getElementById("cubeContainer");
-    if (cubeContainer.children.length === 0) {
-      cubeTalk();
-    }
+    // Ensure the Three.js cube is present by clearing and reinitializing
+    cubeTalk();
   }
 }
 
@@ -168,50 +159,67 @@ function evaluateBMI(bmi) {
   }
 }
 
-// Display results using Chart.js (doughnut chart)
+// Display health results as colored cards instead of a pie chart
 function displayHealthResults(bmi, bmr, tdee) {
+  // Hide the input form and show the results container
   document.getElementById("mainAppContainer").classList.add("displayNone");
-  document.getElementById("resultsContainer").classList.remove("displayNone");
-  document.getElementById("appRestartBTN").classList.remove("displayNone");
-  document.getElementById("headerResults").innerText =
-    `Hi ${healthAppUserName}! Here are your calculated health results.`;
+  const resultsContainer = document.getElementById("resultsContainer");
+  resultsContainer.classList.remove("displayNone");
+  // Set header text
+  resultsContainer.innerHTML = `<h3 id="headerResults">Hi ${healthAppUserName}! Here are your calculated health results.</h3>`;
   
-  const ctx = document.getElementById("healthChart").getContext("2d");
-  const data = {
-    labels: ['BMI', 'BMR', 'TDEE'],
-    datasets: [{
-      data: [parseFloat(bmi.toFixed(2)), Math.round(bmr), Math.round(tdee)],
-      backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
-    }]
-  };
+  // Create a container for the result cards
+  const cardContainer = document.createElement("div");
+  cardContainer.className = "healthCards";
   
-  if (healthChart) { healthChart.destroy(); }
-  healthChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: data,
-    options: {
-      responsive: true,
-      plugins: {
-        tooltip: {
-          callbacks: {
-            label: function(context) {
-              let label = context.label || '';
-              if (label) { label += ': '; }
-              label += context.parsed;
-              return label;
-            }
-          }
-        }
-      }
-    }
-  });
+  // BMI card with color based on healthy range
+  let bmiColor = "#36A2EB"; // default blue for healthy
+  if(bmi < 18.5) {
+     bmiColor = "#FF6384"; // red-ish for underweight
+  } else if(bmi >= 25) {
+     bmiColor = "#FFCE56"; // yellow-ish for overweight
+  }
+  const bmiCard = document.createElement("div");
+  bmiCard.className = "healthCard";
+  bmiCard.style.borderColor = bmiColor;
+  bmiCard.innerHTML = `<h4>BMI</h4>
+                       <p>${bmi.toFixed(2)}</p>
+                       <p>${bmiStatus}</p>`;
   
-  document.getElementById("resultsDescription").innerHTML = `
-    <p><strong>BMI (Body Mass Index):</strong> A measure of body fat based on height and weight. ${bmiStatus}</p>
-    <p><strong>BMR (Basal Metabolic Rate):</strong> The number of calories your body needs at rest.</p>
-    <p><strong>TDEE (Total Daily Energy Expenditure):</strong> The number of calories you burn daily including activity level.</p>
-    <p>Use this information to plan your caloric intake for weight maintenance, loss, or gain.</p>
-  `;
+  // BMR card
+  const bmrCard = document.createElement("div");
+  bmrCard.className = "healthCard";
+  bmrCard.style.borderColor = "#8A2BE2";
+  bmrCard.innerHTML = `<h4>BMR</h4>
+                       <p>${Math.round(bmr)} kcal/day</p>`;
+  
+  // TDEE card
+  const tdeeCard = document.createElement("div");
+  tdeeCard.className = "healthCard";
+  tdeeCard.style.borderColor = "#3CB371";
+  tdeeCard.innerHTML = `<h4>TDEE</h4>
+                        <p>${Math.round(tdee)} kcal/day</p>`;
+  
+  cardContainer.appendChild(bmiCard);
+  cardContainer.appendChild(bmrCard);
+  cardContainer.appendChild(tdeeCard);
+  
+  resultsContainer.appendChild(cardContainer);
+  
+  // Append an explanation paragraph
+  const explanation = document.createElement("p");
+  explanation.innerHTML = `<strong>BMI</strong> indicates body fat, <strong>BMR</strong> shows the calories needed at rest, and <strong>TDEE</strong> is your total daily energy expenditure.`;
+  resultsContainer.appendChild(explanation);
+}
+
+// Restart the Health App: clear results and show the input form again
+function restartApp() {
+  document.getElementById("resultsContainer").classList.add("displayNone");
+  document.getElementById("mainAppContainer").classList.remove("displayNone");
+  document.getElementById("appRestartBTN").classList.add("displayNone");
+  // Reset form values
+  const inputs = document.getElementById("mainAppContainer").querySelectorAll("input, select");
+  inputs.forEach((el) => el.value = "");
 }
 
 /* ---------------- Weather App Functions ---------------- */
@@ -287,7 +295,7 @@ async function getWeather() {
     alert("Please select a valid location from the suggestions.");
     return;
   }
-  const units = "metric";
+  const units = "metric"; // using metric units
   const url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}&units=${units}`;
   try {
     const response = await fetch(url);
@@ -296,6 +304,7 @@ async function getWeather() {
     forecastHeader.textContent = inputElement.value;
     forecastElement.innerHTML = "";
     let forecastHTML = "";
+    // Loop through forecast data (one reading per day)
     for (let i = 0; i < data.list.length; i += 8) {
       const dayData = data.list[i];
       const dateObj = new Date(dayData.dt * 1000);
@@ -408,6 +417,8 @@ function recordLap() {
 // Initialize a rotating cube in the Home section
 function cubeTalk() {
   const container = document.getElementById("cubeContainer");
+  // Clear any previous canvas elements
+  container.innerHTML = "";
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(95, container.clientWidth / container.clientHeight, 0.9, 1000);
   camera.position.z = 2.5;

@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="style.css" />
     <!-- Three.js for 3D animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <!-- Chart.js for the health app pie chart -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- (Chart.js is no longer used in the Health App) -->
   </head>
   <body>
     <!-- Opening Screen -->
@@ -27,7 +26,7 @@
           <h2 id="title">Web/Software Developer</h2>
         </div>
         <div id="mainHeader" class="center-tabs">
-          <!-- Each tab has a data-original attribute for its default text.
+          <!-- Each tab uses a data-original attribute for its default text.
                The active tab shows a rotating cube icon. -->
           <div id="homeTab" class="tab active" data-original="Home">
             <div class="activeCube"></div>
@@ -42,7 +41,7 @@
 
       <!-- Home Section -->
       <section id="homeTabSection">
-        <!-- This container will hold the Three.js cube -->
+        <!-- Container for the Three.js cube -->
         <div id="cubeContainer"></div>
         <div id="homeHeader">A Digital Portfolio by Raneem Ali</div>
       </section>
@@ -129,7 +128,7 @@
 
         <!-- Health App Container -->
         <div id="project1Container" class="displayNone projectContainers">
-          <!-- Welcome Screen with Animated (Rotating) SVG Human -->
+          <!-- Welcome Screen with Animated (Standing) SVG Human -->
           <div id="fitMindsetWelcome">
             <!-- The SVG rotates only around its Y‑axis so it always stays upright -->
             <svg id="humanSVG" width="150" height="150" viewBox="0 0 64 64">
@@ -143,7 +142,7 @@
             <div id="fitWelcomeText">Press Start to Enter</div>
             <button id="fitStartBTN" onclick="startFitMindset()">Start</button>
           </div>
-          <!-- Main Input Form (Vertical layout) -->
+          <!-- Main Input Form (Vertical Layout) -->
           <div id="mainAppContainer" class="displayNone mainProjectContainers">
             <h3>Enter Your Information to Calculate Your Results</h3>
             <label for="nameInput">First Name: </label>
@@ -170,13 +169,11 @@
               <option value="1.9">Extremely Active (2x/day)</option>
             </select>
           </div>
-          <!-- Submit Button to Trigger Calculation -->
+          <!-- Submit Button (styled) -->
           <button id="appSubmitBTN" onclick="calculateHealthStats()">Submit</button>
-          <!-- Results Container (Displays Chart & Explanation) -->
+          <!-- Results Container (Displays Health Cards) -->
           <div id="resultsContainer" class="displayNone">
-            <h3 id="headerResults"></h3>
-            <canvas id="healthChart"></canvas>
-            <p id="resultsDescription"></p>
+            <!-- Header and cards will be injected by JS -->
           </div>
           <!-- Restart & Exit Buttons (inside container) -->
           <button id="appRestartBTN" onclick="restartApp()">Restart</button>
