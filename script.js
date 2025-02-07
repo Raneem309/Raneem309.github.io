@@ -482,9 +482,9 @@ function recordLap() {
   lapItem.innerText = `Lap ${lapNumber}: ${hrs}:${mins}:${secs}`;
   lapContainer.appendChild(lapItem);
   if(lapContainer.childElementCount === 0){
-    lapContainer.classList.add(displayNone);
+    lapContainer.classList.add("displayNone");
   }else{
-    lapContainer.classList.remove(displayNone);
+    lapContainer.classList.remove("displayNone");
   }
 }
 
