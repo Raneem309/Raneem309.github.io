@@ -60,21 +60,23 @@
           <div class="aboutMain">
             <div class="aboutTab" id="about-summary">
               <p>
-                I am a dedicated and detail‑oriented software and web developer based in Brooklyn, NY.
-                I specialize in creating scalable, responsive, and user‑friendly web applications.
-                My passion for problem‑solving and continuous learning drives me to deliver innovative solutions.
+                Hi, I'm Raneem Ali — a passionate and self-driven software developer with a focus on front-end and back-end technologies. With a background in JavaScript, Python, and HTML/CSS, I've developed several projects that showcase my ability to design intuitive user interfaces and build robust server-side applications.
+
+I thrive on solving complex problems and enjoy working with teams to bring ideas to life. My approach is hands-on and detail-oriented, with a strong emphasis on clean, maintainable code. I'm constantly learning and adapting, keeping up with new technologies to stay ahead in an ever-evolving field.
+
+I love building things that have a real impact, whether it's creating seamless web applications or optimizing systems for better user experiences. Currently, I’m seeking opportunities to grow and apply my skills in a collaborative and innovative environment. 
               </p>
             </div>
             <div class="aboutTab displayNone" id="about-skills">
-              <p><strong>Languages:</strong> JavaScript, HTML, CSS, Python, Java</p>
-              <p><strong>Cloud Computing:</strong> AWS, Azure</p>
-              <p><strong>Tools &amp; Platforms:</strong> Microsoft 365, VS Code, SharePoint, GitHub, Power Automate</p>
-              <p><strong>Methodologies:</strong> Agile, DevSecOps, Unit Testing, Debugging, Deployment Strategies</p>
+              <p><strong>Languages:</strong> <em> JavaScript, HTML, CSS, Python, Java</em></p>
+              <p><strong>Cloud Computing:</strong><em> AWS, Azure</em> </p>
+              <p><strong>Tools & Platforms:</strong> <em> Microsoft 365, VS Code, SharePoint, GitHub, Power Automate</em></p>
+              <p><strong>Methodologies:</strong> <em> Agile, DevSecOps, Unit Testing, Debugging, Deployment Strategies</em></p>
             </div>
             <div class="aboutTab displayNone" id="about-experience">
               <p>
-                <strong>Agility Consultants, Washington, DC — Junior Developer</strong><br />
-                Oct 2023 - Oct 2024<br />
+                <strong>Agility Consultants, Washington, DC — Junior Developer</strong><em>
+                Oct 2023 - Oct 2024</em>
                 - Developed and maintained responsive, scalable web applications.<br />
                 - Optimized user experiences and ensured cross‑browser compatibility.<br />
                 - Integrated RESTful APIs and collaborated with backend developers.<br />
@@ -82,8 +84,8 @@
                 - Leveraged GitHub for version control and adopted Agile methodologies.
               </p>
               <p>
-                <strong>The Grooming Lounge, Tysons, VA — First Line Manager</strong><br />
-                Sept 2019 - Sept 2023<br />
+                <strong>The Grooming Lounge, Tysons, VA — First Line Manager</strong><em>
+                Sept 2019 - Sept 2023</em>
                 - Managed and optimized database operations.<br />
                 - Supervised a team of 20 staff members and delivered staff training.<br />
                 - Implemented secure client information systems and streamlined workflows.
@@ -91,9 +93,9 @@
             </div>
             <div class="aboutTab displayNone" id="about-education">
               <p>
-                <strong>George Mason University, Fairfax, VA</strong><br />
-                Bachelor’s in Management Information Systems (MIS)<br />
-                - Courses included JAVA, Python, and AWS fundamentals.
+                <strong>George Mason University, Fairfax, VA</strong><em>
+                Bachelor’s in Management Information Systems (MIS)</em>
+                With my educational foundation in MIS, I focused on scalable software design while gaining hands-on experience and fundamental knowledge with Python, Java, and AWS.
               </p>
             </div>
           </div>
@@ -127,14 +129,14 @@
         <div id="project1Container" class="displayNone projectContainers">
           <!-- Welcome Screen with Rotating SVG "Person" and Start Button -->
           <div id="fitMindsetWelcome">
-            <svg id="humanSVG" width="150" height="150" viewBox="0 0 64 64">
-              <circle cx="32" cy="16" r="10" fill="#ccc" />
-              <rect x="26" y="28" width="12" height="20" fill="#ccc" />
-              <line x1="26" y1="28" x2="16" y2="44" stroke="#ccc" stroke-width="2" />
-              <line x1="38" y1="28" x2="48" y2="44" stroke="#ccc" stroke-width="2" />
-              <line x1="26" y1="48" x2="20" y2="60" stroke="#ccc" stroke-width="2" />
-              <line x1="38" y1="48" x2="44" y2="60" stroke="#ccc" stroke-width="2" />
-            </svg>
+            <model-viewer 
+            id="human3D"
+            src="images/hooman3D.glb" 
+            alt="3D model of a fit man" 
+            auto-rotate 
+            camera-controls
+            style="width: 150px; height: 150px; display: block;">
+          </model-viewer>
             <div id="fitWelcomeText">Press Start to Enter</div>
             <button id="fitStartBTN" onclick="startFitMindset()">Start</button>
           </div>
@@ -180,7 +182,7 @@
             <input type="text" id="location" placeholder="Enter a City..." oninput="getLocations()" />
             <div id="suggestions" class="displayNone"></div>
             <button id="weatherBtn" onclick="getWeather()" disabled>Get Forecast</button>
-            <button id="toggleTempUnit" onclick="toggleTemperatureUnit()">°F / °C</button>
+            <button class="displayNone" id="toggleTempUnit" onclick="toggleTemperatureUnit()">°F / °C</button>
             <div id="forecast" class="displayNone">
               <h2>5-Day Forecast</h2>
               <div id="forecastContianer"></div>
@@ -193,7 +195,6 @@
         <div id="project3Container" class="displayNone projectContainers">
           <div class="stopwatchContainer">
             <div id="stopwatchDisplay">
-              <img src="images/stopwatch.png" alt="Stopwatch" id="stopwatchImg" />
               <div id="timeDisplay">00:00:00</div>
             </div>
             <div id="stopwatchButtons">
@@ -201,7 +202,7 @@
               <button id="lapBtn" onclick="recordLap()" disabled>Lap</button>
               <button id="resetTimerBtn" onclick="resetTimer()" disabled>Reset</button>
             </div>
-            <div id="lapContainer"></div>
+            <div class="displayNone" id="lapContainer"></div>
           </div>
           <button class="exitButton" onclick="exitApp()">Exit</button>
         </div>

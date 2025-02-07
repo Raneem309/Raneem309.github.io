@@ -182,46 +182,68 @@ function displayHealthResults(bmi, bmr, tdee) {
   resultsContainer.classList.remove("displayNone");
   resultsContainer.innerHTML = `<h3 id="headerResults">Hi ${healthAppUserName}! Here are your calculated health results.</h3>`;
   
-  // Create cards for each metric
+  // Create cards container
   const cardContainer = document.createElement("div");
   cardContainer.className = "healthCards";
   
   // Determine color for BMI card based on range
   let bmiColor = "#36A2EB"; // healthy blue
-  if (bmi < 18.5) { bmiColor = "#FF6384"; } 
-  else if (bmi >= 25) { bmiColor = "#FFCE56"; }
+  if (bmi < 18.5) { 
+    bmiColor = "#FF6384"; 
+  } else if (bmi >= 25) { 
+    bmiColor = "#FFCE56"; 
+  }
   
+  // BMI Card (already showing extra line: bmiStatus)
   const bmiCard = document.createElement("div");
   bmiCard.className = "healthCard";
   bmiCard.style.borderColor = bmiColor;
-  bmiCard.innerHTML = `<h4>BMI</h4>
-                       <p>${bmi.toFixed(2)}</p>
-                       <p>${bmiStatus}</p>`;
+  bmiCard.innerHTML = `
+    <h4>BMI</h4>
+    <p>${bmi.toFixed(2)}</p>
+    <p>${bmiStatus}</p>
+  `;
   
+  // Placeholder average values for BMR and TDEE (update these with your real data)
+  const avgBmr = 1500;  // example average BMR value in kcal/day
+  const avgTdee = 2200; // example average TDEE value in kcal/day
+  
+  // BMR Card with an extra line for average
   const bmrCard = document.createElement("div");
   bmrCard.className = "healthCard";
   bmrCard.style.borderColor = "#8A2BE2";
-  bmrCard.innerHTML = `<h4>BMR</h4>
-                       <p>${Math.round(bmr)} kcal/day</p>`;
+  bmrCard.innerHTML = `
+    <h4>BMR</h4>
+    <p>${Math.round(bmr)} kcal/day</p>
+    <p class="avg">Average number of calories a person typically burns while at rest: ${avgBmr} kcal/day</p>
+  `;
   
+  // TDEE Card with an extra line for average
   const tdeeCard = document.createElement("div");
   tdeeCard.className = "healthCard";
   tdeeCard.style.borderColor = "#3CB371";
-  tdeeCard.innerHTML = `<h4>TDEE</h4>
-                        <p>${Math.round(tdee)} kcal/day</p>`;
+  tdeeCard.innerHTML = `
+    <h4>TDEE</h4>
+    <p>${Math.round(tdee)} kcal/day</p>
+    <p class="Average number of calories a person burns with your refrence data: ">: ${avgTdee} kcal/day</p>
+  `;
   
+  // Append cards to container
   cardContainer.appendChild(bmiCard);
   cardContainer.appendChild(bmrCard);
   cardContainer.appendChild(tdeeCard);
   resultsContainer.appendChild(cardContainer);
   
+  // Explanation paragraph
   const explanation = document.createElement("p");
-  explanation.innerHTML = `<strong>BMI</strong> indicates body fat, <strong>BMR</strong> is calories needed at rest, and <strong>TDEE</strong> is your total daily energy expenditure.`;
+  explanation.id = "definitions"
+  explanation.innerHTML = `<strong>BMI</strong> indicates body fat, <strong>BMR</strong> is the calories needed at rest, and <strong>TDEE</strong> is your total daily energy expenditure needed to maintain your weight.`;
   resultsContainer.appendChild(explanation);
   
   // Show Restart button after results are displayed
   document.getElementById("appRestartBTN").classList.remove("displayNone");
 }
+
 
 function restartApp() {
   // Reset: hide results, show input form and Submit button, clear inputs
@@ -299,6 +321,7 @@ async function getWeather() {
   const forecastHeader = document.querySelector("#forecast h2");
   const weatherBtn = document.getElementById("weatherBtn");
   const location = inputElement.dataset.apiValue;
+  const tempBtn = document.getElementById("toggleTempUnit");
   if (!location) {
     alert("Please select a valid location from the suggestions.");
     return;
@@ -315,7 +338,7 @@ async function getWeather() {
     for (let i = 0; i < data.list.length; i += 8) {
       const dayData = data.list[i];
       const dateObj = new Date(dayData.dt * 1000);
-      const options = { weekday: 'long', month: 'short', day: 'numeric' };
+      const options = { weekday: 'long', month: 'long', day: 'numeric' };
       const formattedDate = dateObj.toLocaleDateString(undefined, options);
       let tempC = dayData.main.temp;
       let tempDisplay = tempC;
@@ -339,16 +362,39 @@ async function getWeather() {
         </div>
       `;
     }
+// Get all elements with class "thermometer-fill" inside the #forecastContianer
+const thermometerFills = Array.from(document.querySelectorAll('#forecastContianer .thermometer-fill'));
+
+// Iterate over each element
+thermometerFills.forEach((el) => {
+  // Assume the height is set as a percentage string, e.g. "60%"
+  const heightStr = el.style.height; // "60%"
+  const heightValue = parseFloat(heightStr); // 60
+
+  // Check the height and set the corresponding background
+  if (heightValue > 50 && heightValue < 70) {
+    el.style.background = "linear-gradient(to top, white, orange)";
+  } else if (heightValue >= 70) {
+    el.style.background = "linear-gradient(to top, white, red)";
+  } else if (heightValue < 50) {
+    el.style.background = "linear-gradient(to top, white, blue)";
+  }
+});
+
     forecastElement.innerHTML = forecastHTML;
     document.getElementById("forecast").classList.remove("displayNone");
   } catch (error) {
     console.error("Error retrieving weather data:", error);
     forecastElement.innerText = "Error retrieving weather data.";
+    forecastHeader.innerHTML = ""
   }
   inputElement.value = "";
   weatherBtn.disabled = true;
   weatherBtn.style.cursor = "";
   weatherBtn.style.backgroundColor = "#003e0700";
+  weatherBtn.style.color = "white";
+  tempBtn.classList.remove("displayNone");
+  tempBtn.classList.add("displayNone")
 }
 
 /* ---------------- Stopwatch Functions ---------------- */
@@ -391,6 +437,7 @@ function resetTimer() {
   document.getElementById("toggleTimerBtn").innerText = "Start";
   document.getElementById("lapBtn").disabled = true;
   document.getElementById("resetTimerBtn").disabled = true;
+  lapContainer.classList.add(displayNone);
 }
 
 function updateTimeDisplay() {
@@ -412,6 +459,11 @@ function recordLap() {
   const secs = String(timeInSeconds % 60).padStart(2, '0');
   lapItem.innerText = `Lap ${lapNumber}: ${hrs}:${mins}:${secs}`;
   lapContainer.appendChild(lapItem);
+  if(lapContainer.childElementCount === 0){
+    lapContainer.classList.add(displayNone);
+  }else{
+    lapContainer.classList.remove(displayNone);
+  }
 }
 
 /* ---------------- Three.js Cube in Home Section ---------------- */
