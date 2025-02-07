@@ -71,16 +71,38 @@ function handleOpeningScreen() {
   const openingScreen = document.getElementById("openingScreen");
   const openName = document.getElementById("openName");
   const openTitle = document.getElementById("openTitle");
+
+  // Show the opening screen immediately.
   openingScreen.classList.remove("displayNone");
-  setTimeout(() => { openName.style.opacity = "1"; }, 0);
-  setTimeout(() => { openTitle.style.opacity = "1"; }, 1000);
-  setTimeout(() => { openName.style.opacity = "0"; }, 5000);
+
+  // Fade in the name immediately.
+  setTimeout(() => { 
+    openName.style.opacity = "1"; 
+  }, 0);
+
+  // Fade in the title after 1 second.
+  setTimeout(() => { 
+    openTitle.style.opacity = "1"; 
+  }, 1000);
+
+  // Delay the fade-out of the text to 7 seconds (instead of 5).
+  setTimeout(() => { 
+    openName.style.opacity = "0"; 
+    openTitle.style.opacity = "0";
+  }, 7000);
+
+  // Delay the start of the container fade-out until 7 seconds.
   setTimeout(() => {
     openingScreen.style.transition = "opacity 6s ease";
     openingScreen.style.opacity = "0";
-    setTimeout(() => { openingScreen.classList.add("displayNone"); }, 6000);
-  }, 4000);
+
+    // After the 6-second fade-out, hide the container.
+    setTimeout(() => { 
+      openingScreen.classList.add("displayNone"); 
+    }, 6000);
+  }, 7000);
 }
+
 
 /* ---------------- About Me Section ---------------- */
 function initAboutSection() {
@@ -225,7 +247,7 @@ function displayHealthResults(bmi, bmr, tdee) {
   tdeeCard.innerHTML = `
     <h4>TDEE</h4>
     <p>${Math.round(tdee)} kcal/day</p>
-    <p class="Average number of calories a person burns with your refrence data: ">: ${avgTdee} kcal/day</p>
+    <p class="avg">Average number of calories a person burns with your refrence data: ${avgTdee} kcal/day</p>
   `;
   
   // Append cards to container
@@ -437,7 +459,7 @@ function resetTimer() {
   document.getElementById("toggleTimerBtn").innerText = "Start";
   document.getElementById("lapBtn").disabled = true;
   document.getElementById("resetTimerBtn").disabled = true;
-  lapContainer.classList.add(displayNone);
+  document.getElementById("lapContainer").classList.add("displayNone");
 }
 
 function updateTimeDisplay() {
