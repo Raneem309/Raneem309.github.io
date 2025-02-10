@@ -340,7 +340,7 @@ function toggleTemperatureUnit() {
 async function getWeather() {
   const inputElement = document.getElementById("location");
   const forecastElement = document.getElementById("forecastContianer");
-  const forecastDiv = document.getElementById("#forecast");
+  const forecastDiv = document.getElementById("forecast");
   const weatherBtn = document.getElementById("weatherBtn");
   const location = inputElement.dataset.apiValue;
   const tempBtn = document.getElementById("toggleTempUnit");
