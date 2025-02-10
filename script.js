@@ -355,7 +355,7 @@ async function getWeather() {
     if (!response.ok) throw new Error("Failed to fetch weather data");
     const data = await response.json();
     const h3 = document.createElement("h3");
-    h3.innerHTML = location.valueOf;
+    h3.textContent = location;
     forecastDiv.appendChild(h3);
     forecastHeader.textContent = inputElement.value;
     forecastDiv.append()
@@ -396,11 +396,13 @@ async function getWeather() {
     forecastElement.innerText = "Error retrieving weather data.";
     forecastHeader.innerHTML = ""
   }
+
   inputElement.value = "";
   weatherBtn.disabled = true;
   weatherBtn.style.cursor = "";
   weatherBtn.style.backgroundColor = "#003e0700";
   weatherBtn.style.color = "white";
+ 
   if(forecastElement.innerHTML === ""){
     tempBtn.classList.add("displayNone")
   }else{
