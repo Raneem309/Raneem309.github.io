@@ -354,10 +354,11 @@ async function getWeather() {
     const response = await fetch(url);
     if (!response.ok) throw new Error("Failed to fetch weather data");
     const data = await response.json();
-    const h3 = document.createElement("h3");
-    h3.textContent = location;
-    forecastDiv.appendChild(h3);
-    forecastDiv.append()
+    const h2Element = document.querySelector('#forecast h2');
+    const h3Element = document.querySelector('#forecast h3');
+      if(h3Element){
+        h3Element.innerHTML = location;
+      }
     forecastElement.innerHTML = "";
     let forecastHTML = "";
     for (let i = 0; i < data.list.length; i += 8) {
