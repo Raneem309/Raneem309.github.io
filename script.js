@@ -340,7 +340,7 @@ function toggleTemperatureUnit() {
 async function getWeather() {
   const inputElement = document.getElementById("location");
   const forecastElement = document.getElementById("forecastContianer");
-  const forecastHeader = document.querySelector("#forecast h2");
+  const forecastDiv = document.getElementById("#forecast");
   const weatherBtn = document.getElementById("weatherBtn");
   const location = inputElement.dataset.apiValue;
   const tempBtn = document.getElementById("toggleTempUnit");
@@ -354,7 +354,11 @@ async function getWeather() {
     const response = await fetch(url);
     if (!response.ok) throw new Error("Failed to fetch weather data");
     const data = await response.json();
+    const h3 = document.createElement("h3");
+    h3.innerHTML = location.valueOf;
+    forecastDiv.appendChild(h3);
     forecastHeader.textContent = inputElement.value;
+    forecastDiv.append()
     forecastElement.innerHTML = "";
     let forecastHTML = "";
     for (let i = 0; i < data.list.length; i += 8) {
@@ -384,7 +388,30 @@ async function getWeather() {
         </div>
       `;
     }
-// Get all elements with class "thermometer-fill" inside the #forecastContianer
+
+    forecastElement.innerHTML = forecastHTML;
+    forecastDiv.classList.remove("displayNone");
+  } catch (error) {
+    console.error("Error retrieving weather data:", error);
+    forecastElement.innerText = "Error retrieving weather data.";
+    forecastHeader.innerHTML = ""
+  }
+  inputElement.value = "";
+  weatherBtn.disabled = true;
+  weatherBtn.style.cursor = "";
+  weatherBtn.style.backgroundColor = "#003e0700";
+  weatherBtn.style.color = "white";
+  if(forecastElement.innerHTML === ""){
+    tempBtn.classList.add("displayNone")
+  }else{
+    tempBtn.classList.remove("displayNone");
+  }
+
+  tempFillColor()
+}
+
+function tempFillColor(){
+  // Get all elements with class "thermometer-fill" inside the #forecastContianer
 const thermometerFills = Array.from(document.querySelectorAll('#forecastContianer .thermometer-fill'));
 
 // Iterate over each element
@@ -402,21 +429,6 @@ thermometerFills.forEach((el) => {
     el.style.background = "linear-gradient(to top, white, blue)";
   }
 });
-
-    forecastElement.innerHTML = forecastHTML;
-    document.getElementById("forecast").classList.remove("displayNone");
-  } catch (error) {
-    console.error("Error retrieving weather data:", error);
-    forecastElement.innerText = "Error retrieving weather data.";
-    forecastHeader.innerHTML = ""
-  }
-  inputElement.value = "";
-  weatherBtn.disabled = true;
-  weatherBtn.style.cursor = "";
-  weatherBtn.style.backgroundColor = "#003e0700";
-  weatherBtn.style.color = "white";
-  tempBtn.classList.remove("displayNone");
-  tempBtn.classList.add("displayNone")
 }
 
 /* ---------------- Stopwatch Functions ---------------- */
