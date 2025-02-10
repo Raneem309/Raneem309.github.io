@@ -357,7 +357,6 @@ async function getWeather() {
     const h3 = document.createElement("h3");
     h3.textContent = location;
     forecastDiv.appendChild(h3);
-    forecastHeader.textContent = inputElement.value;
     forecastDiv.append()
     forecastElement.innerHTML = "";
     let forecastHTML = "";
