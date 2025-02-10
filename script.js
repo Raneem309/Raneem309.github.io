@@ -11,6 +11,8 @@ let timer;
 let timeInSeconds = 0;
 let timerRunning = false;
 let lapTimes = [];
+let h2Element = document.querySelector('#forecast h2');
+let h3Element = document.querySelector('#forecast h3');
 
 /* ---------------- Initialization on Window Load ---------------- */
 window.onload = function () {
@@ -354,11 +356,11 @@ async function getWeather() {
     const response = await fetch(url);
     if (!response.ok) throw new Error("Failed to fetch weather data");
     const data = await response.json();
-    const h2Element = document.querySelector('#forecast h2');
-    const h3Element = document.querySelector('#forecast h3');
       if(h3Element){
         h3Element.innerHTML = location;
       }
+      h2Element.classList.remove("displayNone");
+      h3Element.classList.remove("displayNone");
     forecastElement.innerHTML = "";
     let forecastHTML = "";
     for (let i = 0; i < data.list.length; i += 8) {
@@ -395,13 +397,14 @@ async function getWeather() {
     console.error("Error retrieving weather data:", error);
     forecastElement.innerText = "Error retrieving weather data.";
     forecastHeader.innerHTML = ""
+    h2Element.classList.add("displayNone");
+    h3Element.classList.add("displayNone");
   }
 
   inputElement.value = "";
   weatherBtn.disabled = true;
   weatherBtn.style.cursor = "";
   weatherBtn.style.backgroundColor = "#003e0700";
-  weatherBtn.style.color = "white";
  
   if(forecastElement.innerHTML === ""){
     tempBtn.classList.add("displayNone")
@@ -577,6 +580,8 @@ function exitApp() {
   suggestionsElement.classList.add("displayNone");
   document.getElementById("forecastContianer").innerHTML = "";
   document.getElementById("forecast").classList.add("displayNone");
+  document.getElementById("toggleTempUnit").classList.add("displayNone");
+
   
   resetTimer();
   

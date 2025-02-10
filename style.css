@@ -71,10 +71,10 @@ p {
 .container {
   position: relative;
   max-width: 1200px;
-  margin: 5vh auto;
+  margin: 7vh auto;
   background: rgba(0, 0, 0, 0.8);
   border-radius: 20px;
-  padding: 1rem;
+  padding: .5rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -338,7 +338,14 @@ section {
   width: 100%;
 }
 
-#weatherBtn,
+#weatherBtn{
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}
 #toggleTempUnit {
   padding: 0.5rem 1rem;
   margin: 0.5rem;
@@ -473,7 +480,7 @@ section {
 /* ---------------- Responsive Media Queries ---------------- */
 @media (max-width: 768px) {
   .container {
-    margin: 2vh auto;
+    margin: 7vh auto;
     padding: 0.5rem;
   }
   #headerContainer {
@@ -499,7 +506,7 @@ section {
 
 
 #aboutMeHeader, #contactHeader, #projectHeader{
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   color: white;
 }
 
