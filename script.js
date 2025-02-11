@@ -518,10 +518,10 @@ function cubeTalk() {
   renderer.setSize(container.clientWidth, container.clientHeight);
   container.appendChild(renderer.domElement);
   
-  const light = new THREE.DirectionalLight(0xffffff, 1);
-  light.position.set(10, 10, 10);
-  light.castShadow = true;
-  scene.add(light);
+  // const light = new THREE.DirectionalLight(0xffffff, 1);
+  // light.position.set(10, 10, 10);
+  // light.castShadow = true;
+  // scene.add(light);
   
   const geometry = new THREE.BoxGeometry();
   const material = new THREE.MeshStandardMaterial({
