@@ -261,7 +261,7 @@ function displayHealthResults(bmi, bmr, tdee) {
   // Explanation paragraph
   const explanation = document.createElement("p");
   explanation.id = "definitions"
-  explanation.innerHTML = `<strong>Body Mass Index (BMI)</strong>, is a measurement of weight relative to ones height./n <strong>Basal Metabolic Rate (BMR)</strong>, is the minimum number of calories your body needs to function at a basic level./n <strong>Total Daily Energy Expenditure (TDEE)</strong>, is your total daily energy expenditure needed to maintain your weight.`;
+  explanation.innerHTML = `<strong>Body Mass Index (BMI)</strong>, is a measurement of weight relative to ones height.\n <strong>Basal Metabolic Rate (BMR)</strong>, is the minimum number of calories your body needs to function at a basic level.\n <strong>Total Daily Energy Expenditure (TDEE)</strong>, is your total daily energy expenditure needed to maintain your weight.`;
   resultsContainer.appendChild(explanation);
   
   // Show Restart button after results are displayed
