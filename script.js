@@ -514,7 +514,7 @@ function cubeTalk() {
   camera.position.z = 2.5;
   
   const renderer = new THREE.WebGLRenderer({ alpha: true });
-  renderer.shadowMap.enabled = true;
+  // renderer.shadowMap.enabled = true;
   renderer.setSize(container.clientWidth, container.clientHeight);
   container.appendChild(renderer.domElement);
   
@@ -530,8 +530,8 @@ function cubeTalk() {
     transparent: true,
   });
   const cube = new THREE.Mesh(geometry, material);
-  cube.castShadow = true;
-  cube.receiveShadow = true;
+  // cube.castShadow = true;
+  // cube.receiveShadow = true;
   cube.scale.set(2, 2, 2);
   scene.add(cube);
   
@@ -540,13 +540,13 @@ function cubeTalk() {
   const wireframe = new THREE.LineSegments(edges, wireframeMaterial);
   cube.add(wireframe);
   
-  const floorGeometry = new THREE.PlaneGeometry(5, 5);
-  const floorMaterial = new THREE.ShadowMaterial({ opacity: 0.3 });
-  const floor = new THREE.Mesh(floorGeometry, floorMaterial);
-  floor.rotation.x = -Math.PI / 2;
-  floor.position.y = -3.5;
-  floor.receiveShadow = true;
-  scene.add(floor);
+  // const floorGeometry = new THREE.PlaneGeometry(5, 5);
+  // const floorMaterial = new THREE.ShadowMaterial({ opacity: 0.3 });
+  // const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+  // floor.rotation.x = -Math.PI / 2;
+  // floor.position.y = -3.5;
+  // floor.receiveShadow = true;
+  // scene.add(floor);
   
   function animate() {
     requestAnimationFrame(animate);
