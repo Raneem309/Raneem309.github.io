@@ -204,7 +204,7 @@ function evaluateBMI(bmi) {
 function displayHealthResults(bmi, bmr, tdee) {
   const resultsContainer = document.getElementById("resultsContainer");
   resultsContainer.classList.remove("displayNone");
-  resultsContainer.innerHTML = `<h3 id="headerResults">Hi ${healthAppUserName}! Here are your calculated health results.</h3>`;
+  resultsContainer.innerHTML = `<h3 id="headerResults">Hi ${healthAppUserName}! Here are your calculated health results:</h3>`;
   
   // Create cards container
   const cardContainer = document.createElement("div");
@@ -261,7 +261,7 @@ function displayHealthResults(bmi, bmr, tdee) {
   // Explanation paragraph
   const explanation = document.createElement("p");
   explanation.id = "definitions"
-  explanation.innerHTML = `<strong>BMI</strong> indicates body fat, <strong>BMR</strong> is the calories needed at rest, and <strong>TDEE</strong> is your total daily energy expenditure needed to maintain your weight.`;
+  explanation.innerHTML = `<strong>Body Mass Index (BMI)</strong>, is a measurement of weight relative to ones height./n <strong>Basal Metabolic Rate (BMR)</strong>, is the minimum number of calories your body needs to function at a basic level./n <strong>Total Daily Energy Expenditure (TDEE)</strong>, is your total daily energy expenditure needed to maintain your weight.`;
   resultsContainer.appendChild(explanation);
   
   // Show Restart button after results are displayed
@@ -396,7 +396,6 @@ async function getWeather() {
   } catch (error) {
     console.error("Error retrieving weather data:", error);
     forecastElement.innerText = "Error retrieving weather data.";
-    forecastHeader.innerHTML = ""
     h2Element.classList.add("displayNone");
     h3Element.classList.add("displayNone");
   }
