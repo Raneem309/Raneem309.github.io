@@ -68,33 +68,28 @@ function handleOpeningScreen() {
   const openName = document.getElementById("openName");
   const openTitle = document.getElementById("openTitle");
 
-  // Fade in the name immediately.
   setTimeout(() => {
     openName.style.opacity = "1";
   }, 0);
 
-  // Fade in the title after 1 second.
   setTimeout(() => {
     openTitle.style.opacity = "1";
   }, 2000);
 
-  // Delay the fade-out of the text to 7 seconds (instead of 5).
   setTimeout(() => {
     openName.style.opacity = "0";
     openTitle.style.opacity = "0";
-  }, 10000);
+  }, 6000);
 
-  // Delay the start of the container fade-out until 7 seconds.
   setTimeout(() => {
-    openingScreen.style.transition = "opacity 8s ease";
+    openingScreen.style.transition = "opacity 6s ease";
     openingScreen.style.opacity = "0";
 
-    // After the 6-second fade-out, hide the container.
     setTimeout(() => {
       openingScreen.classList.add("displayNone");
       mainContainer.classList.remove("displayNone");
-    }, 8000);
-  }, 10000);
+    }, 6000);
+  }, 8000);
 }
 
 function initAboutSection() {
