@@ -507,21 +507,14 @@ function recordLap() {
 /* ---------------- Three.js Cube in Home Section ---------------- */
 function cubeTalk() {
   const container = document.getElementById("cubeContainer");
-  // Clear previous content (if any)
   container.innerHTML = "";
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(95, container.clientWidth / container.clientHeight, 0.9, 1000);
   camera.position.z = 2.5;
   
   const renderer = new THREE.WebGLRenderer({ alpha: true });
-  // renderer.shadowMap.enabled = true;
   renderer.setSize(container.clientWidth, container.clientHeight);
   container.appendChild(renderer.domElement);
-  
-  // const light = new THREE.DirectionalLight(0xffffff, 1);
-  // light.position.set(10, 10, 10);
-  // light.castShadow = true;
-  // scene.add(light);
   
   const geometry = new THREE.BoxGeometry();
   const material = new THREE.MeshStandardMaterial({
@@ -530,8 +523,6 @@ function cubeTalk() {
     transparent: true,
   });
   const cube = new THREE.Mesh(geometry, material);
-  // cube.castShadow = true;
-  // cube.receiveShadow = true;
   cube.scale.set(2, 2, 2);
   scene.add(cube);
   
@@ -540,13 +531,6 @@ function cubeTalk() {
   const wireframe = new THREE.LineSegments(edges, wireframeMaterial);
   cube.add(wireframe);
   
-  // const floorGeometry = new THREE.PlaneGeometry(5, 5);
-  // const floorMaterial = new THREE.ShadowMaterial({ opacity: 0.3 });
-  // const floor = new THREE.Mesh(floorGeometry, floorMaterial);
-  // floor.rotation.x = -Math.PI / 2;
-  // floor.position.y = -3.5;
-  // floor.receiveShadow = true;
-  // scene.add(floor);
   
   function animate() {
     requestAnimationFrame(animate);
@@ -565,7 +549,7 @@ function cubeTalk() {
 
 /* ---------------- Exit App Function ---------------- */
 function exitApp() {
-  document.getElementById("projectHeader").innerText = "A - Z";
+  document.getElementById("projectHeader").innerText = "Projects";
   const projectContainers = document.querySelectorAll(".projectContainers");
   projectContainers.forEach((container) => container.classList.add("displayNone"));
   
