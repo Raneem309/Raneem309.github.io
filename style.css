@@ -43,6 +43,7 @@ p {
   z-index: 9999;
   text-align: center;
   font-size: 2rem;
+  transition: opacity 1s ease;
 }
 
 #openName,
@@ -63,7 +64,7 @@ p {
   z-index: -2;
 }
 
-#mainContainer{
+#mainContainer {
   opacity: 0;
   transition: opacity 1s ease-in-out;
 }
@@ -112,7 +113,7 @@ p {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* .activeCube {
+.activeCube {
   width: 20px;
   height: 20px;
   background: linear-gradient(45deg, #fff, #ccc);
@@ -127,7 +128,7 @@ p {
   to {
     transform: rotateY(360deg);
   }
-} */
+}
 
 .displayNone {
   display: none !important;

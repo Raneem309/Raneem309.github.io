@@ -58,7 +58,6 @@ function handleTabs(tabId) {
     document.getElementById("contactSection").classList.remove("displayNone");
   } else if (tabId === "homeTab") {
     document.getElementById("homeTabSection").classList.remove("displayNone");
-    // Reinitialize cube on Home tab
     cubeTalk();
   }
 }
@@ -82,13 +81,10 @@ function handleOpeningScreen() {
   }, 3000);
 
   setTimeout(() => {
-    openingScreen.style.transition = "opacity 1s ease";
     openingScreen.style.opacity = "0";
 
     setTimeout(() => {
       openingScreen.classList.add("displayNone");
-      // mainContainer.classList.remove("displayNone");
-      mainContainer.style.transition = "opacity 1s ease-in-out";
       mainContainer.style.opacity = "1";
     }, 1000);
   }, 4000);
@@ -109,36 +105,29 @@ function initAboutSection() {
 }
 
 function launchWeatherApp() {
-  // Show Weather App container and hide project grid
   document.getElementById("projectData").classList.add("displayNone");
   document.getElementById("project2Container").classList.remove("displayNone");
   document.getElementById("projectHeader").innerText = "Weather App";
 }
 
 function launchTimerApp() {
-  // Show Stopwatch container and hide project grid
   document.getElementById("projectData").classList.add("displayNone");
   document.getElementById("project3Container").classList.remove("displayNone");
   document.getElementById("projectHeader").innerText = "Time Control";
 }
 
 function launchHealthStats() {
-  // Show Health App container and hide project grid
   document.getElementById("projectData").classList.add("displayNone");
   document.getElementById("project1Container").classList.remove("displayNone");
-  // Show welcome screen and hide input/results sections
   document.getElementById("fitMindsetWelcome").classList.remove("displayNone");
   document.getElementById("mainAppContainer").classList.add("displayNone");
   document.getElementById("resultsContainer").classList.add("displayNone");
-  // Hide Submit and Restart buttons initially
   document.getElementById("appSubmitBTN").classList.add("displayNone");
   document.getElementById("appRestartBTN").classList.add("displayNone");
-
   document.getElementById("projectHeader").innerText = "Fit Mindset";
 }
 
 function startFitMindset() {
-  // When user clicks start: hide welcome and show input form and submit button
   document.getElementById("fitMindsetWelcome").classList.add("displayNone");
   document.getElementById("mainAppContainer").classList.remove("displayNone");
   document.getElementById("appSubmitBTN").classList.remove("displayNone");
@@ -169,7 +158,6 @@ function calculateHealthStats() {
   evaluateBMI(bmi);
   displayHealthResults(bmi, bmr, tdee);
 
-  // Hide the input form and Submit button after submission
   document.getElementById("mainAppContainer").classList.add("displayNone");
   document.getElementById("appSubmitBTN").classList.add("displayNone");
 }
@@ -191,19 +179,16 @@ function displayHealthResults(bmi, bmr, tdee) {
   resultsContainer.classList.remove("displayNone");
   resultsContainer.innerHTML = `<h3 id="headerResults">Hi ${healthAppUserName}! Here are your calculated health results:</h3>`;
 
-  // Create cards container
   const cardContainer = document.createElement("div");
   cardContainer.className = "healthCards";
 
-  // Determine color for BMI card based on range
-  let bmiColor = "#36A2EB"; // healthy blue
+  let bmiColor = "#36A2EB";
   if (bmi < 18.5) {
     bmiColor = "#FF6384";
   } else if (bmi >= 25) {
     bmiColor = "#FFCE56";
   }
 
-  // BMI Card (already showing extra line: bmiStatus)
   const bmiCard = document.createElement("div");
   bmiCard.className = "healthCard";
   bmiCard.style.borderColor = bmiColor;
@@ -213,11 +198,9 @@ function displayHealthResults(bmi, bmr, tdee) {
     <p>${bmiStatus}</p>
   `;
 
-  // Placeholder average values for BMR and TDEE (update these with your real data)
-  const avgBmr = 1500; // example average BMR value in kcal/day
-  const avgTdee = 2200; // example average TDEE value in kcal/day
+  const avgBmr = 1500;
+  const avgTdee = 2200;
 
-  // BMR Card with an extra line for average
   const bmrCard = document.createElement("div");
   bmrCard.className = "healthCard";
   bmrCard.style.borderColor = "#8A2BE2";
@@ -227,7 +210,6 @@ function displayHealthResults(bmi, bmr, tdee) {
     <p class="avg">Average number of calories a person typically burns while at rest: ${avgBmr} kcal/day</p>
   `;
 
-  // TDEE Card with an extra line for average
   const tdeeCard = document.createElement("div");
   tdeeCard.className = "healthCard";
   tdeeCard.style.borderColor = "#3CB371";
@@ -237,24 +219,20 @@ function displayHealthResults(bmi, bmr, tdee) {
     <p class="avg">Average number of calories a person burns with your refrence data: ${avgTdee} kcal/day</p>
   `;
 
-  // Append cards to container
   cardContainer.appendChild(bmiCard);
   cardContainer.appendChild(bmrCard);
   cardContainer.appendChild(tdeeCard);
   resultsContainer.appendChild(cardContainer);
 
-  // Explanation paragraph
   const explanation = document.createElement("p");
   explanation.id = "definitions";
   explanation.innerHTML = `<strong>Body Mass Index (BMI)</strong>, is a measurement of weight relative to ones height.\n <strong>Basal Metabolic Rate (BMR)</strong>, is the minimum number of calories your body needs to function at a basic level.\n <strong>Total Daily Energy Expenditure (TDEE)</strong>, is your total daily energy expenditure needed to maintain your weight.`;
   resultsContainer.appendChild(explanation);
 
-  // Show Restart button after results are displayed
   document.getElementById("appRestartBTN").classList.remove("displayNone");
 }
 
 function restartApp() {
-  // Reset: hide results, show input form and Submit button, clear inputs
   document.getElementById("resultsContainer").classList.add("displayNone");
   document.getElementById("mainAppContainer").classList.remove("displayNone");
   document.getElementById("appSubmitBTN").classList.remove("displayNone");
@@ -332,7 +310,7 @@ function toggleTemperatureUnit() {
 
 async function getWeather() {
   const inputElement = document.getElementById("location");
-  const forecastElement = document.getElementById("forecastContianer");
+  const forecastElement = document.getElementById("forecastContainer");
   const forecastDiv = document.getElementById("forecast");
   const weatherBtn = document.getElementById("weatherBtn");
   const location = inputElement.dataset.apiValue;
@@ -409,18 +387,14 @@ async function getWeather() {
 }
 
 function tempFillColor() {
-  // Get all elements with class "thermometer-fill" inside the #forecastContianer
   const thermometerFills = Array.from(
-    document.querySelectorAll("#forecastContianer .thermometer-fill")
+    document.querySelectorAll("#forecastContainer .thermometer-fill")
   );
 
-  // Iterate over each element
   thermometerFills.forEach((el) => {
-    // Assume the height is set as a percentage string, e.g. "60%"
-    const heightStr = el.style.height; // "60%"
-    const heightValue = parseFloat(heightStr); // 60
+    const heightStr = el.style.height;
+    const heightValue = parseFloat(heightStr);
 
-    // Check the height and set the corresponding background
     if (heightValue > 50 && heightValue < 70) {
       el.style.background = "linear-gradient(to top, white, orange)";
     } else if (heightValue >= 70) {
@@ -560,7 +534,7 @@ function exitApp() {
   const suggestionsElement = document.getElementById("suggestions");
   suggestionsElement.innerHTML = "";
   suggestionsElement.classList.add("displayNone");
-  document.getElementById("forecastContianer").innerHTML = "";
+  document.getElementById("forecastContainer").innerHTML = "";
   document.getElementById("forecast").classList.add("displayNone");
   document.getElementById("toggleTempUnit").classList.add("displayNone");
 
