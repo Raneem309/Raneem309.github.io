@@ -1,21 +1,21 @@
-const apiKey = "f2ebd821732c6bbb4ceeb84d71225ca0"; 
+const apiKey = "f2ebd821732c6bbb4ceeb84d71225ca0";
 let bmiStatus;
 let healthAppUserName;
-let tempUnit = "C"; 
+let tempUnit = "C";
 
 let mainContainer = document.getElementById("mainContainer");
 let timer;
 let timeInSeconds = 0;
 let timerRunning = false;
 let lapTimes = [];
-let h2Element = document.querySelector('#forecast h2');
-let h3Element = document.querySelector('#forecast h3');
+let h2Element = document.querySelector("#forecast h2");
+let h3Element = document.querySelector("#forecast h3");
 
 window.onload = function () {
-  cubeTalk();       
-  initTabLinks();    
-  initAboutSection(); 
-  handleOpeningScreen(); 
+  cubeTalk();
+  initTabLinks();
+  initAboutSection();
+  handleOpeningScreen();
 };
 
 function initTabLinks() {
@@ -69,18 +69,18 @@ function handleOpeningScreen() {
   const openTitle = document.getElementById("openTitle");
 
   // Fade in the name immediately.
-  setTimeout(() => { 
-    openName.style.opacity = "1"; 
+  setTimeout(() => {
+    openName.style.opacity = "1";
   }, 0);
 
   // Fade in the title after 1 second.
-  setTimeout(() => { 
-    openTitle.style.opacity = "1"; 
+  setTimeout(() => {
+    openTitle.style.opacity = "1";
   }, 2000);
 
   // Delay the fade-out of the text to 7 seconds (instead of 5).
-  setTimeout(() => { 
-    openName.style.opacity = "0"; 
+  setTimeout(() => {
+    openName.style.opacity = "0";
     openTitle.style.opacity = "0";
   }, 10000);
 
@@ -90,14 +90,12 @@ function handleOpeningScreen() {
     openingScreen.style.opacity = "0";
 
     // After the 6-second fade-out, hide the container.
-    setTimeout(() => { 
-      openingScreen.classList.add("displayNone"); 
+    setTimeout(() => {
+      openingScreen.classList.add("displayNone");
       mainContainer.classList.remove("displayNone");
     }, 8000);
   }, 10000);
-
 }
-
 
 function initAboutSection() {
   const aboutOptions = document.querySelectorAll(".aboutOption");
@@ -118,7 +116,6 @@ function launchWeatherApp() {
   document.getElementById("projectData").classList.add("displayNone");
   document.getElementById("project2Container").classList.remove("displayNone");
   document.getElementById("projectHeader").innerText = "Weather App";
-
 }
 
 function launchTimerApp() {
@@ -126,7 +123,6 @@ function launchTimerApp() {
   document.getElementById("projectData").classList.add("displayNone");
   document.getElementById("project3Container").classList.remove("displayNone");
   document.getElementById("projectHeader").innerText = "Time Control";
-
 }
 
 function launchHealthStats() {
@@ -142,7 +138,6 @@ function launchHealthStats() {
   document.getElementById("appRestartBTN").classList.add("displayNone");
 
   document.getElementById("projectHeader").innerText = "Fit Mindset";
-
 }
 
 function startFitMindset() {
@@ -157,23 +152,26 @@ function calculateHealthStats() {
   const weight = parseFloat(document.getElementById("weightInput").value);
   const age = parseInt(document.getElementById("ageInput").value);
   const gender = document.getElementById("genderInput").value;
-  const activityLevel = parseFloat(document.getElementById("activityLevelInput").value);
+  const activityLevel = parseFloat(
+    document.getElementById("activityLevelInput").value
+  );
   healthAppUserName = document.getElementById("nameInput").value;
-  
+
   if (!height || !weight || !age || !gender || !activityLevel) {
     alert("Please fill in all fields.");
     return;
   }
-  
-  const bmi = (703 * weight) / (Math.pow(height * 12, 2));
-  const bmr = gender === "Male" ?
-              66 + (6.23 * weight) + (12.7 * height * 12) - (6.8 * age) :
-              655 + (4.35 * weight) + (4.7 * height * 12) - (4.7 * age);
+
+  const bmi = (703 * weight) / Math.pow(height * 12, 2);
+  const bmr =
+    gender === "Male"
+      ? 66 + 6.23 * weight + 12.7 * height * 12 - 6.8 * age
+      : 655 + 4.35 * weight + 4.7 * height * 12 - 4.7 * age;
   const tdee = bmr * activityLevel;
-  
+
   evaluateBMI(bmi);
   displayHealthResults(bmi, bmr, tdee);
-  
+
   // Hide the input form and Submit button after submission
   document.getElementById("mainAppContainer").classList.add("displayNone");
   document.getElementById("appSubmitBTN").classList.add("displayNone");
@@ -195,19 +193,19 @@ function displayHealthResults(bmi, bmr, tdee) {
   const resultsContainer = document.getElementById("resultsContainer");
   resultsContainer.classList.remove("displayNone");
   resultsContainer.innerHTML = `<h3 id="headerResults">Hi ${healthAppUserName}! Here are your calculated health results:</h3>`;
-  
+
   // Create cards container
   const cardContainer = document.createElement("div");
   cardContainer.className = "healthCards";
-  
+
   // Determine color for BMI card based on range
   let bmiColor = "#36A2EB"; // healthy blue
-  if (bmi < 18.5) { 
-    bmiColor = "#FF6384"; 
-  } else if (bmi >= 25) { 
-    bmiColor = "#FFCE56"; 
+  if (bmi < 18.5) {
+    bmiColor = "#FF6384";
+  } else if (bmi >= 25) {
+    bmiColor = "#FFCE56";
   }
-  
+
   // BMI Card (already showing extra line: bmiStatus)
   const bmiCard = document.createElement("div");
   bmiCard.className = "healthCard";
@@ -217,11 +215,11 @@ function displayHealthResults(bmi, bmr, tdee) {
     <p>${bmi.toFixed(2)}</p>
     <p>${bmiStatus}</p>
   `;
-  
+
   // Placeholder average values for BMR and TDEE (update these with your real data)
-  const avgBmr = 1500;  // example average BMR value in kcal/day
+  const avgBmr = 1500; // example average BMR value in kcal/day
   const avgTdee = 2200; // example average TDEE value in kcal/day
-  
+
   // BMR Card with an extra line for average
   const bmrCard = document.createElement("div");
   bmrCard.className = "healthCard";
@@ -231,7 +229,7 @@ function displayHealthResults(bmi, bmr, tdee) {
     <p>${Math.round(bmr)} kcal/day</p>
     <p class="avg">Average number of calories a person typically burns while at rest: ${avgBmr} kcal/day</p>
   `;
-  
+
   // TDEE Card with an extra line for average
   const tdeeCard = document.createElement("div");
   tdeeCard.className = "healthCard";
@@ -241,19 +239,19 @@ function displayHealthResults(bmi, bmr, tdee) {
     <p>${Math.round(tdee)} kcal/day</p>
     <p class="avg">Average number of calories a person burns with your refrence data: ${avgTdee} kcal/day</p>
   `;
-  
+
   // Append cards to container
   cardContainer.appendChild(bmiCard);
   cardContainer.appendChild(bmrCard);
   cardContainer.appendChild(tdeeCard);
   resultsContainer.appendChild(cardContainer);
-  
+
   // Explanation paragraph
   const explanation = document.createElement("p");
-  explanation.id = "definitions"
+  explanation.id = "definitions";
   explanation.innerHTML = `<strong>Body Mass Index (BMI)</strong>, is a measurement of weight relative to ones height.\n <strong>Basal Metabolic Rate (BMR)</strong>, is the minimum number of calories your body needs to function at a basic level.\n <strong>Total Daily Energy Expenditure (TDEE)</strong>, is your total daily energy expenditure needed to maintain your weight.`;
   resultsContainer.appendChild(explanation);
-  
+
   // Show Restart button after results are displayed
   document.getElementById("appRestartBTN").classList.remove("displayNone");
 }
@@ -264,8 +262,10 @@ function restartApp() {
   document.getElementById("mainAppContainer").classList.remove("displayNone");
   document.getElementById("appSubmitBTN").classList.remove("displayNone");
   document.getElementById("appRestartBTN").classList.add("displayNone");
-  const inputs = document.getElementById("mainAppContainer").querySelectorAll("input, select");
-  inputs.forEach((el) => el.value = "");
+  const inputs = document
+    .getElementById("mainAppContainer")
+    .querySelectorAll("input, select");
+  inputs.forEach((el) => (el.value = ""));
 }
 
 async function getLocations() {
@@ -294,8 +294,14 @@ async function getLocations() {
         let city = place.name;
         let country = place.country;
         let state = place.state || "";
-        let displayName = country === "US" && state ? `${city}, ${state}, ${country}` : `${city}, ${country}`;
-        let apiFormattedName = country === "US" && state ? `${city},${state},${country}` : `${city},${country}`;
+        let displayName =
+          country === "US" && state
+            ? `${city}, ${state}, ${country}`
+            : `${city}, ${country}`;
+        let apiFormattedName =
+          country === "US" && state
+            ? `${city},${state},${country}`
+            : `${city},${country}`;
         if (!seenLocations.has(displayName)) {
           seenLocations.add(displayName);
           const option = document.createElement("div");
@@ -344,29 +350,32 @@ async function getWeather() {
     const response = await fetch(url);
     if (!response.ok) throw new Error("Failed to fetch weather data");
     const data = await response.json();
-      if(h3Element){
-        h3Element.innerHTML = location;
-      }
-      h2Element.classList.remove("displayNone");
-      h3Element.classList.remove("displayNone");
+    if (h3Element) {
+      h3Element.innerHTML = location;
+    }
+    h2Element.classList.remove("displayNone");
+    h3Element.classList.remove("displayNone");
     forecastElement.innerHTML = "";
     let forecastHTML = "";
     for (let i = 0; i < data.list.length; i += 8) {
       const dayData = data.list[i];
       const dateObj = new Date(dayData.dt * 1000);
-      const options = { weekday: 'long', month: 'long', day: 'numeric' };
+      const options = { weekday: "long", month: "long", day: "numeric" };
       const formattedDate = dateObj.toLocaleDateString(undefined, options);
       let tempC = dayData.main.temp;
       let tempDisplay = tempC;
       if (tempUnit === "F") {
-        tempDisplay = (tempC * 9/5) + 32;
+        tempDisplay = (tempC * 9) / 5 + 32;
       }
       tempDisplay = tempDisplay.toFixed(1);
       const weatherDesc = dayData.weather[0].description;
       const iconCode = dayData.weather[0].icon;
       const iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`;
       const thermometer = `<div class="thermometer">
-                              <div class="thermometer-fill" style="height: ${Math.min(Math.max((tempC + 10) * 3, 0), 100)}%;"></div>
+                              <div class="thermometer-fill" style="height: ${Math.min(
+                                Math.max((tempC + 10) * 3, 0),
+                                100
+                              )}%;"></div>
                            </div>`;
       forecastHTML += `
         <div class="forecastItem">
@@ -392,35 +401,37 @@ async function getWeather() {
   weatherBtn.disabled = true;
   weatherBtn.style.cursor = "";
   weatherBtn.style.backgroundColor = "#003e0700";
- 
-  if(forecastElement.innerHTML === ""){
-    tempBtn.classList.add("displayNone")
-  }else{
+
+  if (forecastElement.innerHTML === "") {
+    tempBtn.classList.add("displayNone");
+  } else {
     tempBtn.classList.remove("displayNone");
   }
 
-  tempFillColor()
+  tempFillColor();
 }
 
-function tempFillColor(){
+function tempFillColor() {
   // Get all elements with class "thermometer-fill" inside the #forecastContianer
-const thermometerFills = Array.from(document.querySelectorAll('#forecastContianer .thermometer-fill'));
+  const thermometerFills = Array.from(
+    document.querySelectorAll("#forecastContianer .thermometer-fill")
+  );
 
-// Iterate over each element
-thermometerFills.forEach((el) => {
-  // Assume the height is set as a percentage string, e.g. "60%"
-  const heightStr = el.style.height; // "60%"
-  const heightValue = parseFloat(heightStr); // 60
+  // Iterate over each element
+  thermometerFills.forEach((el) => {
+    // Assume the height is set as a percentage string, e.g. "60%"
+    const heightStr = el.style.height; // "60%"
+    const heightValue = parseFloat(heightStr); // 60
 
-  // Check the height and set the corresponding background
-  if (heightValue > 50 && heightValue < 70) {
-    el.style.background = "linear-gradient(to top, white, orange)";
-  } else if (heightValue >= 70) {
-    el.style.background = "linear-gradient(to top, white, red)";
-  } else if (heightValue < 50) {
-    el.style.background = "linear-gradient(to top, white, blue)";
-  }
-});
+    // Check the height and set the corresponding background
+    if (heightValue > 50 && heightValue < 70) {
+      el.style.background = "linear-gradient(to top, white, orange)";
+    } else if (heightValue >= 70) {
+      el.style.background = "linear-gradient(to top, white, red)";
+    } else if (heightValue < 50) {
+      el.style.background = "linear-gradient(to top, white, blue)";
+    }
+  });
 }
 
 function toggleTimer() {
@@ -467,9 +478,9 @@ function resetTimer() {
 
 function updateTimeDisplay() {
   const display = document.getElementById("timeDisplay");
-  const hrs = String(Math.floor(timeInSeconds / 3600)).padStart(2, '0');
-  const mins = String(Math.floor((timeInSeconds % 3600) / 60)).padStart(2, '0');
-  const secs = String(timeInSeconds % 60).padStart(2, '0');
+  const hrs = String(Math.floor(timeInSeconds / 3600)).padStart(2, "0");
+  const mins = String(Math.floor((timeInSeconds % 3600) / 60)).padStart(2, "0");
+  const secs = String(timeInSeconds % 60).padStart(2, "0");
   display.innerText = `${hrs}:${mins}:${secs}`;
 }
 
@@ -479,14 +490,14 @@ function recordLap() {
   const lapContainer = document.getElementById("lapContainer");
   const lapItem = document.createElement("div");
   const lapNumber = lapTimes.length;
-  const hrs = String(Math.floor(timeInSeconds / 3600)).padStart(2, '0');
-  const mins = String(Math.floor((timeInSeconds % 3600) / 60)).padStart(2, '0');
-  const secs = String(timeInSeconds % 60).padStart(2, '0');
+  const hrs = String(Math.floor(timeInSeconds / 3600)).padStart(2, "0");
+  const mins = String(Math.floor((timeInSeconds % 3600) / 60)).padStart(2, "0");
+  const secs = String(timeInSeconds % 60).padStart(2, "0");
   lapItem.innerText = `Lap ${lapNumber}: ${hrs}:${mins}:${secs}`;
   lapContainer.appendChild(lapItem);
-  if(lapContainer.childElementCount === 0){
+  if (lapContainer.childElementCount === 0) {
     lapContainer.classList.add("displayNone");
-  }else{
+  } else {
     lapContainer.classList.remove("displayNone");
   }
 }
@@ -495,13 +506,18 @@ function cubeTalk() {
   const container = document.getElementById("cubeContainer");
   container.innerHTML = "";
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(95, container.clientWidth / container.clientHeight, 0.9, 1000);
+  const camera = new THREE.PerspectiveCamera(
+    95,
+    container.clientWidth / container.clientHeight,
+    0.9,
+    1000
+  );
   camera.position.z = 2.5;
-  
+
   const renderer = new THREE.WebGLRenderer({ alpha: true });
   renderer.setSize(container.clientWidth, container.clientHeight);
   container.appendChild(renderer.domElement);
-  
+
   const geometry = new THREE.BoxGeometry();
   const material = new THREE.MeshStandardMaterial({
     color: "black",
@@ -511,13 +527,12 @@ function cubeTalk() {
   const cube = new THREE.Mesh(geometry, material);
   cube.scale.set(2, 2, 2);
   scene.add(cube);
-  
+
   const edges = new THREE.EdgesGeometry(geometry);
   const wireframeMaterial = new THREE.LineBasicMaterial({ color: "grey" });
   const wireframe = new THREE.LineSegments(edges, wireframeMaterial);
   cube.add(wireframe);
-  
-  
+
   function animate() {
     requestAnimationFrame(animate);
     cube.rotation.x += 0.01;
@@ -525,7 +540,7 @@ function cubeTalk() {
     renderer.render(scene, camera);
   }
   animate();
-  
+
   window.addEventListener("resize", () => {
     renderer.setSize(container.clientWidth, container.clientHeight);
     camera.aspect = container.clientWidth / container.clientHeight;
@@ -536,8 +551,10 @@ function cubeTalk() {
 function exitApp() {
   document.getElementById("projectHeader").innerText = "Projects";
   const projectContainers = document.querySelectorAll(".projectContainers");
-  projectContainers.forEach((container) => container.classList.add("displayNone"));
-  
+  projectContainers.forEach((container) =>
+    container.classList.add("displayNone")
+  );
+
   const weatherBtn = document.getElementById("weatherBtn");
   weatherBtn.disabled = true;
   weatherBtn.style.cursor = "";
@@ -550,11 +567,12 @@ function exitApp() {
   document.getElementById("forecast").classList.add("displayNone");
   document.getElementById("toggleTempUnit").classList.add("displayNone");
 
-  
   resetTimer();
-  
-  const inputs = document.getElementById("mainAppContainer").querySelectorAll("input, select");
-  inputs.forEach((el) => el.value = "");
+
+  const inputs = document
+    .getElementById("mainAppContainer")
+    .querySelectorAll("input, select");
+  inputs.forEach((el) => (el.value = ""));
   document.getElementById("mainAppContainer").classList.add("displayNone");
   document.getElementById("resultsContainer").classList.add("displayNone");
   document.getElementById("appRestartBTN").classList.add("displayNone");

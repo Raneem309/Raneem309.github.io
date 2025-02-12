@@ -66,7 +66,7 @@ p {
   margin: 7vh auto;
   background: rgba(0, 0, 0, 0.8);
   border-radius: 20px;
-  padding: .5rem;
+  padding: 0.5rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -113,8 +113,12 @@ p {
 }
 
 @keyframes rotateCube {
-  from { transform: rotateY(0deg); }
-  to { transform: rotateY(360deg); }
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
 }
 
 section {
@@ -254,14 +258,14 @@ section {
   color: #000;
 }
 
-#mainAppContainer h3{
+#mainAppContainer h3 {
   text-underline-offset: 11px;
-    text-decoration-thickness: 9px !important;
-    text-decoration: underline;
+  text-decoration-thickness: 9px !important;
+  text-decoration: underline;
 }
 
 .actionButton {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: #fff;
   padding: 0.5rem 1rem;
   border: none;
@@ -316,7 +320,7 @@ section {
   width: 100%;
 }
 
-#weatherBtn{
+#weatherBtn {
   padding: 0.5rem 1rem;
   margin: 0.5rem;
   border: none;
@@ -474,57 +478,62 @@ section {
 }
 
 @keyframes fadeOut {
-  from { opacity: 1; }
-  to { opacity: 0; visibility: hidden; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
-
-#aboutMeHeader, #contactHeader, #projectHeader{
+#aboutMeHeader,
+#contactHeader,
+#projectHeader {
   margin-bottom: 1rem;
   color: white;
 }
 
-#mainAppContainer h3{
-  margin-bottom:  1.5rem;
+#mainAppContainer h3 {
+  margin-bottom: 1.5rem;
 }
 
-#suggestions{
-  padding: .5rem;
+#suggestions {
+  padding: 0.5rem;
   color: #000000;
   background-color: #ffffff8a;
   border-radius: 1rem;
 }
 
-.suggestions-item{
+.suggestions-item {
   cursor: pointer;
 }
 
 .suggestions-item:hover {
   background-color: rgb(255 255 255);
-  padding: .2rem;
+  padding: 0.2rem;
   border-radius: 2rem;
 }
 
-#definitions{
+#definitions {
   margin-top: 1rem;
 }
 
-#forecast h3{
-margin-bottom: 1rem;
+#forecast h3 {
+  margin-bottom: 1rem;
 }
 
-#forecast h2{
+#forecast h2 {
   text-decoration: underline;
 }
 
-#forecast{
+#forecast {
   border: groove;
   border-radius: 2rem;
   padding: 1rem;
 }
 
-
-.contact-list{
+.contact-list {
   flex: 1 1 200px;
   background: #757575;
   padding: 1rem;
