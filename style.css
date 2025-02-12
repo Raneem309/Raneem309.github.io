@@ -58,7 +58,12 @@ p {
   background-size: cover;
   z-index: -2;
 }
- 
+
+#mainContainer{
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
 .container {
   position: relative;
   max-width: 1200px;
