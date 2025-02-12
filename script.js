@@ -88,6 +88,8 @@ function handleOpeningScreen() {
     setTimeout(() => {
       openingScreen.classList.add("displayNone");
       mainContainer.classList.remove("displayNone");
+      mainContainer.style.transition = "opacity 1s ease-in-out";
+      mainContainer.style.opacity = "1";
     }, 1000);
   }, 4000);
 }
