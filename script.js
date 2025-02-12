@@ -79,7 +79,7 @@ function handleOpeningScreen() {
   setTimeout(() => {
     openName.style.opacity = "0";
     openTitle.style.opacity = "0";
-  }, 6000);
+  }, 4000);
 
   setTimeout(() => {
     openingScreen.style.transition = "opacity 6s ease";
@@ -88,8 +88,8 @@ function handleOpeningScreen() {
     setTimeout(() => {
       openingScreen.classList.add("displayNone");
       mainContainer.classList.remove("displayNone");
-    }, 6000);
-  }, 8000);
+    }, 4000);
+  }, 5000);
 }
 
 function initAboutSection() {
