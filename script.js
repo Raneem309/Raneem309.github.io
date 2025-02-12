@@ -79,17 +79,17 @@ function handleOpeningScreen() {
   setTimeout(() => {
     openName.style.opacity = "0";
     openTitle.style.opacity = "0";
-  }, 4000);
+  }, 3000);
 
   setTimeout(() => {
-    openingScreen.style.transition = "opacity 6s ease";
+    openingScreen.style.transition = "opacity 1s ease";
     openingScreen.style.opacity = "0";
 
     setTimeout(() => {
       openingScreen.classList.add("displayNone");
       mainContainer.classList.remove("displayNone");
-    }, 4000);
-  }, 5000);
+    }, 1000);
+  }, 4000);
 }
 
 function initAboutSection() {
