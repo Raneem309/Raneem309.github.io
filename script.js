@@ -1,12 +1,9 @@
-/* script.js */
-
-/* ---------------- Global Variables ---------------- */
-const apiKey = "f2ebd821732c6bbb4ceeb84d71225ca0"; // OpenWeatherMap API key
+const apiKey = "f2ebd821732c6bbb4ceeb84d71225ca0"; 
 let bmiStatus;
 let healthAppUserName;
-let tempUnit = "C"; // "C" for Celsius, "F" for Fahrenheit
+let tempUnit = "C"; 
 
-// Stopwatch variables
+let mainContainer = document.getElementById("mainContainer");
 let timer;
 let timeInSeconds = 0;
 let timerRunning = false;
@@ -14,15 +11,13 @@ let lapTimes = [];
 let h2Element = document.querySelector('#forecast h2');
 let h3Element = document.querySelector('#forecast h3');
 
-/* ---------------- Initialization on Window Load ---------------- */
 window.onload = function () {
-  cubeTalk();         // Initialize Three.js cube in Home section
-  initTabLinks();     // Initialize header tab events
-  initAboutSection(); // Initialize About Me sidebar options
-  handleOpeningScreen(); // Show and fade out opening screen
+  cubeTalk();       
+  initTabLinks();    
+  initAboutSection(); 
+  handleOpeningScreen(); 
 };
 
-/* ---------------- Tab Functions ---------------- */
 function initTabLinks() {
   const tabs = document.querySelectorAll(".tab");
   tabs.forEach((tab) => {
@@ -68,7 +63,6 @@ function handleTabs(tabId) {
   }
 }
 
-/* ---------------- Opening Screen ---------------- */
 function handleOpeningScreen() {
   const openingScreen = document.getElementById("openingScreen");
   const openName = document.getElementById("openName");
@@ -98,13 +92,13 @@ function handleOpeningScreen() {
     // After the 6-second fade-out, hide the container.
     setTimeout(() => { 
       openingScreen.classList.add("displayNone"); 
+      mainContainer.classList.remove("displayNone");
     }, 8000);
   }, 10000);
-  
+
 }
 
 
-/* ---------------- About Me Section ---------------- */
 function initAboutSection() {
   const aboutOptions = document.querySelectorAll(".aboutOption");
   aboutOptions.forEach((option) => {
@@ -119,7 +113,6 @@ function initAboutSection() {
   });
 }
 
-/* ---------------- Launch Functions for Projects ---------------- */
 function launchWeatherApp() {
   // Show Weather App container and hide project grid
   document.getElementById("projectData").classList.add("displayNone");
@@ -136,7 +129,6 @@ function launchTimerApp() {
 
 }
 
-/* ---------------- Health App (Fit Mindset) Functions ---------------- */
 function launchHealthStats() {
   // Show Health App container and hide project grid
   document.getElementById("projectData").classList.add("displayNone");
@@ -266,7 +258,6 @@ function displayHealthResults(bmi, bmr, tdee) {
   document.getElementById("appRestartBTN").classList.remove("displayNone");
 }
 
-
 function restartApp() {
   // Reset: hide results, show input form and Submit button, clear inputs
   document.getElementById("resultsContainer").classList.add("displayNone");
@@ -277,7 +268,6 @@ function restartApp() {
   inputs.forEach((el) => el.value = "");
 }
 
-/* ---------------- Weather App Functions ---------------- */
 async function getLocations() {
   const inputElement = document.getElementById("location");
   const suggestionsElement = document.getElementById("suggestions");
@@ -433,7 +423,6 @@ thermometerFills.forEach((el) => {
 });
 }
 
-/* ---------------- Stopwatch Functions ---------------- */
 function toggleTimer() {
   const toggleBtn = document.getElementById("toggleTimerBtn");
   if (!timerRunning) {
@@ -502,7 +491,6 @@ function recordLap() {
   }
 }
 
-/* ---------------- Three.js Cube in Home Section ---------------- */
 function cubeTalk() {
   const container = document.getElementById("cubeContainer");
   container.innerHTML = "";
@@ -545,7 +533,6 @@ function cubeTalk() {
   });
 }
 
-/* ---------------- Exit App Function ---------------- */
 function exitApp() {
   document.getElementById("projectHeader").innerText = "Projects";
   const projectContainers = document.querySelectorAll(".projectContainers");

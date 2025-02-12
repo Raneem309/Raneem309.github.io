@@ -9,24 +9,18 @@
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   </head>
   <body>
-    <!-- Opening Screen -->
     <div id="openingScreen">
       <span id="openName">Raneem Ali</span>
       <span id="openTitle">Portfolio</span>
     </div>
-    <!-- Background Layer -->
     <div class="background"></div>
-    <!-- Main Container -->
-    <div class="container">
-      <!-- Header with Name and Tabs -->
+    <div id="mainContainer" class="container">
       <div id="headerContainer">
         <div id="nameTitleContainer">
           <h1 id="name">Raneem Ali</h1>
           <h2 id="title">Web/Software Developer</h2>
         </div>
         <div id="mainHeader" class="center-tabs">
-          <!-- Each tab uses a data-original attribute for its default text.
-               The active tab shows a rotating cube icon. -->
           <div id="homeTab" class="tab active" data-original="Home">
             <div class="activeCube"></div>
           </div>
@@ -36,14 +30,10 @@
         </div>
       </div>
 
-      <!-- Home Section -->
       <section id="homeTabSection">
-        <!-- Container for the Three.js cube -->
         <div id="cubeContainer"></div>
         <div id="homeHeader">A Digital Portfolio by Raneem Ali</div>
       </section>
-
-      <!-- About Me Section -->
       <section id="aboutMeSection" class="displayNone">
         <h2 id="aboutMeHeader">About Me</h2>
         <div id="aboutMeContent">
@@ -103,8 +93,6 @@ I love building things that have a real impact, whether it's creating seamless w
           </div>
         </div>
       </section>
-
-      <!-- Projects Section -->
       <section id="projectsSection" class="displayNone">
         <h2 id="projectHeader">Projects</h2>
         <div id="projectData">
@@ -126,10 +114,7 @@ I love building things that have a real impact, whether it's creating seamless w
             </div>
           </div>
         </div>
-
-        <!-- Health App Container -->
         <div id="project1Container" class="displayNone projectContainers">
-          <!-- Welcome Screen with Rotating SVG "Person" and Start Button -->
           <div id="fitMindsetWelcome">
             <model-viewer 
             id="human3D"
@@ -142,7 +127,6 @@ I love building things that have a real impact, whether it's creating seamless w
             <div id="fitWelcomeText">Press Start to Enter</div>
             <button id="fitStartBTN" onclick="startFitMindset()">Start</button>
           </div>
-          <!-- Main Input Form -->
           <div id="mainAppContainer" class="displayNone mainProjectContainers">
             <h3>Enter Your Information to Calculate Your Results</h3>
             <label for="nameInput">First Name: </label>
@@ -169,16 +153,11 @@ I love building things that have a real impact, whether it's creating seamless w
               <option value="1.9">Extremely Active (2x/day)</option>
             </select>
           </div>
-          <!-- Submit Button (appears only after Start is clicked) -->
           <button id="appSubmitBTN" class="actionButton displayNone" onclick="calculateHealthStats()">Submit</button>
-          <!-- Results Container (will display calculated results) -->
           <div id="resultsContainer" class="displayNone"></div>
-          <!-- Restart & Exit Buttons -->
           <button id="appRestartBTN" class="actionButton displayNone" onclick="restartApp()">Restart</button>
           <button class="exitButton" onclick="exitApp()">Exit</button>
         </div>
-
-        <!-- Weather App Container -->
         <div id="project2Container" class="displayNone projectContainers">
           <div class="mainAppContainer mainProjectContainers">
             <input type="text" id="location" placeholder="Enter a City..." oninput="getLocations()" />
@@ -193,8 +172,6 @@ I love building things that have a real impact, whether it's creating seamless w
           </div>
           <button class="exitButton" onclick="exitApp()">Exit</button>
         </div>
-
-        <!-- Stopwatch App Container -->
         <div id="project3Container" class="displayNone projectContainers">
           <div class="stopwatchContainer">
             <div id="stopwatchDisplay">
@@ -210,8 +187,6 @@ I love building things that have a real impact, whether it's creating seamless w
           <button class="exitButton" onclick="exitApp()">Exit</button>
         </div>
       </section>
-
-      <!-- Contact Section -->
       <section id="contactSection" class="displayNone">
         <h2 id="contactHeader">Contact</h2>
         <div id="contactInfo">

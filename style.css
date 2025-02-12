@@ -1,6 +1,3 @@
-/* style.css */
-
-/* Import custom font */
 @font-face {
   font-family: "PPNeueMontreal-Medium";
   src: url("fonts/PPNeueMontreal-Medium.otf") format("truetype");
@@ -8,7 +5,6 @@
   font-style: normal;
 }
 
-/* ---------------- Reset & Global Styles ---------------- */
 * {
   margin: 0;
   padding: 0;
@@ -23,13 +19,11 @@ body {
   overflow-x: hidden;
 }
 
-/* Global paragraph spacing */
 p {
   line-height: 2;
   margin-bottom: 1rem;
 }
 
-/* ---------------- Opening Screen ---------------- */
 #openingScreen {
   position: fixed;
   top: 0;
@@ -55,7 +49,6 @@ p {
   margin: 0.5rem;
 }
 
-/* ---------------- Background Layer ---------------- */
 .background {
   position: fixed;
   top: 0;
@@ -67,7 +60,6 @@ p {
   z-index: -2;
 }
 
-/* ---------------- Main Container ---------------- */
 .container {
   position: relative;
   max-width: 1200px;
@@ -78,7 +70,6 @@ p {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* ---------------- Header ---------------- */
 #headerContainer {
   display: flex;
   justify-content: space-between;
@@ -113,7 +104,6 @@ p {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Active tab: displays a rotating cube icon */
 .activeCube {
   width: 20px;
   height: 20px;
@@ -127,7 +117,6 @@ p {
   to { transform: rotateY(360deg); }
 }
 
-/* ---------------- Sections ---------------- */
 section {
   padding: 1rem;
   margin-top: 1rem;
@@ -137,7 +126,6 @@ section {
   display: none !important;
 }
 
-/* ---------------- About Me Section ---------------- */
 #aboutMeSection {
   color: #000;
 }
@@ -186,7 +174,6 @@ section {
   margin-bottom: 1rem;
 }
 
-/* ---------------- Projects Section ---------------- */
 #projectsSection {
   color: #000;
 }
@@ -236,13 +223,10 @@ section {
   overflow-y: auto;
 }
 
-/* ---------------- Health App Styles ---------------- */
-/* Welcome screen (rotating person & Start button) */
 #fitMindsetWelcome {
   text-align: center;
   padding: 2rem;
 }
-
 
 #fitWelcomeText {
   margin-top: 1rem;
@@ -250,7 +234,6 @@ section {
   color: #000;
 }
 
-/* Royal blue Start button styling */
 #fitStartBTN {
   margin-top: 1rem;
   padding: 0.5rem 1rem;
@@ -261,7 +244,6 @@ section {
   cursor: pointer;
 }
 
-/* Input form styling (vertical layout) */
 #mainAppContainer label,
 #mainAppContainer input,
 #mainAppContainer select {
@@ -278,7 +260,6 @@ section {
     text-decoration: underline;
 }
 
-/* Style for Submit and Restart buttons (positioned bottom left) */
 .actionButton {
   background-color: #4CAF50;
   color: #fff;
@@ -295,7 +276,6 @@ section {
   background-color: #45a049;
 }
 
-/* Exit button (always bottom right) */
 .exitButton {
   padding: 0.5rem 1rem;
   border: none;
@@ -312,7 +292,6 @@ section {
   background: #d22e22;
 }
 
-/* Health Results Cards */
 .healthCards {
   display: flex;
   flex-wrap: wrap;
@@ -330,7 +309,6 @@ section {
   text-align: center;
 }
 
-/* ---------------- Weather App Styles ---------------- */
 #project2Container input,
 #project2Container select {
   padding: 0.5rem;
@@ -397,7 +375,6 @@ section {
   bottom: 0;
 }
 
-/* ---------------- Stopwatch Styles ---------------- */
 .stopwatchContainer {
   text-align: center;
 }
@@ -451,7 +428,6 @@ section {
   color: #000;
 }
 
-/* ---------------- Home Section ---------------- */
 #homeTabSection {
   text-align: center;
   padding: 1rem;
@@ -466,7 +442,6 @@ section {
   background-color: #d3d3d379;
 }
 
-/* Ensure the Three.js cube container is visible */
 #cubeContainer {
   display: flex;
   justify-content: center;
@@ -477,7 +452,6 @@ section {
   height: 300px;
 }
 
-/* ---------------- Responsive Media Queries ---------------- */
 @media (max-width: 768px) {
   .container {
     margin: 7vh auto;
